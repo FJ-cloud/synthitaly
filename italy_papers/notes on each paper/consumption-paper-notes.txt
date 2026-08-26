@@ -1,0 +1,426 @@
+Exactly. Treat the pandemic as an **external intervention module**, not part of the baseline generator. The paper gives enough “normal behavior” information to build a clean baseline card-transaction simulator first.
+
+## Baseline period to use
+
+For “normal” behavior, use:
+
+```text
+Baseline calibration window:
+January 2015 – February 2020, stopping before 23 February 2020
+```
+
+The paper’s regional share heatmap is explicitly calculated over **January 2015–February 2020**, and the authors also note that pre-pandemic transaction data show an upward trend and clear seasonal structure. 
+
+Do **not** use March–September 2020 for baseline estimation, except perhaps as a later stress-test period.
+
+---
+
+# 1. What the baseline generator should simulate
+
+The paper’s raw data structure suggests this target object:
+
+```python
+TransactionAggregate(
+    date: datetime,
+    region: str,
+    category: str,
+    channel: Literal["physical_pos", "virtual_pos"],  # optional, paper says both exist
+    value: float,
+    count: Optional[int],
+)
+```
+
+The paper uses daily card and international-circuit debit-card transactions, Visa/Mastercard, issued in Italy and spent at merchants located in Italy. It includes physical and virtual POS spending, ten expenditure categories, and a regional dimension, but no buyer identifier. 
+
+So your baseline generator should be **merchant-side aggregate** by day, region, and category. It should not claim to model individual consumers unless you later add synthetic agents from another source.
+
+---
+
+# 2. Baseline components to include
+
+A good baseline model from this paper would be:
+
+```text
+log(spend[r, c, t])
+=
+region_base[r]
++ category_base[c]
++ region_category_interaction[r, c]
++ secular_card_adoption_trend[t]
++ weekday_effect[dow(t)]
++ holiday_effect[t]
++ annual_seasonality[t]
++ noise[r, c, t]
+```
+
+Where:
+
+| Component                     | Why it matters                                                                   |
+| ----------------------------- | -------------------------------------------------------------------------------- |
+| `region_base`                 | Card use differs strongly across Italian regions                                 |
+| `category_base`               | Spending is concentrated in a few categories                                     |
+| `region_category_interaction` | Northern vs Southern card use likely differs by category                         |
+| `secular_card_adoption_trend` | Total transactions rise over time because electronic payments become more common |
+| `weekday_effect`              | Paper controls for weekday fixed effects                                         |
+| `holiday_effect`              | Paper controls for holidays; Christmas is the strongest seasonal peak            |
+| `annual_seasonality`          | Clear repeated within-year spending pattern                                      |
+| `noise`                       | Daily data are volatile; weekly aggregation is more stable                       |
+
+The paper’s own baseline controls are weekday fixed effects, year fixed effects, holiday fixed effects, and a linear trend. 
+
+---
+
+# 3. Core normal-behavior facts from the paper
+
+## A. There is a strong secular upward trend
+
+The paper says weekly total transactions rise over the sample because electronic payment instruments became more common relative to cash. 
+
+For your generator, this means:
+
+```text
+Do not use a stationary baseline.
+Use a growing card-adoption trend.
+```
+
+A simple first version:
+
+```python
+trend_multiplier(t) = exp(g * years_since_start)
+```
+
+Better version:
+
+```python
+trend_multiplier(t) = exp(g_region[r] * years_since_start)
+```
+
+because card use differs by region.
+
+---
+
+## B. There is strong annual seasonality
+
+The paper says the week including Christmas has the highest amount of transactions every year. 
+
+So your generator should include:
+
+```text
+Christmas / December peak
+holiday dummies
+possibly summer tourism effects
+Easter timing effects
+sales-season effects for clothing
+```
+
+For the normal baseline, I would model seasonality as a combination of:
+
+```text
+1. Smooth annual Fourier seasonality
+2. Explicit holiday/event dummies
+3. Category-specific seasonal effects
+```
+
+Example:
+
+```text
+seasonality[c, t]
+=
+a1[c] * sin(2π * day_of_year / 365)
++ b1[c] * cos(2π * day_of_year / 365)
++ a2[c] * sin(4π * day_of_year / 365)
++ b2[c] * cos(4π * day_of_year / 365)
++ holiday_effect[c, holiday(t)]
+```
+
+This is useful because food, clothing, hotels/restaurants, and travel should not have identical yearly rhythms.
+
+---
+
+## C. Weekly aggregation is a good validation level
+
+The source data are daily, but the paper frequently presents weekly transaction patterns because daily coefficients are volatile. 
+
+So generate daily data, but validate weekly:
+
+```text
+Generate: daily
+Validate: weekly totals and weekly year-on-year growth
+```
+
+---
+
+# 4. Baseline category system
+
+Use the paper’s ten macro-categories directly:
+
+| Category                           | Contents                                                                                                                                           |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cash in advance                    | Cash withdrawals                                                                                                                                   |
+| Clothing                           | Clothing, footwear                                                                                                                                 |
+| Food                               | Supermarkets, hypermarkets, superettes                                                                                                             |
+| Home furniture                     | Home accessories, household goods, appliances                                                                                                      |
+| Hotels and restaurants             | Hotels, restaurants                                                                                                                                |
+| Retail                             | Art, duty free, garden/pets, gifts, jewelry, non-food distribution, leather/luggage, music, perfumes, optical goods, sport goods, stationery, toys |
+| Services                           | Financial/insurance, health/beauty, health services, home services, non-profits, personal services, public organizations, recreation, schools      |
+| Repairing works and other services | Plumbing, hardware, construction products, shop/office products, other services                                                                    |
+| Phones, web, mobile devices        | Internet, cable TV, mobile phone services, virtual private cloud                                                                                   |
+| Travels and transport              | Travel agencies, fuels, flights, tolls, vehicle rental, transport, vehicle sales/services                                                          |
+
+Source: Appendix Table A.1. 
+
+For implementation, I would use this hierarchy:
+
+```text
+Sector
+└── Macro-category
+    └── Optional merchant subcategory
+```
+
+Example:
+
+```python
+FOOD = {
+    "supermarket": 0.65,
+    "hypermarket": 0.25,
+    "superette": 0.10,
+}
+```
+
+The paper only gives macro-categories, so subcategory weights would need to be synthetic or externally calibrated.
+
+---
+
+# 5. Approximate normal category shares
+
+The paper’s Figure 6 compares 2015–2019 credit-card transaction shares with national-account COICOP shares. It shows that card spending is not compositionally identical to full household consumption. Card shares are broadly aligned for home expenditure and retail/services, lower for food and travel/transport, and higher for hotels/restaurants and clothing. 
+
+Approximate baseline card-spending shares from Figure 6:
+
+| Category group       | Approx. card share, 2015–2019 | Generator implication                   |
+| -------------------- | ----------------------------: | --------------------------------------- |
+| Retail & services    |                          ~26% | Largest aggregate block                 |
+| Food                 |                          ~20% | Major stable category                   |
+| Hotels & restaurants |                          ~11% | Overrepresented in card data            |
+| Travel & transport   |                           ~9% | Underrepresented vs full consumption    |
+| Clothing             |                           ~8% | Overrepresented in card data            |
+| Home expenditure     |                           ~7% | Similar to national accounts            |
+| Phones/web           |                           ~5% | Smaller recurring/utility-like category |
+
+These are approximate visual readings, not exact table values.
+
+Important: full household consumption has higher food and travel/transport shares than the card data because many such payments are still made in cash. Hotels/restaurants and clothing are higher in card data because those items are more often paid electronically. 
+
+For your generator, this means the baseline should represent **card-visible consumer behavior**, not total household consumption.
+
+---
+
+# 6. Regional baseline weights
+
+The paper gives regional transaction-share groups for January 2015–February 2020. Use these as initial region weights:
+
+| Share group | Regions                                                    |
+| ----------- | ---------------------------------------------------------- |
+| >10% each   | Lombardy, Lazio                                            |
+| 6–10% each  | Emilia Romagna, Veneto, Tuscany, Piedmont                  |
+| 4–6% each   | Campania, Apulia, Sicily                                   |
+| 2–4% each   | Friuli Venezia Giulia, Liguria, Marche, Sardinia, Trentino |
+| 1–2% each   | Abruzzo, Calabria, Umbria                                  |
+| <1% each    | Aosta Valley, Molise, Basilicata                           |
+
+Lombardy and Lazio together account for about **36%** of total transactions, while Emilia Romagna, Veneto, Tuscany, and Piedmont together account for almost **32%**. The paper also notes that Southern regions generally use credit-card payments less often than Northern regions. 
+
+So your baseline regional generator should not simply scale by population. It should scale by something closer to:
+
+```text
+regional_card_spending_weight
+≈ population
+× income / consumption level
+× tourism / business activity
+× card adoption intensity
+```
+
+---
+
+# 7. Consumption coverage limitation
+
+The paper says Italian credit-card transaction data account for about **8% of final consumption expenditure excluding rents and bills**. It also notes that actual rents are generally not paid by credit cards in Italy. 
+
+For your baseline generator:
+
+```text
+Exclude:
+- rent
+- imputed rent
+- most bills
+- large parts of cash spending
+
+Include:
+- card-visible retail/service consumption
+- merchant-side domestic transactions
+- physical and virtual POS
+```
+
+This is important for your thesis framing. You are not generating “all consumer consumption.” You are generating a **card-transaction-consistent consumer spending stream**.
+
+---
+
+# 8. Correlation information
+
+There is **no baseline correlation matrix** in the paper.
+
+The only explicit correlation is that year-on-year changes in credit-card transactions and domestic final consumption expenditure have correlation **0.92 over 2015Q3–2020Q3**, but the paper explicitly says this relationship is weaker in the pre-pandemic sample and that the increasing trend in card transactions must be considered. 
+
+For normal behavior, I would not use `0.92` as a strict baseline calibration target. Instead:
+
+```text
+Use it only as evidence that card aggregates contain useful macro-consumption signal.
+Do not force simulated normal card growth to correlate 0.92 with total consumption.
+Trend-adjust first.
+```
+
+A better validation target:
+
+```text
+corr(
+    yoy_growth(detrended_card_spending),
+    yoy_growth(consumption_ex_rent_bills)
+)
+```
+
+---
+
+# 9. Baseline stochastic structure
+
+I would generate spending in two stages:
+
+## Stage 1: Aggregate expected value
+
+```text
+μ[r, c, t] =
+global_level
+× region_weight[r]
+× category_weight[c]
+× region_category_adjustment[r, c]
+× trend[t]
+× weekday_multiplier[c, dow(t)]
+× seasonal_multiplier[c, t]
+× holiday_multiplier[c, t]
+```
+
+## Stage 2: Realized noisy value
+
+For daily aggregate spending:
+
+```python
+spend[r, c, t] ~ LogNormal(log(μ[r, c, t]) - 0.5σ²[r,c], σ[r,c])
+```
+
+or, if you want count and value separately:
+
+```python
+transaction_count[r, c, t] ~ NegativeBinomial(mean_count[r, c, t], dispersion[r, c])
+
+average_ticket[r, c, t] ~ LogNormal(mean_ticket[r, c, t], sigma_ticket[r, c])
+
+spend = transaction_count * average_ticket
+```
+
+The second version is better for a transaction generator because it can later emit individual synthetic transactions.
+
+---
+
+# 10. Recommended baseline generator design
+
+Use a modular structure:
+
+```python
+class BaselineTransactionGenerator:
+    def __init__(
+        self,
+        region_weights,
+        category_weights,
+        trend_model,
+        weekday_effects,
+        seasonal_effects,
+        holiday_effects,
+        covariance_model,
+        rng,
+    ):
+        ...
+
+    def expected_spend(self, date, region, category) -> float:
+        ...
+
+    def sample_aggregate(self, date, region, category) -> float:
+        ...
+
+    def sample_transactions(self, date, region, category) -> list[Transaction]:
+        ...
+```
+
+Then later add shocks externally:
+
+```python
+baseline = BaselineTransactionGenerator(...)
+
+pandemic = PandemicShock(...)
+energy_crisis = EnergyPriceShock(...)
+policy = FiscalStimulusShock(...)
+
+spend = baseline.expected_spend(date, region, category)
+spend *= pandemic.multiplier(date, region, category)
+spend *= energy_crisis.multiplier(date, region, category)
+spend *= policy.multiplier(date, region, category)
+```
+
+This is the clean thesis architecture: baseline first, interventions second.
+
+---
+
+# 11. Minimal baseline formula
+
+Use this as the conceptual model:
+
+```text
+Y[r,c,t] = B[r,c] · T[r,t] · W[c,dow(t)] · S[c,t] · H[c,t] · ε[r,c,t]
+```
+
+Where:
+
+| Symbol        | Meaning                                 |
+| ------------- | --------------------------------------- |
+| `Y[r,c,t]`    | generated card spending                 |
+| `B[r,c]`      | baseline region-category spending level |
+| `T[r,t]`      | secular card-adoption trend             |
+| `W[c,dow(t)]` | weekday effect                          |
+| `S[c,t]`      | annual seasonality                      |
+| `H[c,t]`      | holiday/special-calendar effect         |
+| `ε[r,c,t]`    | stochastic residual                     |
+
+Then shocks become multiplicative overlays:
+
+```text
+Y_observed[r,c,t] = Y_baseline[r,c,t] · Shock_k[r,c,t]
+```
+
+That separation is exactly what you want.
+
+---
+
+# 12. Baseline validation checklist
+
+Your simulated baseline should reproduce:
+
+| Feature                    | Expected baseline behavior                                                    |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| Long-run trend             | Increasing card spending over 2015–early 2020                                 |
+| Weekly pattern             | Stable weekday/weekend structure                                              |
+| Annual pattern             | Clear Christmas peak                                                          |
+| Category mix               | Retail/services and food are largest blocks                                   |
+| Regional concentration     | Lombardy and Lazio dominant                                                   |
+| North/South difference     | Southern card spending lower relative to population                           |
+| Consumption proxy behavior | Card-spending growth loosely tracks consumption growth after trend adjustment |
+| Volatility                 | Daily volatility higher than weekly volatility                                |
+
+The paper is therefore best used as a **baseline card-payment structure source** plus later **shock calibration source**. For your base model, the most important extracted ideas are: trend, seasonality, holidays, category weights, regional weights, and card-versus-consumption coverage bias.

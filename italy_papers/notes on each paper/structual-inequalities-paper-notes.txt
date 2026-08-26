@@ -1,0 +1,343 @@
+Below is the paper distilled into an ABM-ready specification. Key caution: this is **not a full consumer-spending generator**. It is specifically a **wire-transfer generator**: rents, salaries, pensions, taxes, bills, service fees, invoices, settlements, and family/community expense-sharing. The authors explicitly say wire transfers are impractical for fast purchases and are used more for fixed or large payments such as rents and salaries; cards/cash are excluded, so shopping/retail behaviour is under-observed. ([Springer][1]) ([Springer][1]) 
+
+## 1. Core behavioral picture
+
+The paper’s model of Italian wire-transfer behaviour is:
+
+> Money generally flows from high-degree legal entities — firms, finance, institutions, large employers — toward lower-degree natural persons, then is partially redistributed inside households, families, and small local communities through rent, housing costs, shared expenses, and transfers among relatives.
+
+This is not purely hierarchical: the whole network is disassortative, but natural-person subcommunities are locally assortative and clustered. High-degree hubs pay many low-degree agents; low-degree agents pay firms/institutions and also exchange money among each other. The authors describe this as a strong hierarchical pattern mixed with small, tightly clustered natural-person communities. ([Springer][1])
+
+## 2. Agent types and attributes to implement
+
+| ABM entity      |                                     Paper meaning | Attributes available / implied                                                      | Behavioural role                                                                                                          |
+| --------------- | ------------------------------------------------: | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `NaturalPerson` |                    Individual human account owner | gender, birth year/age, region inferred from branch, account ownership structure    | Low-degree nodes; receive salaries/pensions; pay rent, mortgage, bills, taxes, fees; share expenses with family/community |
+| `LegalEntity`   | Company, institution, public/private organisation | NACE/ATECO sector, region, legal status, account degree/strength                    | Medium/high-degree nodes; employers, utilities, finance institutions, businesses, public administration, suppliers        |
+| `Account`       |                                        Graph node | one or multiple owners; natural/legal/no-info/mislabelled/automatic-operation label | Transaction endpoint                                                                                                      |
+| `Transfer`      |                          Directed multigraph edge | payer, payee, timestamp, amount, channel, purpose text                              | Monetary event                                                                                                            |
+
+Dataset scale: more than **12M account owners**: 11.5M natural persons and 500K legal entities, over **12.7M accounts**. The transfer dataset has **100M transactions** worth more than **€1000B**, Jan 2016–Dec 2017. ([Springer][1])
+
+Account ownership distribution:
+
+| Owners per account |                          Share |
+| ------------------ | -----------------------------: |
+| Single owner       |                          69.0% |
+| Two owners         |                          23.9% |
+| More than two      |                           7.1% |
+| More than 20       | rare; mainly business accounts |
+
+Natural persons own **88%** of accounts, legal entities **12%**. But legal entities generate **more than twice** as many wire transfers as natural persons and transfer an order of magnitude more total money. The largest amount is legal-to-legal, while the largest number of transfers is legal-to-natural. ([Springer][1])
+
+## 3. Payment categories you should code
+
+Use four directed transaction regimes.
+
+| Flow                            | Purpose inferred from payment text                        | Network signature                                                         | ABM rule                                                                                   |
+| ------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `NaturalPerson → NaturalPerson` | rent, housing expenses, family/community expense sharing  | low-degree to low-degree; locally assortative; high clustering            | Recurring monthly or semi-regular transfers inside household/family/local cluster          |
+| `LegalEntity → NaturalPerson`   | salary, pension                                           | high-degree/legal to low-degree/natural; employer-employee band           | Monthly salary/pension payments; end-of-month spike; extra June/December payments possible |
+| `NaturalPerson → LegalEntity`   | payment, fee, settlement; also taxes, bills, service fees | low-degree natural persons pay businesses/institutions of variable degree | Regular bills/taxes/fees; monthly or scheduled                                             |
+| `LegalEntity → LegalEntity`     | settlement, invoice                                       | noisy, broad-spectrum B2B; 18% of transfers but 42% of money              | Invoice/supply-chain settlement; large amounts; sector-dependent                           |
+
+The paper’s text analysis explicitly finds those four purpose groups from January 2016 payment-purpose text. ([Springer][1])
+
+For a generator, treat wire transfers as **relationship-driven payments**, not impulse purchases. More than **82%** of transfers are repeated more than once between the same pair of nodes, consistent with contracts such as buyer–seller or worker–employer relationships. ([Springer][1])
+
+## 4. Network topology and degree distributions
+
+Represent the system as a **directed multigraph**:
+
+```text
+node = bank account
+edge = wire transfer from payer account to payee account
+edge attributes = timestamp, amount, channel, purpose
+node attributes = natural/legal/no-info, region, age/gender if natural, NACE sector if legal
+```
+
+The authors use exactly this graph formulation and emphasize that many payments, such as rents and salaries, repeat monthly between the same account pair. ([Springer][1])
+
+### Degree distribution
+
+The degree distribution is heavy-tailed / power-law-like:
+
+| Distribution | Exponent |
+| ------------ | -------: |
+| Total degree | γ = 2.24 |
+| In-degree    | γ = 2.27 |
+| Out-degree   | γ = 2.23 |
+
+The fit thresholds reported in Fig. 5 are: `xmin_total = 111`, `xmin_in = 93`, `xmin_out = 29`. ([Springer][1])
+
+Natural persons concentrate at low degrees; no natural person has degree above **2500** in the 2017 network. Legal-entity accounts can exceed **10⁶** connections. Natural-person degree distribution has a visible spike around **degree ≈ 12**, which the authors interpret as a sign of monthly payments. ([Springer][1])
+
+### Connectivity
+
+The giant connected component does **not** emerge like an Erdős–Rényi phase transition. Instead, the network grows around a stable core of the top **1% highest-degree nodes**. In 2017, **94%** of nodes are in the GCC; **94.5%** of highest-degree first-percentile nodes are already in the GCC in January 2017. ([Springer][1])
+
+For ABM initialization: create hubs first, connect them early, then attach low-degree natural persons and smaller businesses around them. Do not generate the network by uniform random attachment.
+
+## 5. Assortativity, clustering, and local communities
+
+The global network is strongly **disassortative**: low-degree nodes tend to connect to high-degree nodes, and high-degree nodes tend to connect to low-degree nodes. Degree is also a rough proxy for type: low-degree nodes are mostly natural persons; high-degree nodes are mostly legal entities. ([Springer][1])
+
+However, the low-degree natural-person subnetwork behaves differently:
+
+| Pattern                                                        | Meaning for ABM                                                                      |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Low-degree natural persons are clustered                       | Build households/families/local communities with triangle closure                    |
+| Natural-person ↔ natural-person transfers are more assortative | Similar-degree people exchange money among themselves                                |
+| High-degree legal entities have low clustering                 | Employers/institutions pay many disconnected recipients                              |
+| Medium businesses sit between both worlds                      | They operate locally, so they may pay/be paid by people who also know/pay each other |
+
+The paper states that natural persons pay each other for personal reasons inside local communities and families — housing expenses, mortgage payments, etc. — while big companies spread payments across many distant receivers. ([Springer][1])
+
+## 6. Degree bands you can use
+
+The paper identifies degree band `[10, 100]` as the main natural-person activity regime. The reasoning: a regular account owner may receive salary/pension monthly, pay rent/mortgage monthly, pay bills monthly, and perform additional expenditures. In heatmaps, this range shows dense activity and natural persons dominate this degree range. ([Springer][1])
+
+ABM practical classes:
+
+| Degree class     | Likely type                                                        | Behaviour                                                |
+| ---------------- | ------------------------------------------------------------------ | -------------------------------------------------------- |
+| `k < 10`         | inactive/light natural persons, small entities                     | few transfers/year                                       |
+| `10 ≤ k ≤ 100`   | ordinary active natural persons                                    | salary/pension in; rent/bills/taxes/family transfers out |
+| `100 < k < 2500` | active natural persons, small firms, freelancers, local businesses | mixed behaviour; possible mislabelling                   |
+| `k ≥ 2500`       | legal entities/hubs                                                | employers, finance, institutions, high-volume businesses |
+| `k > 10⁶`        | extreme legal hubs                                                 | systemic payment hubs                                    |
+
+The paper warns that some high-degree “natural persons” and low-degree “legal entities” may be mislabelled or accounts repurposed by freelancers/business owners. Treat labels probabilistically near the boundary. ([Springer][1])
+
+## 7. Direction of money flow
+
+The directional hierarchy is measurable:
+
+| Direction relative to degree             | Share of transfers |
+| ---------------------------------------- | -----------------: |
+| Higher-degree payer → lower-degree payee |              68.9% |
+| Lower-degree payer → higher-degree payee |              29.4% |
+
+Legal-to-legal transfers are only about **18%** of wire transfers but account for about **42%** of circulating money. This matters: B2B flows are fewer but much larger. ([Springer][1])
+
+ABM implication: generate **frequency** mostly from salary/bill/rent relationships, but generate **amount mass** from legal-entity and B2B flows.
+
+## 8. Bow-tie structure
+
+The paper’s bow-tie decomposition:
+
+| Component      | Share of nodes | Interpretation                                                   |
+| -------------- | -------------: | ---------------------------------------------------------------- |
+| SCC            |         24.03% | Economic core; strongly connected; main circulating money engine |
+| IN             |         18.33% | Upstream accounts feeding SCC                                    |
+| OUT            |         40.84% | Downstream sink; money exits wire-transfer network here          |
+| Tubes/Tendrils |          9.11% | Peripheral directed paths                                        |
+| Disconnected   |          7.68% | Isolated components                                              |
+
+OUT is the largest component and mostly natural persons. Money reaches OUT and is not re-injected via wire transfer, possibly because it is then spent by card/cash. SCC is only 24% of nodes but produces almost 80% of transfers and more than 85% of transferred amount. ([Springer][1])
+
+### Node type distribution by component
+
+From Fig. 12:
+
+| Component | Natural person | Legal entity | No info | Mislabelled | Automatic op. |
+| --------- | -------------: | -----------: | ------: | ----------: | ------------: |
+| All       |         73.99% |       16.14% |   9.27% |       0.43% |         0.16% |
+| IN        |         73.85% |       17.87% |   7.30% |       0.47% |         0.51% |
+| SCC       |         61.43% |       28.76% |   9.06% |       0.63% |         0.12% |
+| OUT       |         78.94% |        9.86% |  10.82% |       0.33% |         0.05% |
+
+SCC is much more legal-entity-heavy than OUT. More than **43% of businesses/legal entities** are in SCC, and the **top 500 hubs** are all in SCC. ([Springer][1])
+
+### Bow-tie flow matrix by transfer count
+
+Rows are sender component; columns are receiver component.
+
+| Sender → Receiver |   IN |   SCC |   OUT | Others |  Total |
+| ----------------- | ---: | ----: | ----: | -----: | -----: |
+| IN                | 1.9% |  8.7% |  1.4% |   2.2% |  14.1% |
+| SCC               | 0.0% | 47.0% | 32.3% |   0.0% |  79.3% |
+| OUT               | 0.0% |  0.0% |  3.1% |   0.0% |   3.1% |
+| Others            | 0.0% |  0.0% |  1.3% |   2.3% |   3.6% |
+| Total             | 1.9% | 55.6% | 38.1% |   4.5% | 100.0% |
+
+### Bow-tie flow matrix by transferred amount
+
+| Sender → Receiver |   IN |   SCC |   OUT | Others |  Total |
+| ----------------- | ---: | ----: | ----: | -----: | -----: |
+| IN                | 1.2% |  3.9% |  1.6% |   1.5% |   8.1% |
+| SCC               | 0.0% | 55.8% | 29.4% |   0.0% |  85.3% |
+| OUT               | 0.0% |  0.0% |  2.3% |   0.0% |   2.3% |
+| Others            | 0.0% |  0.0% |  1.6% |   2.7% |   4.3% |
+| Total             | 1.2% | 59.8% | 34.9% |   4.1% | 100.0% |
+
+For ABM: implement money as mostly circulating in SCC, then draining into OUT. OUT agents should have low probability of re-emitting wire transfers, because their spending may occur through cash/cards outside this dataset.
+
+## 9. Temporal behaviour
+
+Calendar effects are strong:
+
+| Time pattern                                   | Interpretation                                      |
+| ---------------------------------------------- | --------------------------------------------------- |
+| Few transfers on weekends and Italian holidays | Banking/business-day effect                         |
+| End-of-month increase in number and amount     | Salaries                                            |
+| June and December peaks                        | Bonus salaries and taxes                            |
+| Christmas most active                          | High economic activity                              |
+| August most depressed                          | Vacations, company closures, card/cash substitution |
+| Number of transfers more regular than amount   | Large legal-entity payments drive amount volatility |
+
+The paper notes that daily transaction counts are more stable, while total amount fluctuates heavily and is harder to explain without NLP on purpose text. ([Springer][1])
+
+ABM scheduling:
+
+```text
+For each simulated day:
+    if weekend/holiday: suppress most wire transfers
+    if last business days of month: boost salary/pension/rent/bill flows
+    if June or December end-month: boost salary bonus/tax flows
+    if August: reduce firm/legal-entity activity strongly
+    if Christmas period: increase activity
+```
+
+## 10. Regional behaviour in Italy
+
+Regional wire-transfer totals are strongly aligned with regional GDP. The paper reports outgoing wire-transfer total amount vs regional GDP correlation of **r = 0.97**, **p = 4.1 × 10⁻¹³**. All mutual correlations among regional GDP, incoming/outgoing transfer number, and incoming/outgoing amount are high, though actual transfer values are normalized because of bank policy. ([Springer][1])
+
+North–South inequality is large:
+
+| Regional statistic                                                                   | Paper value |
+| ------------------------------------------------------------------------------------ | ----------: |
+| South Italy GDP per capita vs Centre-North                                           |   45% lower |
+| Wire-transfer amount received by natural persons in Southern regions vs Centre-North | 44.6% lower |
+
+Northern accounts are richer on average. Lombardy and Lazio emerge as the main economic centres. The “richest club” is Lombardy, Piedmont, Veneto, Emilia-Romagna, and Lazio; Campania is the only southern region with a non-negligible exchange with that club. ([Springer][1])
+
+ABM regional multiplier idea:
+
+```text
+region_income_multiplier:
+    North, especially Lombardy/Piedmont/Veneto/Emilia-Romagna: high
+    Centre, especially Lazio/Rome: high for professional services
+    South/Islands: lower income and transfer volume
+    Campania: strongest Southern connector, receives more than it sends
+```
+
+## 11. Business sectors
+
+The paper groups ATECO/NACE sectors as follows:
+
+| NACE code | Group                      |
+| --------- | -------------------------- |
+| A         | Agriculture and Farming    |
+| B         | Mining                     |
+| C         | Industry                   |
+| D, E      | Services providers         |
+| F, L      | Real Estate                |
+| G         | Commerce                   |
+| H         | Transportation             |
+| I, N      | Tourism                    |
+| J, M, S   | Professional Services      |
+| K         | Finance                    |
+| O         | Public Administration      |
+| P         | Education                  |
+| Q         | Health and Social Services |
+| R, T, U   | Other                      |
+
+Source table: ([Springer][2])
+
+Important sectoral flow findings:
+
+| Sector pattern                                                                                                     | ABM interpretation                                        |
+| ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Finance in SCC sends huge amounts to natural persons                                                               | pensions, financial disbursements, institutional payments |
+| Commerce pays Industry more than natural persons                                                                   | supply-chain procurement                                  |
+| Natural persons are widest receivers in SCC                                                                        | salaries/pensions/income distribution                     |
+| Natural persons send back only a small fraction of what they receive to legal entities                             | much spending leaves observed wire-transfer channel       |
+| Professional Services cascade from SCC to Professional Services in OUT                                             | subcontracting / hierarchical service chain               |
+| 85% of Professional Services SCC → Professional Services OUT transfers go from higher-degree to lower-degree actor | model as prime contractor → subcontractor                 |
+| 65% of Professional Services OUT transfers go to natural persons                                                   | service-sector income eventually reaches individuals      |
+| Professional Services core is in Lazio/Rome                                                                        | regional sector specialization                            |
+| Finance and Industry cores are in the North, especially Lombardy                                                   | regional sector specialization                            |
+
+These sectoral findings are described directly in the paper’s flow analysis. ([Springer][1])
+
+## 12. ABM behaviour rules
+
+A compact implementation design:
+
+```python
+class AgentType:
+    NATURAL = "natural_person"
+    LEGAL = "legal_entity"
+
+class TransferPurpose:
+    SALARY = "salary"
+    PENSION = "pension"
+    RENT_HOUSING = "rent_housing"
+    FAMILY_EXPENSE_SHARE = "family_expense_share"
+    BILL_TAX_FEE = "bill_tax_fee"
+    B2B_INVOICE = "b2b_invoice"
+    B2B_SETTLEMENT = "b2b_settlement"
+    PUBLIC_ADMIN = "public_admin"
+    OTHER = "other"
+```
+
+Suggested generation order:
+
+1. Generate regions with GDP/income multipliers: North high, Lazio high for professional services, South lower.
+2. Generate accounts: mostly natural persons; smaller but highly active legal entities.
+3. Assign natural-person accounts into households/family/local clusters.
+4. Assign legal entities into NACE sectors and bow-tie components, with large hubs concentrated in SCC.
+5. Sample degree targets from power-law-like distributions: γ around 2.2.
+6. Create core SCC first, especially legal hubs.
+7. Add recurring relationships:
+
+   * employer → worker monthly
+   * pension/finance/public institution → pensioner monthly
+   * tenant/person → landlord/person or real-estate/legal monthly
+   * person → utilities/tax/service providers monthly/periodic
+   * firm → firm invoice/settlement, sector-dependent
+   * family/community expense sharing among natural persons
+8. Apply temporal calendar modifiers.
+9. Allow most money to circulate in SCC, then drain to OUT.
+10. Let OUT agents spend much of their money through unobserved channels: cash/card, not wire transfer.
+
+## 13. Calibration values you can directly use
+
+| Parameter                                            | Value / rule                               |
+| ---------------------------------------------------- | ------------------------------------------ |
+| Natural-person account share                         | 88% of accounts in dataset-level statement |
+| Legal-entity account share                           | 12%                                        |
+| Account owner count                                  | 69% single, 23.9% two-owner, 7.1% more     |
+| Wire-transfer degree exponent                        | γ ≈ 2.2                                    |
+| Natural-person max observed degree                   | < 2500                                     |
+| Legal-entity max observed degree                     | > 10⁶                                      |
+| Natural-person active degree band                    | 10–100                                     |
+| Repeated pair transfers                              | >82%                                       |
+| GCC share                                            | 94% of nodes                               |
+| Highest-degree core                                  | top 1% drives GCC                          |
+| Top percentile in GCC in first month                 | 94.5%                                      |
+| Higher-degree → lower-degree transfers               | 68.9%                                      |
+| Lower-degree → higher-degree transfers               | 29.4%                                      |
+| Legal→legal share by count                           | ~18%                                       |
+| Legal→legal share by amount                          | ~42%                                       |
+| SCC node share                                       | 24.03%                                     |
+| IN node share                                        | 18.33%                                     |
+| OUT node share                                       | 40.84%                                     |
+| Tubes/tendrils                                       | 9.11%                                      |
+| Disconnected                                         | 7.68%                                      |
+| SCC transfer count share as sender                   | 79.3%                                      |
+| SCC amount share as sender                           | 85.3%                                      |
+| SCC→SCC amount share                                 | 55.8%                                      |
+| SCC→OUT amount share                                 | 29.4%                                      |
+| SCC→OUT transfers to natural persons by count        | 76.5%                                      |
+| SCC→OUT transfers to natural persons by amount       | 17.3%                                      |
+| South natural-person received amount vs Centre-North | 44.6% lower                                |
+| Regional outgoing amount vs GDP                      | r = 0.97                                   |
+
+## 14. What the paper does **not** give you
+
+The paper does **not** provide a clean transaction-amount distribution by purpose or household income bracket. It also hides absolute regional wire-transfer values, showing normalized amounts because of bank policy. It excludes cash/card payments and excludes transactions involving other banks’ customers. Therefore, for a full consumer-spending generator, you need an additional module for card/cash retail consumption and external-bank interactions. The paper itself says wire-transfer-only data can understate shopping and distort sectors such as commerce. ([Springer][1])
+
+[1]: https://link.springer.com/article/10.1007/s41109-020-00314-x "Structural inequalities emerging from a large wire transfers network | Applied Network Science | Springer Nature Link"
+[2]: https://link.springer.com/article/10.1007/s41109-020-00314-x/tables/1 "Table 1 | Structural inequalities emerging from a large wire transfers network | Applied Network Science | Springer Nature Link"

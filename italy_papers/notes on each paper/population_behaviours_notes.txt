@@ -1,0 +1,485 @@
+Redone without recommendations — only extraction and ABM-facing characterisation from the paper.
+
+# 0. What this paper can and cannot define
+
+The paper is a **payment-behaviour survey**, not a full income/wealth survey. It can define:
+
+| Can define from paper                                          | Cannot define from paper                  |
+| -------------------------------------------------------------- | ----------------------------------------- |
+| Payment method probabilities                                   | Full income distribution of Italy         |
+| Payment method by amount                                       | Starting bank balances                    |
+| Payment method by age, gender, education, income group, region | Starting wallet cash distribution         |
+| POS / online / P2P / recurring payment composition             | Total wealth or savings                   |
+| Merchant/payment acceptance effects                            | Exact daily purchase frequency per person |
+| Access to cards, accounts, instant payments, cash, crypto      | Household composition                     |
+
+The survey was conducted between September 2023 and June 2024. For Italy it contains **4,088 respondents**, **8,050 POS transactions**, **397 P2P transactions**, **2,837 online transactions**, and **11,825 recurring payments**. POS, P2P, and online payments were collected in a one-day diary; recurring payments refer to the previous 30 days. 
+
+---
+
+# 1. Consumer agent attributes supported by the paper
+
+The paper supports these consumer dimensions:
+
+| Attribute    | Categories visible in the paper                                                             | Behavioural relevance                                                          |
+| ------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Gender       | Female, male                                                                                | Small at POS; stronger for P2P                                                 |
+| Age          | 18–24, 25–39, 40–54, 55–64, 65+                                                             | Strong for cash and mobile usage                                               |
+| Education    | Primary/lower secondary, upper/post secondary, university/PhD                               | Lower education → more cash                                                    |
+| Income group | Up to €1,000; €1,001–€2,500; €2,501–€4,000; more than €4,000; refusal/don’t know            | Lower income → stronger cash preference and lower card ownership               |
+| Urbanity     | Rural, urban                                                                                | Small POS effect; visible in access/payment adoption                           |
+| Occupation   | Retired, student, self-employed, housework/unemployed, manual worker, white collar, manager | Explains heterogeneity in cash/card use                                        |
+| Region       | North, Centre, South and Islands, with subregional clusters                                 | Regional differences exist but are smaller than amount/payment-context effects |
+
+The paper states that cash use is especially relevant among the **elderly**, **less educated**, and **low-income** groups, while mobile devices are mainly used by **generation Z and millennials**. 
+
+---
+
+# 2. Top-level transaction context
+
+For non-recurring day-to-day payments:
+
+| Payment context              | Share by number | Share by value | Interpretation                           |
+| ---------------------------- | --------------: | -------------: | ---------------------------------------- |
+| POS / physical point of sale |             73% |            58% | Main daily retail channel                |
+| Online                       |             24% |            38% | Less frequent but higher-value           |
+| P2P                          |              3% |             4% | Minor share of total day-to-day payments |
+
+The average POS transaction is about **€28**, while the average online transaction is about **€55**, so online payments are relatively more important by value than by count. 
+
+ABM state transition:
+
+```python
+context_probs = {
+    "pos": 0.73,
+    "online": 0.24,
+    "p2p": 0.03,
+}
+```
+
+---
+
+# 3. POS payments
+
+## 3.1 Overall POS payment distribution
+
+| POS payment method | Share by number | Share by value | Average transaction value |
+| ------------------ | --------------: | -------------: | ------------------------: |
+| Cash               |             61% |            49% |                       €23 |
+| Card               |             32% |            39% |                       €34 |
+| Mobile             |              4% |             5% |                       €42 |
+| Other              |        residual |       residual |                       €53 |
+
+Cash is still the most frequent POS instrument, but non-cash methods slightly dominate by value: cash is **49%** of POS value, while non-cash instruments together are **51%**. 
+
+---
+
+## 3.2 POS transaction amount distribution
+
+| POS amount range | Share of POS transactions |
+| ---------------- | ------------------------: |
+| €0–€30           |                       74% |
+| €30–€50          |                       16% |
+| €50–€100         |                        8% |
+| >€100            |                        2% |
+
+This is a central relationship in the paper: most POS payments are low value, and low-value payments are much more cash-heavy. 
+
+---
+
+## 3.3 POS payment method conditional on amount
+
+| Amount range | Cash |                Card |          Mobile |    Other |
+| ------------ | ---: | ------------------: | --------------: | -------: |
+| €0–€30       |  64% |                 30% |              3% |      ~3% |
+| €30–€50      |  56% |                 37% |              4% |      ~3% |
+| €50–€100     |  44% |                ~43% |              6% |      ~7% |
+| >€100        |  32% | card + mobile = 55% | included in 55% | residual |
+
+The paper explicitly says payment instrument choice at POS is **significantly associated with transaction value**: cash dominates low-value payments, while cards, mobile apps, and other instruments increase with transaction size. 
+
+---
+
+# 4. POS demographic behaviour
+
+## 4.1 POS by age
+
+| Age group | Cash by number | Card by number | Behavioural reading            |
+| --------- | -------------: | -------------: | ------------------------------ |
+| 18–24     |          55.5% |          31.8% | Lowest cash reliance           |
+| 25–39     |          59.0% |          33.5% | More digital than older groups |
+| 40–54     |          59.3% |          34.2% | Near national average          |
+| 55–64     |          59.3% |          32.6% | Near national average          |
+| 65+       |          65.5% |          29.5% | Highest cash reliance          |
+
+The 65+ group has the strongest POS cash behaviour: **66% by number** and **58% by value** according to the paper’s summary. Younger consumers, especially 18–39, are more likely to use mobile payments. 
+
+---
+
+## 4.2 POS by gender
+
+| Gender | Cash by number | Card by number |
+| ------ | -------------: | -------------: |
+| Female |          60.7% |          31.5% |
+| Male   |          60.4% |          33.2% |
+
+The POS gender gap is negligible. The paper explicitly states that men and women report similar shares of cash, card, and mobile payments at POS. 
+
+---
+
+## 4.3 POS by education
+
+| Education               | Cash by number | Card by number |
+| ----------------------- | -------------: | -------------: |
+| Primary/lower secondary |          63.8% |          28.8% |
+| Upper/post secondary    |          60.2% |          33.7% |
+| University/PhD          |          54.9% |          35.8% |
+
+Education is negatively associated with cash use: lower education is more cash-heavy, university/PhD is less cash-heavy.
+
+---
+
+## 4.4 POS by income group
+
+| Income group       | Cash by number | Card by number | Cash by value | Card by value |
+| ------------------ | -------------: | -------------: | ------------: | ------------: |
+| Up to €1,000       |          64.3% |          29.3% |         49.4% |         34.8% |
+| €1,001–€2,500      |          59.8% |          32.6% |         46.0% |         40.1% |
+| €2,501–€4,000      |          61.1% |          31.6% |         54.6% |         37.4% |
+| More than €4,000   |          59.3% |          35.5% |         50.5% |         40.8% |
+| Refusal/don’t know |          54.7% |          38.5% |         46.6% |         48.0% |
+
+The paper’s qualitative statement is that lower-income people rely heavily on cash. In the appendix chart, the **up to €1,000** group has the highest POS cash share by number, at **64.3%**.
+
+---
+
+## 4.5 POS by occupation
+
+| Occupation           | Cash by number | Card by number |
+| -------------------- | -------------: | -------------: |
+| Retired              |          64.2% |          29.3% |
+| Student              |          63.6% |          26.9% |
+| Self-employed        |          63.2% |          29.3% |
+| Housework/unemployed |          62.3% |          30.8% |
+| Manual worker        |          61.2% |          34.1% |
+| Other white collar   |          54.6% |          37.3% |
+| Manager              |          54.5% |          39.5% |
+
+Managers and white-collar workers are the least cash-heavy POS groups. Retired, student, self-employed, and unemployed/housework groups are more cash-heavy.
+
+---
+
+# 5. POS purchase purpose and merchant acceptance
+
+Payment behaviour differs by location and purpose.
+
+| POS purpose/location       | Payment behaviour                        |
+| -------------------------- | ---------------------------------------- |
+| Home services              | Cash-heavy: 69% of value                 |
+| Other services             | Cash-heavy: 67% of value                 |
+| Pick-up station            | Cash-heavy: 65% of value                 |
+| Travel                     | Cards dominate: 65% of value             |
+| Taxes/public charges       | Cards dominate: 64% of value             |
+| Other purchases            | Cards dominate: 54% of value             |
+| Durable goods              | Cards dominate: 51% of value             |
+| Street purchases           | Mobile relatively relevant: 15% of value |
+| Vending/ticketing machines | Mobile relatively relevant: 8% of value  |
+
+Merchant acceptance is a behavioural constraint. Cashless acceptance at POS is **87%**, up from **80%** in 2022. Travel and culture/entertainment have the highest cashless acceptance, around **96%**. Pick-up stations and home services have the lowest cashless acceptance, around **76–77%**. The paper also reports that **12%** of respondents faced at least one card/mobile refusal, and **6%** reported that cashless instruments were not accepted below a certain transaction value. 
+
+This means actual payment behaviour is conditional on:
+
+```python
+P(payment_method | amount, agent_attributes, purchase_type, merchant_acceptance)
+```
+
+not only on consumer preference.
+
+---
+
+# 6. Online payments
+
+## 6.1 Overall online payment method distribution
+
+| Online payment method | Share by number | Share by value | Average value |
+| --------------------- | --------------: | -------------: | ------------: |
+| Cards                 |           51.3% |          52.4% |         €56.6 |
+| Credit transfer       |            3.4% |           6.6% |        €106.4 |
+| Direct debit          | small by number |  6.6% by value |         €86.4 |
+| E-payment solutions   |           27.7% |          25.9% |         €51.9 |
+| Instant payments      |           small |          small |         €38.0 |
+| Other                 |  8.1% by number |       residual |         €34.0 |
+
+Cards are the dominant online payment instrument by both number and value. E-payment solutions are second. Credit transfers are low-frequency but high-value. 
+
+---
+
+## 6.2 Online product type distribution
+
+| Online product type   | Share by number | Share by value |
+| --------------------- | --------------: | -------------: |
+| Food                  |           29.8% |          17.7% |
+| Durable goods         |           28.0% |          33.9% |
+| Other                 |           17.9% |          25.9% |
+| Medicine/cosmetics    |           11.4% |           7.2% |
+| Culture/entertainment |            9.3% |           7.4% |
+| Travel                |            3.6% |           7.8% |
+
+Food is frequent but lower-value. Durable goods and travel have higher value intensity.
+
+---
+
+## 6.3 Online payment method by product type
+
+| Product type          | Main online payment pattern                             |
+| --------------------- | ------------------------------------------------------- |
+| Durable goods         | Cards 58.6%, e-payments 28.3%                           |
+| Medicine/cosmetics    | Cards 56.8%, e-payments 26.0%                           |
+| Travel                | Cards 50.7%, e-payments 32.4%; credit transfers visible |
+| Food                  | Cards 48.6%, e-payments 27.4%, instant payments 10.1%   |
+| Culture/entertainment | Cards 48.3%, e-payments 28.0%, other 10.5%              |
+| Other                 | Cards 42.5%, e-payments 27.1%, other 14.9%              |
+
+The online purchase mechanism is therefore:
+
+```python
+P(online_method | product_type, amount, agent_access, demographics)
+```
+
+Cards dominate across all online categories, but e-payment solutions are consistently important.
+
+---
+
+# 7. P2P payments
+
+## 7.1 Overall P2P distribution
+
+| P2P method        | Share by number | Share by value | Average value |
+| ----------------- | --------------: | -------------: | ------------: |
+| Cash              |           44.4% |          34.2% |        €31.23 |
+| Cards/mobile apps |           42.9% |          40.3% |        €38.12 |
+| Credit transfers  | small by number | 16.0% by value |       €139.41 |
+| Instant payments  |           small |          small |        €31.68 |
+| Other             |  5.5% by number |  7.4% by value |        €55.14 |
+
+Cash is the most frequent P2P method by number, but cards/mobile apps dominate by value. Credit transfers are relatively rare but used for much larger P2P amounts. 
+
+---
+
+## 7.2 P2P by gender
+
+| Gender | Cash by number | Cards/mobile by number | Cash by value | Cards/mobile by value |
+| ------ | -------------: | ---------------------: | ------------: | --------------------: |
+| Female |          53.2% |                  34.8% |         43.0% |                 34.5% |
+| Male   |          33.2% |                  53.1% |         23.5% |                 47.5% |
+
+Unlike POS, P2P shows a strong gender association. Female respondents are more cash-heavy; male respondents are more cards/mobile-heavy.
+
+---
+
+## 7.3 P2P by age
+
+| Age group | Cash by number | Cards/mobile by number |
+| --------- | -------------: | ---------------------: |
+| 18–24     |          30.1% |                  59.0% |
+| 25–39     |          43.8% |                  39.0% |
+| 40–54     |          48.8% |                  41.7% |
+| 55–64     |          33.7% |                  55.5% |
+| 65+       |          55.8% |                  30.3% |
+
+The 18–24 group is strongly digital for P2P. The 65+ group is strongly cash-heavy.
+
+---
+
+## 7.4 P2P by education
+
+| Education               | Cash by number | Cards/mobile by number |
+| ----------------------- | -------------: | ---------------------: |
+| Primary/lower secondary |          44.5% |                  45.3% |
+| Upper/post secondary    |          34.2% |                  53.8% |
+| University/PhD          |          49.0% |                  35.8% |
+
+P2P education patterns are less monotonic than POS. The clearest P2P demographic associations are gender and age.
+
+---
+
+# 8. Recurring payments
+
+Recurring payments are weekly, monthly, annual, or otherwise repeated payments. The paper includes rent/mortgage, utilities, insurance, telephone/internet bills, taxes/public charges, subscriptions, season tickets, and loans. 
+
+## 8.1 Recurring bill types
+
+| Recurring bill type             | Share of respondents | Average amount |
+| ------------------------------- | -------------------: | -------------: |
+| Utilities                       |                  73% |           €124 |
+| Telephone/internet bills        |                  70% |            €40 |
+| Subscriptions                   |                  36% |            €32 |
+| Insurance                       |                  26% |           €244 |
+| Rent                            |                  24% |           €440 |
+| Taxes/public charges            |                  20% |           €151 |
+| Mortgage                        |                  19% |           €489 |
+| School/childcare/tuition        |                  14% |           €121 |
+| Paying back debt/consumer loans |                  14% |           €198 |
+
+---
+
+## 8.2 Recurring payment method by bill type, by number of transactions
+
+| Bill type                |  Cash | Cards | Credit transfers | Direct debits | Other |
+| ------------------------ | ----: | ----: | ---------------: | ------------: | ----: |
+| Telephone/internet       | small | 21.7% |            small |         62.8% | small |
+| Utilities                | 11.2% | 18.8% |             9.7% |         56.7% | small |
+| Subscriptions            | small | 41.4% |            small |         44.4% | small |
+| Insurance                | small | 33.8% |            22.3% |         31.8% | small |
+| Rent                     |  9.8% | 11.9% |            37.9% |         37.9% | small |
+| Taxes/public charges     | small | 30.7% |            15.7% |         31.7% | 14.6% |
+| School/childcare/tuition | 18.7% | 38.6% |            20.0% |         19.7% | small |
+| Mortgage                 | small | 15.6% |            19.7% |         57.1% | small |
+| Debt/consumer loans      | small | 16.9% |            small |         65.0% | small |
+
+Direct debit is the dominant recurring-payment method overall. Cards are important for subscriptions, insurance, taxes/public charges, and school/tuition. Credit transfers are important for rent, mortgage, insurance, and school/tuition.
+
+---
+
+# 9. Preferences and attitudes
+
+## 9.1 POS payment preference
+
+| Preference                               | Italy |
+| ---------------------------------------- | ----: |
+| Prefer cash                              | 20.0% |
+| Prefer card or other cashless instrument | 60.6% |
+| No clear preference                      | 19.4% |
+
+This creates a major behavioural discrepancy: actual POS transactions are **61% cash by number**, but only **20%** of respondents say they prefer cash when freely choosing in a shop. The paper links this gap to acceptance constraints, especially for low-value transactions. 
+
+---
+
+## 9.2 POS preference by age
+
+| Age group | Prefer cash | Prefer cashless | No clear preference |
+| --------- | ----------: | --------------: | ------------------: |
+| 18–24     |       17.7% |           67.6% |               14.7% |
+| 25–39     |       22.6% |           61.2% |               16.3% |
+| 40–54     |       17.4% |           61.6% |               21.0% |
+| 55–64     |       18.9% |           59.6% |               21.5% |
+| 65+       |       21.9% |           57.9% |               20.2% |
+
+Even the 65+ group has a majority cashless preference, but its actual cash use remains high.
+
+---
+
+## 9.3 POS preference by income
+
+| Income group       | Prefer cash | Prefer cashless | No clear preference |
+| ------------------ | ----------: | --------------: | ------------------: |
+| Up to €1,000       |       34.1% |           39.2% |               26.7% |
+| €1,001–€2,500      |       18.4% |           61.7% |               19.9% |
+| €2,501–€4,000      |       18.2% |           65.4% |               16.4% |
+| More than €4,000   |       11.0% |           75.2% |               13.8% |
+| Refusal/don’t know |       24.1% |           60.7% |               15.2% |
+
+This is one of the clearest preference gradients in the paper: higher income corresponds to stronger stated cashless preference.
+
+---
+
+## 9.4 Reasons for preferring instruments
+
+| Instrument       | Main perceived advantages                             |
+| ---------------- | ----------------------------------------------------- |
+| Cash             | Broad acceptance; better overview/control of expenses |
+| Cards            | Convenience from not carrying cash; speed; safety     |
+| Digital payments | Privacy concerns exist despite cashless preference    |
+
+The paper reports that **58%** of Italian respondents consider it important to be able to pay in cash, and **58%** express privacy concerns related to digital payments. 
+
+---
+
+# 10. Access to cash and non-cash instruments
+
+## 10.1 Cash access
+
+| Cash access variable                         |                   Italy |
+| -------------------------------------------- | ----------------------: |
+| Main cash source: ATM                        |                     76% |
+| Bank counter                                 |                     10% |
+| Cashback                                     |                      5% |
+| Cash-in-shop                                 |                      3% |
+| Access to cash very/fairly easy              |                     89% |
+| Access to cash difficult                     |                     10% |
+| Store cash at home for precautionary reasons |                     35% |
+| Under-24 storing cash at home                |                     45% |
+| Precautionary cash amount                    | Almost all below €1,000 |
+
+ATMs are the dominant source of cash. Cash provision through shops or retailers is still uncommon. 
+
+---
+
+## 10.2 Access to non-cash instruments
+
+| Access variable                | Italy |
+| ------------------------------ | ----: |
+| Has payment account            |   87% |
+| Has payment card               |   88% |
+| Has access to instant payments |   56% |
+| Owns crypto-assets             |    9% |
+
+There is a north-south card ownership gap: about **88%** card ownership in northern regions and **85%** in southern regions. Low-income and unemployed people have the lowest card possession rate, around **81%**. Less-educated people and people under 24 are also below average, about **86–87%**. 
+
+---
+
+# 11. Crypto-assets
+
+| Crypto variable             |                 Italy |
+| --------------------------- | --------------------: |
+| Own crypto-assets           |                    9% |
+| Hold crypto for investment  | 54% of crypto holders |
+| Use crypto as payment means | 20% of crypto holders |
+| More common among males     |                   Yes |
+| More common among age ≤39   |                   12% |
+
+Crypto-assets are not a mainstream payment method in this paper. Their primary role is investment, not payment. 
+
+---
+
+# 12. Correlations / associations described in the paper
+
+The paper mostly reports **descriptive associations**, not regression coefficients. The main behavioural relationships are:
+
+| Relationship                               | Direction                                                          |
+| ------------------------------------------ | ------------------------------------------------------------------ |
+| Transaction amount → payment method        | Higher amount reduces cash use and increases card/mobile/other use |
+| Low-value POS purchases → cash             | Cash dominates especially below €50                                |
+| Older age → cash                           | 65+ has highest POS cash use                                       |
+| Younger age → mobile/digital               | 18–39 more likely to use mobile payments                           |
+| Lower education → cash                     | Primary/lower-secondary group is more cash-heavy                   |
+| Lower income → cash preference/use         | Up to €1,000 group has highest cash preference and high cash use   |
+| Higher income → cashless preference        | More than €4,000 group has 75.2% cashless preference               |
+| Merchant acceptance → actual method        | Cashless preference does not always translate into cashless use    |
+| Online context → card/e-payment            | Online payments are mostly cards, then e-payment solutions         |
+| P2P context → cash or card/mobile          | Cash leads by number, cards/mobile lead by value                   |
+| Credit transfer → high-value P2P/online    | Credit transfers have much higher average transaction values       |
+| Recurring payments → direct debit          | Direct debit dominates most recurring bills                        |
+| Privacy concern → digital-payment friction | 58% report privacy concerns around digital payments                |
+| Cash access → cash availability            | ATM access remains the central cash-supply mechanism               |
+
+The strongest modelling relationship in the whole paper is:
+
+```text
+payment_method = f(transaction_context, transaction_amount, merchant_acceptance,
+                   age, income_group, education, occupation, instrument_access)
+```
+
+The paper does not provide enough evidence to define:
+
+```text
+starting_balance = f(age, income, education, region)
+```
+
+or
+
+```text
+monthly_income = f(agent_type)
+```
+
+It only gives **income brackets used for behavioural conditioning**, not a full distribution of income or balances.

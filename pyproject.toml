@@ -1,0 +1,50 @@
+[project]
+name = "synthitaly"
+version = "0.2.0"
+description = "Small agent-based simulation of Italian consumer transactions (bank-eye view) — master's thesis prototype"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mesa>=3.1",
+    "solara>=1.57.4",
+    "networkx>=3.4",
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "matplotlib>=3.9",
+    "altair>=5.4",
+    "plotly>=6.8.0",
+    "scikit-learn>=1.5",
+    "scipy>=1.13",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29",
+    "jupyter>=1.1",
+    "nbconvert>=7.16",
+    "pytest>=8.3",
+    "ruff>=0.7",
+    # presentation/scripts/make_reference_card.py builds MODEL_REFERENCE_CARD.pdf.
+    # It was undeclared, so `uv sync` removed it from the venv and the script broke.
+    "reportlab>=4.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+src = ["src", "tests"]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501", "B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,475 @@
+Below is the useful part of the **Banca d’Italia SHIW 2022 paper** for filling the gaps in your ABM population generator. The key point: this paper cannot give you exact individual microdata, but it gives strong **calibration constraints** for household income, wealth, savings, bank deposits, debt burden, and vulnerability.
+
+## 1. What this paper is useful for in your generator
+
+Treat this paper as a **household-level calibration source**, not a transaction-level source.
+
+It is good for:
+
+| ABM variable                | Can use from this paper? | Use as                                                                  |
+| --------------------------- | -----------------------: | ----------------------------------------------------------------------- |
+| Household net annual income |                   Partly | Distribution constraints and source-based income multipliers            |
+| Income source               |                      Yes | Payroll, self-employed, pension, transfers/not working, property income |
+| Equivalized income          |                      Yes | Welfare/income-per-household-member measure                             |
+| Wealth                      |                   Partly | Mean, median, top-decile concentration                                  |
+| Financial assets            |           Yes, aggregate | Bank/deposit balance proxy                                              |
+| Savings behavior            |           Yes, aggregate | Probability of no saving by income quintile                             |
+| Debt status and burden      |                      Yes | Debt probabilities by income quartile                                   |
+| Liquidity vulnerability     |                      Yes | Low-buffer household class                                              |
+| Household composition       |             Not directly | But gives equivalence-scale formula                                     |
+
+The report is based on more than 9,500 interviewed households and reports household income net of income taxes and social security contributions. It also notes that the survey design was changed to better capture high-income households, which matters for your generator because you should explicitly model the upper tail instead of assuming a simple symmetric distribution. 
+
+---
+
+# 2. Solving the “not answerable” fields from your table
+
+## A. Full income distribution of Italy
+
+**The paper does not give the full income distribution**, but it gives enough constraints to build a realistic synthetic distribution.
+
+Use these facts:
+
+| Income distribution feature           | Value / rule from paper |
+| ------------------------------------- | ----------------------: |
+| Mean household income, real net terms | +1.4% from 2020 to 2022 |
+| Mean equivalized income               | +1.8% from 2020 to 2022 |
+| Mean household income vs 2006         |   still about 10% lower |
+| Mean equivalized income vs 2006       |    still about 5% lower |
+| Gini index of equivalized income      |                   33.6% |
+| Bottom income decile share            |    2.4% of total income |
+| Top income decile share               |   27.9% of total income |
+
+The most useful calibration target is the **Gini = 33.6%** and the decile shares: bottom 10% get **2.4%** of total income, top 10% get **27.9%**. 
+
+For your generator, I would not try to directly recreate every euro value from this short report. Instead:
+
+```text
+Generate equivalized household income from a fitted distribution.
+Constrain it so that:
+- Gini ≈ 0.336
+- bottom decile receives ≈ 2.4% of income
+- top decile receives ≈ 27.9% of income
+```
+
+Then convert equivalized income into total household income using household composition:
+
+```text
+household_income = equivalized_income × equivalence_scale
+```
+
+This is important because your ABM should generate **households first**, then persons inside households, not just isolated individuals.
+
+---
+
+## B. Sources of income
+
+This is one of the strongest parts of the paper for your model.
+
+The paper distinguishes households by the **work status / income source of the primary income earner**:
+
+| Primary income source | Meaning for your generator                                                                 |       Relative income level |
+| --------------------- | ------------------------------------------------------------------------------------------ | --------------------------: |
+| Payroll employee      | Stable labor income                                                                        | 108% of general mean income |
+| Self-employed         | Professionals, freelancers, entrepreneurs, company partners/managers, non-standard workers | 149% of general mean income |
+| Pensioner             | Pension is main income source                                                              |  82% of general mean income |
+| Other / not working   | Transfers or other non-work income                                                         |           Low and worsening |
+| Property income       | Secondary income, correlated with wealth                                                   |     Rose by 5.7% on average |
+
+Between 2020 and 2022, mean income rose for households where the primary earner was self-employed by **+2.8%**, rose slightly for payroll-employee households by **+0.8%**, fell for pensioner households by **−2.6%**, and fell heavily for households relying on other transfers by **−15.4%**. Property income rose by **+5.7%** on average. 
+
+Use this directly as your **income-source module**:
+
+```text
+income_source ∈ {
+    payroll_employee,
+    self_employed,
+    pension,
+    transfer_or_not_working,
+    property_income_secondary
+}
+```
+
+Recommended modeling logic:
+
+```text
+base_income = draw_from_income_distribution(decile)
+
+if primary_source == "payroll_employee":
+    income *= 1.08 / average_source_normalizer
+
+if primary_source == "self_employed":
+    income *= 1.49 / average_source_normalizer
+    income_volatility = high
+    inflation_pass_through = high
+
+if primary_source == "pension":
+    income *= 0.82 / average_source_normalizer
+    income_volatility = low
+    inflation_pass_through = low
+
+if primary_source == "transfer_or_not_working":
+    income *= low_multiplier
+    income_volatility = medium
+    shock_sensitivity = high
+```
+
+Important: the paper gives **relative income levels**, not the population shares of each source. You should get the shares of workers, pensioners, unemployed, etc. from your other demographic source.
+
+---
+
+## C. Household composition
+
+The paper does **not** give the actual distribution of Italian household types, such as single adults, couples, families with children, elderly couples, and so on.
+
+But it gives a very useful rule: the paper uses the **OECD-modified equivalence scale**:
+
+| Household member                | Weight |
+| ------------------------------- | -----: |
+| Household head                  |    1.0 |
+| Each additional member aged 14+ |    0.5 |
+| Each child under 14             |    0.3 |
+
+Equivalized income is total household income divided by the number of equivalized adults. 
+
+Use this in your ABM like this:
+
+```python
+def equivalence_scale(n_adults: int, n_children_under_14: int) -> float:
+    if n_adults < 1:
+        raise ValueError("Household must have at least one adult.")
+    return 1.0 + 0.5 * (n_adults - 1) + 0.3 * n_children_under_14
+
+
+def household_income_from_equivalized(
+    equivalized_income: float,
+    n_adults: int,
+    n_children_under_14: int,
+) -> float:
+    return equivalized_income * equivalence_scale(n_adults, n_children_under_14)
+```
+
+Example:
+
+```text
+Single adult:
+scale = 1.0
+
+Couple without children:
+scale = 1.5
+
+Couple with two children under 14:
+scale = 1.0 + 0.5 + 0.3 + 0.3 = 2.1
+```
+
+So if two households have the same equivalized income, the larger household receives a larger total household income.
+
+---
+
+## D. Starting bank balances
+
+The paper does not directly report checking-account balances, but it gives a good proxy through **financial assets** and **deposits**.
+
+Useful facts:
+
+| Variable                                |                     Value |
+| --------------------------------------- | ------------------------: |
+| Households holding financial assets     |                       92% |
+| Mean financial assets among holders     |             about €62,400 |
+| Total financial wealth held as deposits |                     40.4% |
+| Poorest wealth decile deposit share     | 99.4% of financial assets |
+| Richest wealth decile deposit share     | 24.6% of financial assets |
+
+The paper defines deposits as bank and post office current accounts, deposit accounts, certificates of deposit, repos, and postal savings certificates. 
+
+So for your ABM, use **deposit wealth as starting bank balance proxy**:
+
+```text
+starting_bank_balance ≈ financial_assets × deposit_share_by_wealth_decile
+```
+
+Deposit shares by net wealth decile:
+
+| Wealth decile | Deposit share of financial assets |
+| ------------: | --------------------------------: |
+|             1 |                             99.4% |
+|             2 |                             95.7% |
+|             3 |                             83.0% |
+|             4 |                             86.2% |
+|             5 |                             80.2% |
+|             6 |                             71.7% |
+|             7 |                             72.0% |
+|             8 |                             63.8% |
+|             9 |                             58.4% |
+|            10 |                             24.6% |
+
+Interpretation for the generator:
+
+```text
+Poor households:
+    low financial assets, but almost all liquid/deposits.
+
+Rich households:
+    high financial assets, but much lower deposit share because they hold funds, equity, managed investments, bonds, etc.
+```
+
+This gives you a realistic structure: low-income/low-wealth households may have little money, but what they have is mostly liquid; high-wealth households have more assets, but much of it is not in the bank account used for daily payments.
+
+---
+
+## E. Starting wallet cash distribution
+
+The paper does **not** report wallet cash.
+
+Do not pretend it does.
+
+What you can do is derive a behavioral proxy:
+
+```text
+wallet_cash = short-term transaction buffer
+```
+
+Use your payment-method paper for cash-use probabilities, and use this SHIW paper only to condition liquidity:
+
+| Household type             | Wallet-cash logic                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------------ |
+| Low income, liquidity poor | low bank balance, possibly higher cash reliance, but small absolute cash buffer      |
+| High income                | lower relative need for cash, but can hold more absolute cash                        |
+| Pensioner household        | potentially more cash-oriented, but this must come from your payment paper, not SHIW |
+| Self-employed              | possibly higher cash variability, but again needs payment-source evidence            |
+
+A simple generator rule:
+
+```python
+wallet_cash = min(
+    monthly_income * cash_buffer_rate,
+    bank_balance * liquidity_access_rate,
+)
+```
+
+Where `cash_buffer_rate` should come from your payment-method data, not this SHIW report.
+
+Use SHIW only to say:
+
+```text
+Low-income households are more financially constrained.
+More than 70% of households in the lowest income quintile did not save.
+```
+
+That supports low cash buffers for the bottom quintile. 
+
+---
+
+## F. Total wealth or savings
+
+This paper helps a lot here, but still only at aggregate level.
+
+Useful wealth facts:
+
+| Wealth measure                      |          Value |
+| ----------------------------------- | -------------: |
+| Mean net wealth                     | about €296,000 |
+| Median net wealth                   | about €152,000 |
+| Poorest 10% share of net wealth     | less than 0.1% |
+| Richest 10% share of net wealth     |      about 52% |
+| Households with financial assets    |            92% |
+| Mean financial assets among holders |  about €62,400 |
+
+Net wealth means:
+
+```text
+real assets + financial assets − financial liabilities
+```
+
+The paper also warns that wealth estimates may be distorted because respondents can underreport or have difficulty valuing assets. 
+
+For your generator:
+
+```text
+Use mean = €296,000 and median = €152,000 as calibration targets.
+Use top 10% wealth share ≈ 52% as an inequality constraint.
+```
+
+Savings behavior:
+
+| Household group         | Did not save in 2022 |
+| ----------------------- | -------------------: |
+| All households          |        more than 50% |
+| Lowest income quintile  |                  70% |
+| Highest income quintile |                  28% |
+
+So define:
+
+```python
+p_no_saving_by_income_quintile = {
+    1: 0.70,
+    2: 0.60,  # interpolated assumption
+    3: 0.52,  # interpolated assumption
+    4: 0.40,  # interpolated assumption
+    5: 0.28,
+}
+```
+
+Only quintiles 1 and 5 are directly given by the paper; the middle values should be documented as interpolation. 
+
+---
+
+## G. Exact daily purchase frequency per person
+
+The paper cannot answer this.
+
+It only gives broad consumption changes:
+
+| Group                           | 2022 spending change |
+| ------------------------------- | -------------------: |
+| Mean household spending         |           +5.7% real |
+| Top income quintile spending    |                 +11% |
+| Bottom income quintile spending |                  −2% |
+
+The paper says the top quintile recovered strongly in non-essential goods and services, while the bottom quintile continued cutting spending and sometimes delayed bills or relied on family, friends, or public grants. 
+
+Use this as a **budget constraint**, not as daily frequency.
+
+Recommended approach:
+
+```text
+1. Use another source for daily/weekly purchase frequency.
+2. Use SHIW to scale monthly spending budgets by income quintile.
+3. Generate transactions until the household reaches its monthly consumption budget.
+```
+
+Behavioral rule:
+
+```text
+Bottom quintile:
+    fewer discretionary purchases
+    higher probability of delayed utility bills
+    higher probability of receiving family/public support
+
+Top quintile:
+    higher discretionary spending
+    higher durable/non-essential purchase probability
+```
+
+---
+
+# 3. Debt and financial vulnerability — useful for household realism
+
+Even though your question focuses on income and households, debt is important because it affects transaction behavior.
+
+Useful debt facts:
+
+| Debt variable                          |     Value |
+| -------------------------------------- | --------: |
+| Households with any debt               |       26% |
+| Consumer debt                          | about 10% |
+| Property-related debt                  |     13.9% |
+| Work-related debt                      |      2.5% |
+| Overdraft / revolving credit card debt |      4.6% |
+| Loans from family/friends              |      1.4% |
+
+Debt is concentrated among higher-income households: households above the median income hold **85% of total financial debt**. Consumer credit is less concentrated: **71%** goes to households above median income. 
+
+Debt probability by equivalized income quartile, for home renovation/purchase and consumer debt:
+
+| Equivalized income quartile | Share indebted | Mean annual debt service | Debt service / mean income |
+| --------------------------: | -------------: | -----------------------: | -------------------------: |
+|                          Q1 |          12.0% |                   €3,754 |                      20.8% |
+|                          Q2 |          19.2% |                   €4,763 |                      17.8% |
+|                          Q3 |          24.4% |                   €5,576 |                      15.8% |
+|                          Q4 |          28.5% |                   €8,718 |                      15.0% |
+
+Important behavioral interpretation:
+
+```text
+Higher-income households are more likely to have debt.
+Lower-income indebted households have a heavier debt burden relative to income.
+```
+
+Financially vulnerable households are defined as households with equivalized income below the median and annual debt-service ratio above 30% of monetary income. They are **1.5% of all households** and **7% of indebted households**. 
+
+Liquidity-poor households are those whose liquid financial assets are too low to avoid poverty for three months. Among indebted households, **37.4%** were liquidity poor. 
+
+Use these as ABM classes:
+
+```text
+normal_household
+low_savings_household
+indebted_household
+financially_vulnerable_household
+liquidity_poor_household
+```
+
+---
+
+# 4. Recommended household generator structure
+
+Use this order:
+
+```text
+1. Generate household composition from your demographic source.
+2. Compute equivalence scale using OECD-modified scale.
+3. Assign region, age, education, gender from your other source.
+4. Assign primary income source:
+       payroll employee
+       self-employed
+       pension
+       transfer/not working
+5. Draw equivalized income from calibrated distribution.
+6. Convert to household income.
+7. Assign income decile/quintile.
+8. Assign wealth decile correlated with income decile.
+9. Generate net wealth using mean/median/top-decile constraints.
+10. Generate financial assets.
+11. Generate deposit/bank balance from financial assets × deposit share.
+12. Generate debt status and debt service.
+13. Generate savings status.
+14. Generate monthly spending budget.
+15. Generate transactions using your payment-method paper.
+```
+
+Minimal schema:
+
+```python
+@dataclass
+class Household:
+    household_id: int
+    region: str
+
+    n_adults: int
+    n_children_under_14: int
+    equivalence_scale: float
+
+    primary_income_source: str
+    annual_net_income: float
+    equivalized_income: float
+    income_decile: int
+    income_quintile: int
+
+    net_wealth: float
+    financial_assets: float
+    deposit_balance: float
+    wallet_cash: float
+
+    has_debt: bool
+    debt_type: str | None
+    annual_debt_service: float
+
+    saves_this_year: bool
+    liquidity_poor: bool
+    financially_vulnerable: bool
+```
+
+---
+
+# 5. Clean interpretation for your thesis
+
+You can write something like this:
+
+> The SHIW 2022 report is used to calibrate the household layer of the agent-based model. It provides aggregate constraints for net household income, income inequality, source-of-income differences, equivalized income, financial assets, net wealth, savings behavior, debt burden, and financial vulnerability. The model therefore treats the household, not the individual, as the primary economic unit. Individual agents inherit household-level financial constraints while retaining their own demographic and payment-behavior attributes from other data sources.
+
+And:
+
+> The SHIW report does not provide exact daily transaction frequencies, wallet cash holdings, or a complete household-composition distribution. These variables are therefore generated from other sources or modeled as assumptions. However, SHIW provides the macro-financial constraints that keep these assumptions realistic, especially across income quintiles, wealth deciles, income sources, and vulnerability classes.
+
+In practical terms: use your payment paper for **how people pay**, and use this SHIW paper for **how much financial capacity their household has**.
