@@ -190,17 +190,25 @@ rather than a tuning failure — see the ceiling argument in Study B.
 | `is_climber` | debtors only | 167 (86) | LogReg | 0.988 | **0.817** |
 | `is_climber` | debtors only | 167 (86) | RF | 0.998 | **0.786** |
 
-### The ceiling on `is_debtor` is structural
+### The bound on `is_debtor` is structural — and the fair result clears it
 
-`numbers.sample_debtor_subtype(rng, financially_vulnerable)` **draws** the subtype from a
-random tilt on a single binary flag. Conditional on vulnerability the label is close to
-noise, so no fair behavioural feature can recover it and no amount of tuning will move it.
-What separability does exist arrives *after* assignment, from the divergent repayment
-rules.
+`is_debtor` is `c.debtor_subtype is not None` (`features.py:227`), and a subtype is assigned
+if and only if `has_debt` came up true (`model.py:1134-1135`). So the label is drawn by
+`numbers.has_debt(rng, income_quartile)` (`numbers.py:755-760`) — a Bernoulli on
+`DEBT_PROBABILITY_BY_INCOME_QUARTILE` = `{1: 0.120, 2: 0.192, 3: 0.244, 4: 0.285}`.
+(`sample_debtor_subtype` and the vulnerability flag decide *which* archetype a debtor is,
+so they bound `is_climber`, not `is_debtor` — see below.)
 
-This is worth stating plainly in the write-up because it is a property of **the generator**,
-not of the models: the honest ML result is weak *by construction*, and knowing why is more
-useful than a better number would have been.
+At assignment time, therefore, the only signal in the label is the income-quartile gradient.
+Those four probabilities put a hard ceiling on what any assignment-time feature could
+achieve: with equal-sized quartiles the Bayes-optimal AUC from income quartile alone is
+**0.603**.
+
+The fair AUCs are **0.674 (LogReg) and 0.774 (RF)** — *above* that bound. The excess is not
+noise: separability arrives *after* assignment, from the divergent repayment rules, which
+leave a visible trace in the account record. Read this as a positive result rather than a
+shortfall. The honest number is well short of the naive 1.000 because the direct proxies
+were removed, not because the label is unlearnable.
 
 ### `is_climber` does better, and for a good reason
 
@@ -365,12 +373,17 @@ So f14 reads ARI 0.21 / 0.36 against this document's 0.213 / 0.364, and f15 read
 
 | What | Command | Time |
 |---|---|---|
-| Everything | `uv run python scripts/run_all.py` | ~3½ min |
+| Everything | `uv run python scripts/run_all.py` | ~15 min |
 | Just this document's numbers | `uv run python scripts/validation_report.py` | ~27 s |
 | The pinned regression bounds | `uv run pytest -q -m slow` | ~32 s |
 | The diagnostics estimators | `uv run pytest -q tests/test_diagnostics.py` | ~5 s |
 | Studies 0, A, C interactively | `uv run jupyter lab notebooks/clustering.ipynb` → Run All | ~35 s |
 | Studies B, D interactively | `uv run jupyter lab notebooks/prediction.ipynb` → Run All | ~35 s |
+
+The full-run figure is measured, not estimated: the pinned run's own
+`run_all.log` records **12/13 stages ok in 924.4s**, of which the paper replications
+alone take 660 s. An earlier `~3½ min` in this table predated the replication stages
+and was wrong.
 
 `runs/latest/validation_report.json` carries no timestamp and the model is seeded, so two
 runs are byte-identical — `run_all.py` checks exactly that and reports MATCH or DRIFT.
@@ -395,6 +408,37 @@ the tolerance.
 ≈ 0.5 for independent variables, KMO high under a single common factor, Bartlett
 calibrated under sphericity — plus the refusal itself: that the full fair set is singular
 and is rejected, and that the reduction restores full rank.
+
+### Known limits of the replication harness
+
+Three properties of the published-workflow replications (`scripts/replicate_so.py`,
+`src/synthitaly/creditscoring.py`) that a reader should know before quoting from them.
+None of them changes a reported discrimination figure, and none is hidden — each is
+stated on the prediction page too.
+
+1. **A So scorecard's Gini can rest on fewer than ten folds.** `scorecard()` drops any
+   decile that does not hold both classes and only marks a run `skipped` when *every*
+   decile fails. At the 90+ DPD base rate that bites: 7 of the 30 scorecards in the pinned
+   run use fewer than ten folds and one uses a **single** fold, where the reported
+   `± 0.000` means n = 1 rather than a precise measurement. Fold counts are carried in
+   `gini_folds` in `replicate_so.json` and are now rendered next to every Gini.
+
+2. **A failed stepwise selection still returns a scorecard.** When no characteristic
+   clears the likelihood-ratio bar, `stepwise_logit` falls back to a one-variable fit on
+   whichever column is first in the list, and the result is shaped like a successful fit.
+   Callers that care must inspect `selected`. This is the likely origin of the one
+   negative Gini in the cascade.
+
+3. **Model 4 versus Model 1 is not out-of-sample on both sides.** Model 1's score is the
+   pooled out-of-fold vector; Model 4's `P(G|x,R)` component is fitted on all revolvers
+   without cross-validation and applied to everyone. The DeLong comparison is therefore
+   **conservative** — Model 4 holds the in-sample advantage and still loses in all ten
+   evaluable configurations, so the direction of the result stands — but it is not the
+   symmetric out-of-sample test the phrasing suggests.
+
+Fixing 1 and 2 properly means changing `replicate_so.py` / `creditscoring.py` and
+re-running, which would move the pinned run every reported number is traced to. They are
+documented rather than fixed, deliberately.
 
 ---
 

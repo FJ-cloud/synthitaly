@@ -187,10 +187,13 @@ category-share units fix then took it back up to 0.364 by removing spend-varianc
 noise unrelated to subtype. The attribution block above `EXPECTED` in
 `scripts/validation_report.py` records every row and its cause.
 
-The ceiling on the debtor task is structural. `numbers.sample_debtor_subtype(rng,
-financially_vulnerable)` **draws** the subtype from a random tilt on a single binary flag —
-conditional on vulnerability the label is close to noise, so no fair behavioural feature can
-recover it, and no amount of tuning will move it. What separability does exist arrives *after*
+The bound on the debtor task is structural. `is_debtor` is `c.debtor_subtype is not None`,
+and a subtype is assigned iff `has_debt` came up true — so the label is drawn by
+`numbers.has_debt(rng, income_quartile)`, a Bernoulli on
+`DEBT_PROBABILITY_BY_INCOME_QUARTILE` = `{1: 0.120, 2: 0.192, 3: 0.244, 4: 0.285}`. At
+assignment time the only signal in the label is that income gradient, and it caps the
+Bayes-optimal AUC from income quartile alone at **0.603**. The fair AUCs of 0.674 and 0.774
+sit *above* that bound. What separability does exist beyond it arrives *after*
 assignment, from the divergent repayment rules: subsisters draw on a credit line (a distinct
 mechanic, hence near-perfect cluster separation — all 37 of them land together, in a cluster
 that also absorbs 5 chronics and 8 climbers), while climbers and chronics differ only in

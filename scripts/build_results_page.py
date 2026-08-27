@@ -306,9 +306,12 @@ def build(rep: dict, generated: str) -> str:
             table(["Task", "population", "n (positives)", "estimator", "naive AUC", "fair AUC"],
                   pred_rows, "llrlrr"),
             p("<code>is_debtor</code> is near-perfect with the debt-mechanic columns and modest "
-              "without them, because the subtype is <em>drawn</em> from a random tilt on a single "
-              "binary vulnerability flag — conditional on vulnerability the label is close to "
-              "noise. <code>is_climber</code> predicts better fair-only because the divergent "
+              "without them. The label is <em>drawn</em> by <code>numbers.has_debt</code>, a "
+              "Bernoulli on the income-quartile gradient "
+              "<code>{1: 0.120, 2: 0.192, 3: 0.244, 4: 0.285}</code>, so at assignment time "
+              "income quartile is the only signal in it and bounds the Bayes-optimal AUC at "
+              "<b>0.603</b>. The fair scores clear that bound on post-assignment repayment "
+              "behaviour. <code>is_climber</code> predicts better fair-only because the divergent "
               "repayment rules leave an ordinary, visible trace in the account record."),
             '<div class="gallery">' + plate(STUDY_FIGS[2], caps) + "</div>",
             '<div class="callout"><b>One leak hid inside the fair set.</b> The fair debtor AUC '

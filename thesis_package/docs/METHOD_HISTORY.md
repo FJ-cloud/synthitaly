@@ -501,6 +501,14 @@ one binary flag, so conditional on vulnerability the label is close to noise and
 feature can recover it** — *"a property of the generator, not of the models"*
 [`EXPLANATION.md` §8a].
 
+> **Correction, 2026-08-27.** That mechanism was misattributed, and the sources above have
+> been fixed. It bounds `is_climber`, not `is_debtor`. `is_debtor` is drawn by
+> `numbers.has_debt` — a Bernoulli on the income quartile — so its assignment-time bound is
+> the Bayes-optimal AUC from income quartile alone, **0.603**, which the fair AUCs of 0.674
+> and 0.774 exceed. The instinct recorded here (report the ceiling, do not tune past it) was
+> right; the named mechanism was not. Kept in place rather than rewritten because this file
+> is a record of what was believed when.
+
 The clearest single illustration: the fair AUC **fell** from 0.91 to 0.697 as a direct result
 of the leak audit (Q6.3), and the *lower* number was adopted. An acceptance criterion driven
 by analytical usefulness would have kept 0.91.

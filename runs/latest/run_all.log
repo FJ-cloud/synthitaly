@@ -1,0 +1,129 @@
+synthitaly — run_all   2026-08-22 14:24:20
+output: runs/20260822-142420   stages: 13
+
+[1/13] Unit & property tests — pytest -m 'not slow'
+    ........................................................................ [ 52%]
+    ................................................................         [100%]
+    -> ok  50.1s
+
+[2/13] Pinned validation bounds — pytest -m slow
+    .....                                                                    [100%]
+    -> ok  29.6s
+
+[3/13] Validation report — 800 x 720 diagnostics, clustering, prediction
+    | `ari_saver_fair_k2` | 0.0180 | 0.0182 | ±0.03 | PASS |
+    | `ari_finstatus_naive_k4` | 0.1056 | 0.1070 | ±0.04 | PASS |
+    | `ari_finstatus_fair_k4` | 0.0323 | 0.0381 | ±0.04 | PASS |
+    | `auc_is_saver_logreg_naive` | 1.0000 | 1.0000 | ±0.01 | PASS |
+    | `auc_is_saver_logreg_debtorfair` | 0.9917 | 0.9956 | ±0.015 | PASS |
+    | `auc_is_saver_rf_debtorfair` | 0.9917 | 0.9920 | ±0.015 | PASS |
+    | `auc_is_saver_logreg_saverfair` | 0.7467 | 0.7467 | ±0.02 | PASS |
+    | `auc_is_saver_rf_saverfair` | 0.7811 | 0.7971 | ±0.02 | PASS |
+    
+    **21/21 PASS.**
+    
+    wrote runs/20260822-142420/validation_report.json + .md   (35.6s)
+    -> ok  36.8s
+
+[4/13] Model figures — 19 charts, PNG + SVG
+      wrote f12_still_in_debt.png / .pdf / .svg
+    f13-f15 — clustering / prediction validation
+      wrote f13_clustering_pca.png / .pdf / .svg
+      wrote f14_cluster_recovery.png / .pdf / .svg
+      wrote f15_prediction.png / .pdf / .svg
+    f16-f19 — savers
+      wrote f16_saver_rate_by_quintile.png / .pdf / .svg
+      wrote f17_saver_balances_by_quintile.png / .pdf / .svg
+      wrote f18_saver_prediction.png / .pdf / .svg
+      wrote f19_saver_debtor_confound.png / .pdf / .svg
+    
+    Done: 19 figures + CAPTIONS.md in presentation/figures
+    -> ok  30.8s
+
+[5/13] Diagrams — 5 Mermaid-sourced diagrams
+    wrote d01_architecture.png / .svg
+      wrote d02_day_step.png / .svg
+      wrote d03_money_flow.png / .svg
+      wrote d04_methodology_pipeline.png / .svg
+      wrote d05_provenance_tiers.png / .svg
+      wrote d06_odd_overview.png / .svg
+      wrote 5 .mmd sources
+    Done: diagrams in presentation/diagrams
+    -> ok  1.4s
+
+[6/13] Status deck — presentation/status_deck.html
+    wrote presentation/status_deck.html  (1291 KB)
+    -> ok  0.1s
+
+[7/13] Results page — runs/latest/results.html
+    wrote runs/20260822-142420/results.html  (657 KB)
+    -> ok  0.0s
+
+[8/13] Flows & papers — runs/latest/flows_and_papers.html
+    wrote runs/20260822-142420/flows_and_papers.html  (39 KB)
+    -> ok  0.5s
+
+[9/13] Savers & debt — runs/latest/savers_and_debt.html
+    wrote runs/20260822-142420/savers_and_debt.html  (694 KB)
+    -> ok  0.4s
+
+[10/13] Dataset appendix — runs/latest/data_appendix.html + features.csv
+    building model — 800 consumers × 720 days, seed 42
+    wrote runs/20260822-142420/data_appendix.html  (91 KB)
+    -> ok  22.3s
+
+[11/13] Paper replications — runs/latest/prediction_and_papers.html
+    running so...
+      running khandani...
+      running butaru...
+        seed 42:  16.9s
+        seed 43:  88.3s
+        seed 44:  84.4s
+        seed 45:  84.2s
+        seed 46:  84.0s
+        seed 47:  84.5s
+      assembled in 636s
+      wrote runs/20260822-142420/prediction_and_papers.html  (56 KB)
+    -> ok  660.0s
+
+[12/13] Notebooks — execute all four headless
+    demo        ok     16.6s
+    analysis    ok      8.7s
+    clustering  ok     30.1s
+    prediction  ok     37.1s
+    -> ok  92.4s
+
+[13/13] Determinism check — compare with the previous run
+    sha256 6e1564328d0348cf…
+    DRIFT — differs from runs/20260817-145314 (sha256 24bbf89fe14368ab…).
+    diff runs/20260817-145314/validation_report.json 20260822-142420/validation_report.json
+    -> FAILED  0.0s
+
+====================================================================
+  ok    tests          50.1s   Unit & property tests
+  ok    tests-slow     29.6s   Pinned validation bounds
+  ok    validation     36.8s   Validation report
+  ok    figures        30.8s   Model figures
+  ok    diagrams        1.4s   Diagrams
+  ok    deck            0.1s   Status deck
+  ok    results         0.0s   Results page
+  ok    flows           0.5s   Flows & papers
+  ok    savers-debt     0.4s   Savers & debt
+  ok    data-appendix   22.3s   Dataset appendix
+  ok    prediction-papers  660.0s   Paper replications
+  ok    notebooks      92.4s   Notebooks
+  FAIL  determinism     0.0s   Determinism check
+====================================================================
+12/13 stages ok in 924.4s
+
+Look at:
+  runs/latest/results.html            the browsable results page  <- start here
+  runs/latest/flows_and_papers.html   money flows, paper map + gap audit
+  runs/latest/savers_and_debt.html    the savers & debt studies
+  runs/latest/data_appendix.html      dataset schemas + summary statistics
+  runs/latest/validation_report.md    every number, as text
+  runs/latest/notebooks/*.html        the executed notebooks
+  presentation/status_deck.html       the full status deck
+  runs/latest/run_all.log             this log
+
+FAILED: determinism — see the output above.

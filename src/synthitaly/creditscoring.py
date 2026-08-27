@@ -336,7 +336,11 @@ def stepwise_logit(
         if not changed:
             break
 
-    if not sel:  # nothing cleared the bar — fall back to an intercept-only scorecard
+    if not sel:
+        # Nothing cleared the bar. This is NOT an intercept-only fit: it fits a
+        # one-variable model on whichever column happens to be first, so the result
+        # is a scorecard built on near-noise and is indistinguishable from a real one
+        # in the returned object. Callers that care must check `selected`.
         sel = [cols[0]]
     X = frame[sel].to_numpy(dtype=float)
     model = _fit(X, y)

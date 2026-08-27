@@ -9,7 +9,7 @@ re-implement; the *why* is in [`EXPLANATION.md`](EXPLANATION.md), the value tabl
 [`../src/synthitaly/`](../src/synthitaly/).
 
 **Figure.** The whole protocol is drawn as a single composite schematic in
-[`../diagrams/d06_odd_overview.png`](../diagrams/d06_odd_overview.png)
+[`../thesis_package/diagrams/d06_odd_overview.png`](../thesis_package/diagrams/d06_odd_overview.png)
 (SVG alongside it, for print; `presentation/scripts/make_diagrams.py` regenerates both). Its three panels follow this document's structure:
 **A** = §1.2 entities and state variables, **B** = §1.3 process overview and
 scheduling plus the month calendar, **C** = §3.3 submodels with their sources, over

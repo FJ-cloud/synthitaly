@@ -189,11 +189,23 @@ def sec_variables(b: PP.Bundle) -> str:
 
 
 def _gini_cell(run: dict, model: str) -> str:
+    """Render a scorecard's Gini, always with the number of folds it rests on.
+
+    ``scorecard()`` drops any decile that does not hold both classes and only marks
+    the whole run ``skipped`` when *every* decile fails, so a surviving mean can come
+    from as few as one fold. Without the fold count a lone fold renders as
+    ``x ± 0.000``, which reads as a precise measurement when it means n = 1.
+    """
     x = run.get(model, {})
     if x.get("skipped"):
         return "not evaluable"
     if "gini_mean" in x:
-        return f"{x['gini_mean']:.3f} ± {x['gini_sd']:.3f}"
+        n = len(x.get("gini_folds", []))
+        cell = f"{x['gini_mean']:.3f} ± {x['gini_sd']:.3f}"
+        if not n:
+            return cell
+        cls = "warn" if n < 10 else "note"
+        return f'{cell} <span class="{cls}">(n={n})</span>'
     return f"{x['gini']:.3f}" if "gini" in x else "—"
 
 
@@ -639,9 +651,13 @@ def sec_cross(so: dict, kha: dict, but: dict, val: dict) -> str:
         R.table(["Existing study", "Population", "AUC, Set B equivalent",
                  "AUC with label-revealing variables on"], old_rows, "llrr"),
         R.p("The two sit at opposite ends of the same axis and neither is in the middle where "
-            "real credit models live. <code>is_debtor</code> is drawn from a random tilt on a "
-            "single hidden flag, so conditional on vulnerability it is close to noise and "
-            "0.70 is a ceiling, not a tuning failure. The delinquency label is the opposite: "
+            "real credit models live. <code>is_debtor</code> is drawn by "
+            "<code>numbers.has_debt</code>, a Bernoulli on the income-quartile gradient "
+            "<code>{1: 0.120, 2: 0.192, 3: 0.244, 4: 0.285}</code>, so at assignment time the "
+            "income quartile is the only signal in the label and it bounds the Bayes-optimal "
+            "AUC at <b>0.603</b>. The fair scores of 0.674 and 0.774 clear that bound on "
+            "post-assignment repayment behaviour: around 0.70 is a structural bound being "
+            "beaten, not a tuning failure. The delinquency label is the opposite: "
             f"it follows almost deterministically from income source — {worst_name} "
             f"households write bills off at <b>{src_ratio:.0f}×</b> the rate of "
             f"{best_name} ones — and the ledger reveals income source almost perfectly "
@@ -659,7 +675,18 @@ def sec_cross(so: dict, kha: dict, but: dict, val: dict) -> str:
     )
 
 
-def sec_problems() -> str:
+def sec_problems(val: dict, so: dict) -> str:
+    # Every figure quoted in this section is read off the loaded run, never typed in.
+    n_subsisters = val["labels"]["subtype_mix"]["subsister"]
+
+    cards = [(k, m, len(x["gini_folds"]))
+             for k, r in so["runs"].items()
+             for m, x in r.items()
+             if isinstance(x, dict) and x.get("gini_folds")]
+    n_cards = len(cards)
+    n_short = sum(1 for *_, n in cards if n < 10)
+    worst_key, worst_model, _ = min(cards, key=lambda c: c[2])
+
     return R.section(
         "problems", "Section 7", "Problems, stated plainly",
         R.cards([
@@ -678,21 +705,50 @@ def sec_problems() -> str:
                  "still comes from the nine training deciles alone, but the <i>list</i> is "
                  "mildly optimistic. This is inherited from the paper's own procedure, not a "
                  "shortcut taken here.")),
-            ("Class imbalance at 90+ DPD",
-             R.p("Around 3% of consumer-months, close to the papers' own 2.0–2.5%. But at 800 "
-                 "consumers that is roughly 27 events, which is why the So cascade's Model 3 "
-                 "— Good/Bad restricted to revolvers — cannot be built for that outcome at "
-                 "all: a decile cannot hold both classes. It is reported as not evaluable "
-                 "rather than as a number.")),
+            ("Class imbalance at 90+ DPD starves the Model 3 folds",
+             R.p("Around 3% of consumer-months, close to the papers' own 2.0–2.5%. At 800 "
+                 "consumers many deciles then hold only one class, and the So cascade's "
+                 "Model 3 — Good/Bad restricted to revolvers — is the worst hit. "
+                 "<code>scorecard()</code> drops such a decile and only returns "
+                 "<code>skipped</code> when <i>every</i> decile fails, so a Model 3 Gini can "
+                 "be a mean over far fewer than ten folds. In this run "
+                 f"<b>{n_short} of {n_cards}</b> scorecards rest on fewer than ten, and one "
+                 f"(<code>{worst_key}</code>, {worst_model}) on a <b>single</b> fold — its "
+                 "<code>± 0.000</code> means n = 1, not precision. Every Gini on this page "
+                 "now carries its fold count, flagged when it is below ten. Nothing is "
+                 "silently reported as not evaluable.")),
+            ("A failed stepwise selection still returns a scorecard",
+             R.p("When no characteristic clears the likelihood-ratio bar, "
+                 "<code>stepwise_logit</code> falls back to a one-variable fit on whichever "
+                 "column is first in the list (" +
+                 R.src("src/synthitaly/creditscoring.py") + "). The returned object is "
+                 "shaped exactly like a successful fit, so a \"nothing was significant\" "
+                 "outcome is reported as a number. This is the most likely origin of the "
+                 "single negative Gini in the cascade table, whose selected characteristics "
+                 "carry coefficients around −4.5 to −8.0 — the signature of a fit on noise."),
+             ),
+            ("Model 4 is not a like-for-like comparison with Model 1",
+             R.p("Model 1's score is the pooled out-of-fold vector. Model 4's "
+                 "<code>P(G|x,R)</code> component is fitted on <i>all</i> revolvers with no "
+                 "cross-validation — bins and stepwise on the same rows — and then applied "
+                 "to everyone (" + R.src("scripts/replicate_so.py") + "). The DeLong test "
+                 "therefore compares an out-of-sample score against a partly in-sample one. "
+                 "The direction of the result survives: Model 4 holds the in-sample "
+                 "advantage and still loses in every configuration, so the comparison is "
+                 "<b>conservative</b> rather than flattering. It is not, however, the "
+                 "out-of-sample-versus-out-of-sample test the phrasing suggests."),
+             ),
             ("A subtype tell that is not quarantined",
              R.p("Subsisters are given <code>starting_balance = 0.0</code> while everyone "
-                 "else receives one month's income (" + R.src("src/synthitaly/model.py:1080") +
+                 "else receives one month's income ("
+                 + R.src("src/synthitaly/model.py:1164-1169") +
                  "). That is a deterministic function of the subtype and it reaches "
                  "<code>cur_balance</code>, which sits in Set B. It is called out nowhere "
                  "else in the repo and should be either randomised or quarantined.")),
             ("<code>is_saver</code> is force-set for subsisters",
-             R.p("All 36 subsisters are marked savers at " +
-                 R.src("src/synthitaly/model.py:1091") + ", so the saver and debtor labels "
+             R.p(f"All {n_subsisters} subsisters are marked savers at "
+                 + R.src("src/synthitaly/model.py:1183-1184")
+                 + ", so the saver and debtor labels "
                  "are entangled. Already declared in <code>VALIDATION.md</code>, repeated "
                  "here because it bears on any multi-class subtype work.")),
             ("Horizons that do not fit the run",
@@ -770,7 +826,7 @@ def build(out_dir: Path, reuse: bool = False) -> str:
         sec_khandani(kha),
         sec_butaru(but),
         sec_cross(so, kha, but, val),
-        sec_problems(),
+        sec_problems(val, so),
     ])
     meta = (f"{PP.describe_config()} · long-horizon rows from {PP.LONG_DAYS} days · "
             f"built in {time.time() - t0:.0f}s")

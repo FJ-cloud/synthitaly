@@ -31,6 +31,14 @@ uv run solara run src/synthitaly/viz.py            # the interactive app
 **New here?** [`docs/USAGE.md`](docs/USAGE.md) is the one-page guide — how to run it, how to
 export the datasets, and how to run the analysis.
 
+**Documentation.** The thesis names these three by filename; they all live under `docs/`:
+
+| File | What it is |
+|---|---|
+| [`docs/RUNBOOK.md`](docs/RUNBOOK.md) | how to reproduce every number |
+| [`docs/VALIDATION.md`](docs/VALIDATION.md) | the long-form methodological validation |
+| [`docs/MODEL_REFERENCE.md`](docs/MODEL_REFERENCE.md) | the data dictionary and parameter tables, with sources |
+
 `run_all.py` takes about fifteen minutes and leaves a browsable results page at
 `runs/latest/results.html` — every validation number, the 19 figures, and the sourcing. Run
 it twice and it tells you whether the numbers came back byte-identical. See

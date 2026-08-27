@@ -163,11 +163,15 @@ def debt_results(rep: dict, caps: dict) -> str:
         "<h3>Study A — clustering the debtor subpopulation</h3>", clus_t,
         "<h3>Study B — predicting who holds debt, and who digs out</h3>", pred_t,
         callout(
-            "<b>The ceiling on the debtor task is structural, not a tuning failure.</b> "
-            "<code>sample_debtor_subtype()</code> draws the archetype from a random tilt on a "
-            "single hidden binary flag. Conditional on vulnerability the label is close to "
-            "noise, so no honest behavioural feature can recover it and no amount of tuning "
-            "will move it. What separability does exist arrives <i>after</i> assignment, from "
+            "<b>The bound on the debtor task is structural, and the fair result clears it.</b> "
+            "<code>is_debtor</code> is drawn by <code>numbers.has_debt()</code>, a Bernoulli on "
+            "the income-quartile gradient <code>{1: 0.120, 2: 0.192, 3: 0.244, 4: 0.285}</code>, "
+            "so at assignment time the income quartile is the only signal in the label and it "
+            "caps the Bayes-optimal AUC at <b>0.603</b>. The fair AUCs sit above that. "
+            "(<code>sample_debtor_subtype()</code> draws the <i>archetype</i> from a tilt on a "
+            "single hidden flag, so it bounds <code>is_climber</code>, not "
+            "<code>is_debtor</code>.) What separability does exist arrives <i>after</i> "
+            "assignment, from "
             "the divergent repayment rules — subsisters draw on a credit line, which is a "
             "distinct mechanic and hence nearly perfectly separable; climbers and chronics "
             "differ only in repayment speed and get merged."),

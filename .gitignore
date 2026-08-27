@@ -18,11 +18,14 @@ notebooks/demo_accounts.csv
 
 # Simulation outputs. Every run is local and regenerable, with one exception:
 # runs/20260822-142420/ is the pinned run the thesis reports, named by Appendix
-# C.5, so it is tracked. runs/latest points at it in a fresh clone; re-running
-# run_all.py repoints that symlink locally, which shows up as a modified file.
+# C.5, so it is tracked. runs/latest is a real copy of it rather than a symlink:
+# Appendix C.4 tells the reader to open runs/latest/results.html, and a symlink
+# to a directory does not resolve when the repository is browsed on github.com.
+# Re-running run_all.py replaces it locally with a symlink to the new run, which
+# then shows up as a modified file.
 runs/*
 !runs/20260822-142420/
-!runs/latest
+!runs/latest/
 
 # Dataset exports — scripts/export_dataset.py writes here by default. Derived
 # from a seeded model, so regenerable by re-running the command in MANIFEST.md.
