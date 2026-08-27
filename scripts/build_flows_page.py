@@ -376,7 +376,7 @@ def paper_map_section() -> str:
          src("numbers.py:234"), TIER2],
         ["<b>Jiang et al. (2022)</b>", "synthetic-population method",
          "<i>not implemented in the active model</i>", "—", TIERM],
-        ["<b>Grimm et al. (2010)</b>", "the ODD documentation protocol",
+        ["<b>Grimm et al. (2020)</b>", "the ODD documentation protocol",
          "<i>documentation format; adopted after the model was built</i>", "—", TIERM],
     ]
     return section(

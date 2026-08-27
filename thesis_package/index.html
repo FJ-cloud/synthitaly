@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>synthitaly — thesis package</title>
+<style>
+:root {
+  --bg:#fbfbf9; --card:#fff; --ink:#14140f; --ink2:#4b4a44; --muted:#8a887f;
+  --line:#e4e3db; --accent:#2a78d6; --ok:#008300; --warn:#c23b3b; --hl:#f5f2e6;
+  --tier1:#0f7a52; --tier2:#b9761f; --tier3:#c23b3b; --tierM:#5b6470;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+          --bg:#131311; --card:#1c1c19; --ink:#f0efe9; --ink2:#b8b6ad; --muted:#86847c;
+          --line:#33322c; --accent:#6ea8ee; --ok:#4fbb6a; --warn:#e8756f; --hl:#26261f;
+          --tier1:#4fbb8a; --tier2:#d9a05b; --tier3:#e8756f; --tierM:#9aa2ad; }
+}
+/* Some hosts (the claude.ai artifact viewer among them) stamp an explicit theme on
+   the root element instead of relying on the OS preference. Repeating the dark
+   palette here lets an explicit choice win in both directions: the guard above keeps
+   data-theme="light" light on a dark OS, and this keeps data-theme="dark" dark on a
+   light one. Tokens only — no component ever takes a colour from inside these
+   blocks, so an unstamped document still gets a complete palette from :root. */
+:root[data-theme="dark"] {
+          --bg:#131311; --card:#1c1c19; --ink:#f0efe9; --ink2:#b8b6ad; --muted:#86847c;
+          --line:#33322c; --accent:#6ea8ee; --ok:#4fbb6a; --warn:#e8756f; --hl:#26261f;
+          --tier1:#4fbb8a; --tier2:#d9a05b; --tier3:#e8756f; --tierM:#9aa2ad; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 -apple-system,
+  "Segoe UI", system-ui, sans-serif; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 24px 80px; }
+header { padding:56px 0 8px; }
+h1 { font-size:2.4rem; margin:0 0 6px; letter-spacing:-.02em; }
+.sub { color:var(--ink2); font-size:1.05rem; margin:0; }
+.meta { color:var(--muted); font-size:.85rem; margin-top:10px; }
+nav { position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line);
+  padding:10px 0; margin:24px 0 0; z-index:5; display:flex; gap:18px; flex-wrap:wrap; }
+nav a { color:var(--ink2); text-decoration:none; font-size:.86rem; font-weight:600; }
+nav a:hover { color:var(--accent); }
+section { padding:44px 0 8px; border-bottom:1px solid var(--line); }
+.kicker { font-size:.74rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); font-weight:700; }
+h2 { font-size:1.6rem; margin:4px 0 16px; letter-spacing:-.01em; }
+h3 { font-size:1.05rem; margin:30px 0 10px; color:var(--ink2); }
+h4 { font-size:.92rem; margin:22px 0 8px; color:var(--ink2); }
+p { margin:0 0 14px; max-width:74ch; }
+a { color:var(--accent); }
+code { font:.88em ui-monospace, "SF Mono", Menlo, monospace; background:var(--hl);
+  padding:1px 5px; border-radius:4px; }
+pre { background:var(--card); border:1px solid var(--line); border-radius:8px;
+  padding:14px 16px; overflow-x:auto; font:.84rem/1.6 ui-monospace, "SF Mono", Menlo, monospace; }
+pre code { background:none; padding:0; }
+.scroll { overflow-x:auto; margin:16px 0 20px; }
+table { border-collapse:collapse; width:100%; font-size:.9rem; background:var(--card); }
+th, td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+  border-bottom:2px solid var(--line); white-space:nowrap; }
+td.r, th.r { text-align:right; font-variant-numeric:tabular-nums; }
+td.c, th.c { text-align:center; }
+tbody tr:hover { background:var(--hl); }
+.note { color:var(--muted); font-size:.82rem; }
+.hl { font-weight:700; }
+.ok { color:var(--ok); font-weight:700; }
+.warn { color:var(--warn); font-weight:700; }
+.pill { background:var(--accent); color:#fff; font-size:.68rem; font-weight:700; padding:2px 7px;
+  border-radius:10px; letter-spacing:.05em; text-transform:uppercase; }
+.pill.warn { background:var(--warn); color:#fff; }
+.pill.ok { background:var(--ok); color:#fff; }
+.pill.mute { background:var(--muted); color:#fff; }
+.tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px;
+  margin:22px 0 8px; }
+.tile { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+.tl { font-size:.72rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  font-weight:700; }
+.tv { font-size:1.9rem; font-weight:700; letter-spacing:-.02em; font-variant-numeric:tabular-nums;
+  line-height:1.2; margin:2px 0; }
+.ts { font-size:.78rem; color:var(--ink2); }
+.gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:20px;
+  margin:20px 0; }
+.plate { margin:0; background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:12px; }
+.plate img { width:100%; height:auto; display:block; border-radius:4px; background:#fff; }
+.plate figcaption { font-size:.8rem; color:var(--ink2); margin-top:9px; line-height:1.5; }
+.plate.missing { border-style:dashed; color:var(--muted); padding:26px; text-align:center; }
+.callout { background:var(--hl); border-left:3px solid var(--accent); border-radius:0 8px 8px 0;
+  padding:14px 18px; margin:20px 0; font-size:.92rem; max-width:74ch; }
+.callout.warn { border-left-color:var(--warn); }
+.callout.ok { border-left-color:var(--ok); }
+.callout p:last-child { margin-bottom:0; }
+.tier { font-size:.68rem; font-weight:700; padding:2px 7px; border-radius:10px; color:#fff;
+  letter-spacing:.05em; text-transform:uppercase; white-space:nowrap; }
+.tier1 { background:var(--tier1); }
+.tier2 { background:var(--tier2); }
+.tier3 { background:var(--tier3); }
+.tierM { background:var(--tierM); }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;
+  margin:20px 0; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; }
+.card h4 { margin:0 0 8px; font-size:1rem; color:var(--ink); }
+.card p { font-size:.88rem; margin-bottom:8px; }
+.steps { counter-reset:step; margin:18px 0; padding:0; list-style:none; }
+.steps li { counter-increment:step; position:relative; padding:0 0 14px 40px; font-size:.93rem;
+  max-width:74ch; }
+.steps li::before { content:counter(step); position:absolute; left:0; top:0; width:26px;
+  height:26px; border-radius:50%; background:var(--accent); color:#fff; font-size:.78rem;
+  font-weight:700; display:flex; align-items:center; justify-content:center; }
+footer { padding:32px 0; color:var(--muted); font-size:.83rem; }
+@media (max-width:860px) {
+  h1 { font-size:1.9rem; }
+  .gallery { grid-template-columns:1fr; }
+}
+@media print {
+  nav { position:static; }
+  section { break-inside:avoid; }
+}
+</style></head>
+<body><div class="wrap">
+<header>
+  <h1>synthitaly — thesis package</h1>
+  <p class="sub">Everything from the analysis pipeline, the figure layer and the docs, collected into one directory.</p>
+  <p class="meta">Built 2026-08-24 17:59 · model outputs from <code>20260822-142420</code> · 800 consumers × 720 days, seed 42</p>
+</header>
+<nav><a href="#start">Pages</a><a href="#odd">ODD figure</a><a href="#writeup">Write-up</a><a href="#figures">Figures</a><a href="#diagrams">Diagrams</a><a href="#data">Data</a><a href="#reports">Reports</a><a href="#notebooks">Notebooks</a><a href="#docs">Docs</a><a href="#evidence">Evidence</a></nav>
+<section id="start"><div class="kicker">start here</div><h2>The five generated pages</h2><ul class='steps'><li><a href='results/results.html'><b>Results</b></a> — the browsable results page — start here; every study, with its figures</li><li><a href='results/flows_and_papers.html'><b>Flows &amp; papers</b></a> — the money-flow map, the paper→code mapping, and the 22-item gap audit</li><li><a href='results/savers_and_debt.html'><b>Savers &amp; debt</b></a> — the saver and debtor studies, with figures f09–f19</li><li><a href='results/data_appendix.html'><b>Data appendix</b></a> — dataset schemas and summary statistics for every exported frame</li><li><a href='results/prediction_and_papers.html'><b>Prediction &amp; papers</b></a> — the So / Khandani / Butaru replications against the model</li></ul></section><section id="odd"><div class="kicker">the model</div><h2>The ODD figure</h2><p>A single composite schematic of the whole protocol — entities and state variables, the within-day scheduling loop, and the submodels with their sources. It is generated from <code>docs/ODD.md</code> by <code>presentation/scripts/make_diagrams.py</code>.</p><p><a href='diagrams/d06_odd_overview.png'>d06_odd_overview.png</a> · <a href='diagrams/d06_odd_overview.svg'>.svg</a> (vector, for print)</p><p><img src='diagrams/d06_odd_overview.svg' style='width:100%;border:1px solid #d8d7d0;border-radius:6px'></p><p><a href='ODD_protocol.html'><b>ODD_protocol.html</b></a> — the same figure with the protocol written out around it: entities, scheduling, design concepts, and every submodel tagged with its source and its &#9888; modelling-choice flag.</p></section><section id="writeup"><div class="kicker">the prose</div><h2>The written results section</h2><p><a href='RESULTS_validation.md'><b>RESULTS_validation.md</b></a> — a thesis-ready results section covering Studies 0/A/B/C/D and the three paper replications, with the limitations carried forward.</p></section><section id="figures"><div class="kicker">assets</div><h2>Figures (64 files)</h2><p><b>f00_overview</b> and <b>f00_overview_v2</b> — what enters the model, what happens, what comes out. Two variants under comparison: v2 draws the daily events as categories on one row rather than as a chain, because they fire on different scheduled dates. Then 19 result figures, each as PNG, SVG and PDF, plus <code>CAPTIONS.md</code> (which covers f01–f19; the f00 captions live in the thesis). Use the SVG or the PDF for print.</p><p><a href='figures/'>browse figures/</a></p></section><section id="diagrams"><div class="kicker">assets</div><h2>Diagrams (17 files)</h2><p>d01 architecture · d02 day-step · d03 money-flow · d04 methodology pipeline · d05 provenance tiers · <b>d06 ODD overview</b>. PNG + SVG, with Mermaid source for d01–d05.</p><p><a href='diagrams/'>browse diagrams/</a></p></section><section id="data"><div class="kicker">data</div><h2>Data and machine-readable results</h2><ul class='steps'><li><a href='data/features.csv'><b>features.csv</b></a> — the per-consumer feature frame: consumer_id + 45 features. The analysis uses 44 of them (34 fair + 10 LEAK_); n_income is constant and excluded as degenerate</li><li><a href='data/validation_report.json'><b>validation_report.json</b></a> — every validation number, machine-readable</li><li><a href='data/replicate_so.json'><b>replicate_so.json</b></a> — So, Thomas, Seow &amp; Mues — transactor/revolver scorecard</li><li><a href='data/replicate_khandani.json'><b>replicate_khandani.json</b></a> — Khandani, Kim &amp; Lo (2010) — CART, rolling windows</li><li><a href='data/replicate_butaru.json'><b>replicate_butaru.json</b></a> — Butaru et al. (2015) — C4.5 vs ridge logit vs RF</li></ul></section><section id="reports"><div class="kicker">data</div><h2>Text reports</h2><ul class='steps'><li><a href='reports/validation_report.md'><b>validation_report.md</b></a> — every validation number, as text</li><li><a href='reports/run_all.log'><b>run_all.log</b></a> — the pipeline log for the run this package was built from</li></ul></section><section id="notebooks"><div class="kicker">notebooks</div><h2>Executed notebooks (4)</h2><p>demo · analysis · clustering · prediction, executed headless.</p><p><a href='notebooks/'>browse notebooks/</a></p></section><section id="docs"><div class="kicker">prose</div><h2>Repository documentation</h2><ul class='steps'><li><a href='docs/USAGE.md'><b>USAGE.md</b></a> — the one-page run guide — set up, export the data, run the analysis</li><li><a href='docs/ODD.md'><b>ODD.md</b></a> — the ODD protocol (Grimm et al. 2010) — see diagrams/d06_odd_overview</li><li><a href='docs/VALIDATION.md'><b>VALIDATION.md</b></a> — the long-form validation write-up</li><li><a href='docs/METHOD_HISTORY.md'><b>METHOD_HISTORY.md</b></a> — the Q1–Q12 methodological narrative</li><li><a href='docs/RUNBOOK.md'><b>RUNBOOK.md</b></a> — how to reproduce every number</li><li><a href='docs/MODEL_REFERENCE.md'><b>MODEL_REFERENCE.md</b></a> — the data dictionary and parameter value tables</li><li><a href='docs/EXPLANATION.md'><b>EXPLANATION.md</b></a> — why the model is built the way it is</li></ul></section><section id="evidence"><div class="kicker">data</div><h2>Evidence pack</h2><p>The provenance layer, written by <code>scripts/build_evidence_pack.py</code> after this script runs. It holds the result JSONs and <code>features.csv</code> again alongside five caveated figures, plus two listings that are <i>generated from the code itself</i> rather than maintained by hand: <code>feature_sets.md</code> (the fair / leak / saver-fair column sets, read off the real frame) and <code>run_configurations.md</code> (every <code>ItalyModel(...)</code> construction in the repository, found by parsing the source, which is what establishes that every figure and number comes from the same 800 × 720 configuration).</p><p><a href='evidence/'>browse evidence/</a> · <a href='evidence/README.md'>evidence/README.md</a></p></section>
+<footer>Generated by <code>scripts/build_thesis_package.py</code>, which copies rather than rebuilds. Re-run it to refresh; do <b>not</b> pass <code>--clean</code> unless you also re-run <code>build_evidence_pack.py</code> afterwards, because <code>--clean</code> deletes <code>evidence/</code>.</footer>
+</div></body></html>

@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "SynthItaly: an agent-based simulator of Italian consumer bank transactions"
+abstract: >-
+  An agent-based model of what an Italian bank would see on its consumer
+  customers' accounts, with validation against three published
+  consumer-credit papers. Code accompanying a master's thesis.
+type: software
+authors:
+  - family-names: Erleigh
+    given-names: Frederick
+repository-code: "https://github.com/FJ-cloud/synthitaly"
+license: MIT
+version: "1.0-thesis"
+date-released: "2026-08-27"
+keywords:
+  - agent-based modelling
+  - synthetic data
+  - consumer credit
+  - Mesa
+  - Italy

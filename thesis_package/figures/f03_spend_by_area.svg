@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="453.6pt" height="266.4pt" viewBox="0 0 453.6 266.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-22T14:26:37.599356</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 266.4 
+L 453.6 266.4 
+L 453.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 15.876 225.9 
+L 401.436 225.9 
+L 401.436 45.5 
+L 15.876 45.5 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="73.844811" y="234.9" transform="rotate(-0 73.844811 234.9)">North</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="208.656" y="234.9" transform="rotate(-0 208.656 234.9)">Centre</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="343.467189" y="234.9" transform="rotate(-0 343.467189 234.9)">South</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_4">
+      <path d="M 15.876 225.9 
+L 401.436 225.9 
+" clip-path="url(#pe5957ed132)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_5"/>
+     <g id="text_4">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="228.9" transform="rotate(-0 404.436 228.9)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_6">
+      <path d="M 15.876 197.072501 
+L 401.436 197.072501 
+" clip-path="url(#pe5957ed132)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_7"/>
+     <g id="text_5">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="200.072501" transform="rotate(-0 404.436 200.072501)">1,000</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_8">
+      <path d="M 15.876 168.245002 
+L 401.436 168.245002 
+" clip-path="url(#pe5957ed132)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_9"/>
+     <g id="text_6">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="171.245002" transform="rotate(-0 404.436 171.245002)">2,000</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_10">
+      <path d="M 15.876 139.417503 
+L 401.436 139.417503 
+" clip-path="url(#pe5957ed132)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_11"/>
+     <g id="text_7">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="142.417503" transform="rotate(-0 404.436 142.417503)">3,000</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_12">
+      <path d="M 15.876 110.590005 
+L 401.436 110.590005 
+" clip-path="url(#pe5957ed132)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_13"/>
+     <g id="text_8">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="113.590005" transform="rotate(-0 404.436 113.590005)">4,000</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_14">
+      <path d="M 15.876 81.762506 
+L 401.436 81.762506 
+" clip-path="url(#pe5957ed132)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_15"/>
+     <g id="text_9">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="84.762506" transform="rotate(-0 404.436 84.762506)">5,000</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_16">
+      <path d="M 15.876 52.935007 
+L 401.436 52.935007 
+" clip-path="url(#pe5957ed132)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_17"/>
+     <g id="text_10">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="55.935007" transform="rotate(-0 404.436 55.935007)">6,000</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 33.401455 225.9 
+L 114.288168 225.9 
+L 114.288168 67.654386 
+L 33.401455 67.654386 
+z
+" clip-path="url(#pe5957ed132)" style="fill: #006ba2"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 168.212643 225.9 
+L 249.099357 225.9 
+L 249.099357 155.187665 
+L 168.212643 155.187665 
+z
+" clip-path="url(#pe5957ed132)" style="fill: #006ba2"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 303.023832 225.9 
+L 383.910545 225.9 
+L 383.910545 124.921464 
+L 303.023832 124.921464 
+z
+" clip-path="url(#pe5957ed132)" style="fill: #006ba2"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 15.876 225.9 
+L 401.436 225.9 
+" style="fill: none; stroke: #b7c4cb; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 600; font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #121316" x="73.844811" y="65.894386" transform="rotate(-0 73.844811 65.894386)">5,489</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 600; font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #121316" x="208.656" y="153.427665" transform="rotate(-0 208.656 153.427665)">2,453</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 600; font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #121316" x="343.467189" y="123.161464" transform="rotate(-0 343.467189 123.161464)">3,503</text>
+   </g>
+  </g>
+  <g id="text_14">
+   <text style="font-weight: 700; font-size: 11px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #121316" x="9.072" y="23.349688" transform="rotate(-0 9.072 23.349688)">The North spends most, the Centre least</text>
+  </g>
+  <g id="text_15">
+   <text style="font-size: 8.5px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="9.072" y="35.63" transform="rotate(-0 9.072 35.63)">Cumulative purchase euro over the run, €'000</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 6.5px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #758d99" x="9.072" y="258.015703" transform="rotate(-0 9.072 258.015703)">Source: synthitaly simulation — 800 consumers × 720 days, seed 42</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 6.5px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="9.072" y="248.515703" transform="rotate(-0 9.072 248.515703)">Population weights 0.46 / 0.20 / 0.34 (ISTAT); the South also carries an income gradient of 0.554× the Centre-North (Semeraro et al.).</text>
+  </g>
+  <g id="patch_7">
+   <path d="M 9.072 9.2 
+L 47.628 9.2 
+L 47.628 6 
+L 9.072 6 
+z
+" style="fill: #e3120b"/>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe5957ed132">
+   <rect x="15.876" y="45.5" width="385.56" height="180.4"/>
+  </clipPath>
+ </defs>
+</svg>

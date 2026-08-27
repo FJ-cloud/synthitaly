@@ -1,0 +1,6 @@
+flowchart LR
+    P["1 · Papers<br/>4 Italian + 3 behavioural<br/>+ 1 method"] --> N["2 · numbers.py<br/>every constant,<br/>paper-cited"]
+    N --> INIT["3 · Initialise<br/>build agents;<br/>assign bands/debt/savings"]
+    INIT --> SIM["4 · Simulate<br/>daily loop:<br/>income&#8594;bills&#8594;debt&#8594;<br/>purchases&#8594;sweep"]
+    SIM --> OUT["5 · Outputs<br/>ledger · accounts ·<br/>time series"]
+    OUT --> AN["6 · Analysis<br/>clustering · prediction ·<br/>Solara dashboard"]

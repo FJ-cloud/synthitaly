@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant M as ItalyModel.step()
+    participant I as IncomeSource
+    participant C as Consumer
+    participant D as DataCollector
+    M->>I: do("step")
+    Note over I: only on the 27th (payday)
+    I->>C: credit monthly income (+Dec tredicesima)
+    M->>C: shuffle_do("step")
+    Note over C: _month_close (1st) -> _settle_overdue -><br/>_pay_due_bills -> _service_debt (25th) -><br/>_maybe_buy_from_merchant
+    C-->>M: append to model.transactions
+    M->>M: KPIs + group_balances()
+    M->>D: collect(self)
+    M->>M: today += 1 day

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="453.6pt" height="266.4pt" viewBox="0 0 453.6 266.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-22T14:26:39.604779</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 266.4 
+L 453.6 266.4 
+L 453.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 15.876 222.4 
+L 401.436 222.4 
+L 401.436 59.5 
+L 15.876 59.5 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="32.913959" y="231.4" transform="rotate(-0 32.913959 231.4)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="81.663485" y="231.4" transform="rotate(-0 81.663485 231.4)">100</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="130.413011" y="231.4" transform="rotate(-0 130.413011 231.4)">200</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="179.162537" y="231.4" transform="rotate(-0 179.162537 231.4)">300</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5"/>
+     <g id="text_5">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="227.912063" y="231.4" transform="rotate(-0 227.912063 231.4)">400</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6"/>
+     <g id="text_6">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="276.661589" y="231.4" transform="rotate(-0 276.661589 231.4)">500</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7"/>
+     <g id="text_7">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="325.411114" y="231.4" transform="rotate(-0 325.411114 231.4)">600</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_8"/>
+     <g id="text_8">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="374.16064" y="231.4" transform="rotate(-0 374.16064 231.4)">700</text>
+     </g>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="208.656" y="243.34375" transform="rotate(-0 208.656 243.34375)">Simulated day</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_9">
+      <path d="M 15.876 222.4 
+L 401.436 222.4 
+" clip-path="url(#p1fc577d1eb)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_10">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="225.4" transform="rotate(-0 404.436 225.4)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_11">
+      <path d="M 15.876 187.960254 
+L 401.436 187.960254 
+" clip-path="url(#p1fc577d1eb)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_12"/>
+     <g id="text_11">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="190.960254" transform="rotate(-0 404.436 190.960254)">20</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_13">
+      <path d="M 15.876 153.520507 
+L 401.436 153.520507 
+" clip-path="url(#p1fc577d1eb)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_14"/>
+     <g id="text_12">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="156.520507" transform="rotate(-0 404.436 156.520507)">40</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_15">
+      <path d="M 15.876 119.080761 
+L 401.436 119.080761 
+" clip-path="url(#p1fc577d1eb)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_16"/>
+     <g id="text_13">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="122.080761" transform="rotate(-0 404.436 122.080761)">60</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_17">
+      <path d="M 15.876 84.641015 
+L 401.436 84.641015 
+" clip-path="url(#p1fc577d1eb)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_18"/>
+     <g id="text_14">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="87.641015" transform="rotate(-0 404.436 87.641015)">80</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_19">
+    <path d="M 33.401455 74.309091 
+L 222.549615 74.309091 
+L 223.03711 167.296406 
+L 237.661968 167.296406 
+L 238.149463 184.516279 
+L 251.311835 184.516279 
+L 251.79933 186.238266 
+L 266.424188 186.238266 
+L 266.911683 187.960254 
+L 296.161399 187.960254 
+L 296.648894 189.682241 
+L 383.910545 189.682241 
+L 383.910545 189.682241 
+" clip-path="url(#p1fc577d1eb)" style="fill: none; stroke: #006ba2; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_20">
+    <path d="M 33.401455 146.632558 
+L 383.910545 146.632558 
+L 383.910545 146.632558 
+" clip-path="url(#p1fc577d1eb)" style="fill: none; stroke: #e3120b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_21">
+    <path d="M 33.401455 158.686469 
+L 383.910545 158.686469 
+L 383.910545 158.686469 
+" clip-path="url(#p1fc577d1eb)" style="fill: none; stroke: #c68a00; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 15.876 222.4 
+L 401.436 222.4 
+" style="fill: none; stroke: #b7c4cb; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="text_15">
+   <text style="font-weight: 700; font-size: 11px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #121316" x="9.072" y="23.920312" transform="rotate(-0 9.072 23.920312)">Only climbers ever clear their debt</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 8.5px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="9.072" y="35.63" transform="rotate(-0 9.072 35.63)">Households still carrying outstanding principal, count</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="23.572" y="49.648125" transform="rotate(-0 23.572 49.648125)">Climber</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="77.8152" y="49.648125" transform="rotate(-0 77.8152 49.648125)">Chronic</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="132.0584" y="49.648125" transform="rotate(-0 132.0584 49.648125)">Subsister</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 6.5px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #758d99" x="9.072" y="258.015703" transform="rotate(-0 9.072 258.015703)">Source: synthitaly simulation — 800 consumers × 720 days, seed 42</text>
+  </g>
+  <g id="patch_4">
+   <path d="M 9.072 9.2 
+L 47.628 9.2 
+L 47.628 6 
+L 9.072 6 
+z
+" style="fill: #e3120b"/>
+  </g>
+  <g id="patch_5">
+   <path d="M 9.072 49 
+L 20.072 49 
+L 20.072 46 
+L 9.072 46 
+z
+" style="fill: #006ba2"/>
+  </g>
+  <g id="patch_6">
+   <path d="M 63.3152 49 
+L 74.3152 49 
+L 74.3152 46 
+L 63.3152 46 
+z
+" style="fill: #e3120b"/>
+  </g>
+  <g id="patch_7">
+   <path d="M 117.5584 49 
+L 128.5584 49 
+L 128.5584 46 
+L 117.5584 46 
+z
+" style="fill: #c68a00"/>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p1fc577d1eb">
+   <rect x="15.876" y="59.5" width="385.56" height="162.9"/>
+  </clipPath>
+ </defs>
+</svg>

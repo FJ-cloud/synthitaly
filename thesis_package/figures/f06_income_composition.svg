@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="453.6pt" height="266.4pt" viewBox="0 0 453.6 266.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-22T14:26:38.352011</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 266.4 
+L 453.6 266.4 
+L 453.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 15.876 235.4 
+L 401.436 235.4 
+L 401.436 59.5 
+L 15.876 59.5 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="56.920463" y="244.4" transform="rotate(-0 56.920463 244.4)">Payroll</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="132.788231" y="244.4" transform="rotate(-0 132.788231 244.4)">Pension</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="208.656" y="244.4" transform="rotate(-0 208.656 244.4)">Self-employed</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="284.523769" y="244.4" transform="rotate(-0 284.523769 244.4)">Unemployed</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5"/>
+     <g id="text_5">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #58585b" x="360.391537" y="244.4" transform="rotate(-0 360.391537 244.4)">Transfers</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_6">
+      <path d="M 15.876 235.4 
+L 401.436 235.4 
+" clip-path="url(#p2a0891997d)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_7"/>
+     <g id="text_6">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="238.4" transform="rotate(-0 404.436 238.4)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_8">
+      <path d="M 15.876 198.639289 
+L 401.436 198.639289 
+" clip-path="url(#p2a0891997d)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_9"/>
+     <g id="text_7">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="201.639289" transform="rotate(-0 404.436 201.639289)">100</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_10">
+      <path d="M 15.876 161.878579 
+L 401.436 161.878579 
+" clip-path="url(#p2a0891997d)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_11"/>
+     <g id="text_8">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="164.878579" transform="rotate(-0 404.436 164.878579)">200</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_12">
+      <path d="M 15.876 125.117868 
+L 401.436 125.117868 
+" clip-path="url(#p2a0891997d)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_13"/>
+     <g id="text_9">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="128.117868" transform="rotate(-0 404.436 128.117868)">300</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_14">
+      <path d="M 15.876 88.357158 
+L 401.436 88.357158 
+" clip-path="url(#p2a0891997d)" style="fill: none; stroke: #d9e0e3; stroke-width: 0.7; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_15"/>
+     <g id="text_10">
+      <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="404.436" y="91.357158" transform="rotate(-0 404.436 91.357158)">400</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 33.401455 235.4 
+L 80.439471 235.4 
+L 80.439471 205.991432 
+L 33.401455 205.991432 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #cce1eb; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 109.269223 235.4 
+L 156.30724 235.4 
+L 156.30724 218.85768 
+L 109.269223 218.85768 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #cce1eb; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 185.136992 235.4 
+L 232.175008 235.4 
+L 232.175008 226.577429 
+L 185.136992 226.577429 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #cce1eb; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 261.00476 235.4 
+L 308.042777 235.4 
+L 308.042777 224.00418 
+L 261.00476 224.00418 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #cce1eb; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 336.872529 235.4 
+L 383.910545 235.4 
+L 383.910545 230.253501 
+L 336.872529 230.253501 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #cce1eb; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 33.401455 205.991432 
+L 80.439471 205.991432 
+L 80.439471 84.31348 
+L 33.401455 84.31348 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #3e7d9b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 109.269223 218.85768 
+L 156.30724 218.85768 
+L 156.30724 178.053292 
+L 109.269223 178.053292 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #3e7d9b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 185.136992 226.577429 
+L 232.175008 226.577429 
+L 232.175008 191.654754 
+L 185.136992 191.654754 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #3e7d9b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 261.00476 224.00418 
+L 308.042777 224.00418 
+L 308.042777 222.901358 
+L 261.00476 222.901358 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #3e7d9b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 336.872529 230.253501 
+L 383.910545 230.253501 
+L 383.910545 226.577429 
+L 336.872529 226.577429 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #3e7d9b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 33.401455 84.31348 
+L 80.439471 84.31348 
+L 80.439471 75.490909 
+L 33.401455 75.490909 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #003d5b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 109.269223 178.053292 
+L 156.30724 178.053292 
+L 156.30724 178.053292 
+L 109.269223 178.053292 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #003d5b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 185.136992 191.654754 
+L 232.175008 191.654754 
+L 232.175008 179.891327 
+L 185.136992 179.891327 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #003d5b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 261.00476 222.901358 
+L 308.042777 222.901358 
+L 308.042777 222.901358 
+L 261.00476 222.901358 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #003d5b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 336.872529 226.577429 
+L 383.910545 226.577429 
+L 383.910545 226.577429 
+L 336.872529 226.577429 
+z
+" clip-path="url(#p2a0891997d)" style="fill: #003d5b; stroke: #ffffff; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 15.876 235.4 
+L 401.436 235.4 
+" style="fill: none; stroke: #b7c4cb; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="text_11">
+   <text style="font-weight: 700; font-size: 11px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #121316" x="9.072" y="23.920312" transform="rotate(-0 9.072 23.920312)">Half the population is on a payroll</text>
+  </g>
+  <g id="text_12">
+   <text style="font-size: 8.5px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="9.072" y="35.63" transform="rotate(-0 9.072 35.63)">Consumers by income source, count, split by income level</text>
+  </g>
+  <g id="text_13">
+   <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="23.572" y="49.648125" transform="rotate(-0 23.572 49.648125)">Low</text>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="58.2152" y="49.648125" transform="rotate(-0 58.2152 49.648125)">Middle</text>
+  </g>
+  <g id="text_15">
+   <text style="font-size: 8px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #58585b" x="107.5584" y="49.768125" transform="rotate(-0 107.5584 49.768125)">High</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 6.5px; font-family: 'Fira Sans', 'Source Sans Pro', 'Lato', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #758d99" x="9.072" y="258.015703" transform="rotate(-0 9.072 258.015703)">Source: synthitaly simulation — 800 consumers × 720 days, seed 42</text>
+  </g>
+  <g id="patch_19">
+   <path d="M 9.072 9.2 
+L 47.628 9.2 
+L 47.628 6 
+L 9.072 6 
+z
+" style="fill: #e3120b"/>
+  </g>
+  <g id="patch_20">
+   <path d="M 9.072 49 
+L 20.072 49 
+L 20.072 46 
+L 9.072 46 
+z
+" style="fill: #cce1eb"/>
+  </g>
+  <g id="patch_21">
+   <path d="M 43.7152 49 
+L 54.7152 49 
+L 54.7152 46 
+L 43.7152 46 
+z
+" style="fill: #3e7d9b"/>
+  </g>
+  <g id="patch_22">
+   <path d="M 93.0584 49 
+L 104.0584 49 
+L 104.0584 46 
+L 93.0584 46 
+z
+" style="fill: #003d5b"/>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p2a0891997d">
+   <rect x="15.876" y="59.5" width="385.56" height="175.9"/>
+  </clipPath>
+ </defs>
+</svg>

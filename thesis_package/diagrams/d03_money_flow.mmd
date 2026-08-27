@@ -1,0 +1,7 @@
+flowchart LR
+    I["IncomeSource &#9650;<br/>(per area)"] -- salary --> C["Consumer &#9679;"]
+    C -- purchase --> MCh["Merchants<br/>(10 categories)"]
+    C -- bill / debt-service --> B["Bills & debt<br/>(utilities/rent/telecom/<br/>mortgage/loan/debt)"]
+    C -- "overdraft &euro;30 / late 11%" --> F["Fees &#8594; bank"]
+    L["credit_line"] -- borrow (subsister) --> C
+    C -. "month-end sweep (internal)" .-> S["savings / pension"]

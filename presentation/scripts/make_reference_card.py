@@ -808,7 +808,7 @@ def build(o: dict) -> None:
         + tag("ITA") + ". A consumer subscribes to each bill independently with its share.", "note"))
     f.append(gap(6))
 
-    f.append(para("Calendar — <i>Emiliozzi et al. (2023) §3 / §11</i> + <i>structural-inequalities §9</i> " + tag("ITA"), "h2"))
+    f.append(para("Calendar — <i>Emiliozzi et al. (2023) §3, direction only</i> + <i>structural-inequalities</i> " + tag("ITA"), "h2"))
     f.append(table([
         ["Weekday", "Month", "Special days", "Payday", "Bonus"],
         ["Mon–Wed ×0.95<br/>Thu ×1.00<br/><b>Fri ×1.10</b><br/><b>Sat ×1.20</b><br/>Sun ×1.00",

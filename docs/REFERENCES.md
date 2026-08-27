@@ -57,7 +57,7 @@ look as though it used them:
 
 | Source | Reference | Used for | DOI / locator |
 |---|---|---|---|
-| **Grimm et al. (2010)** | Grimm, V. et al. (2010). *A standard protocol for describing individual-based and agent-based models: ODD.* Ecological Modelling 221(23). | The specification format of [`ODD.md`](ODD.md) and diagram `d06_odd_overview` | — |
+| **Grimm et al. (2020)** | Grimm, V. et al. (2020). *The ODD Protocol for Describing Agent-Based and Other Simulation Models: A Second Update to Improve Clarity, Replication, and Structural Realism.* JASSS 23(2), 7. [doi:10.18564/jasss.4259](https://doi.org/10.18564/jasss.4259) | The specification format of [`ODD.md`](ODD.md) and diagram `d06_odd_overview` | — |
 | **Jiang et al. (2022)** | Jiang, N., Crooks, A. T., Kavak, H., Burger, A. & Kennedy, W. G. (2022). *A method to create a synthetic population with social networks for geographically-explicit agent-based models.* Computational Urban Science 2:7. | The thesis method paper. **Note:** the social-network half is not implemented in the shipped model — `_build_visual_graph()` draws a graph for the dashboard that no agent reads | Comput. Urban Sci. 2:7 |
 | **Fagiolo, Moneta & Windrum (2007)** | Fagiolo, G., Moneta, A. & Windrum, P. (2007). *A Critical Guide to Empirical Validation of Agent-Based Models in Economics.* Computational Economics 30, 195–226. | The validation framing the replication chapter is organised around | 10.1007/s10614-007-9104-4 |
 | **Mesa 3** | The Mesa developers. *Mesa 3: Agent-based modeling with Python.* Journal of Open Source Software (2025). | The simulation framework the model is built on | 10.21105/joss.07668 |

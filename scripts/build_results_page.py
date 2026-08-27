@@ -53,7 +53,7 @@ MODEL_SOURCES = [
      "fees concentrate among the vulnerable → the chronic-debtor tilt"),
     ("Method", "Jiang et al. (2022)",
      "the synthetic-population construction (implemented in the parked fuller version)"),
-    ("Method", "Grimm et al. (2010)",
+    ("Method", "Grimm et al. (2020)",
      "the ODD protocol the model spec in <code>docs/ODD.md</code> follows"),
 ]
 

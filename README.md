@@ -36,6 +36,20 @@ export the datasets, and how to run the analysis.
 it twice and it tells you whether the numbers came back byte-identical. See
 [`docs/RUNBOOK.md`](docs/RUNBOOK.md).
 
+## The results as reported in the thesis
+
+You do not have to run anything to see them. The run the thesis reports is preserved in this
+repository:
+
+- [`runs/20260822-142420/`](runs/20260822-142420/) — the pinned run: `results.html`, the four
+  replication JSONs, `validation_report.{json,md}`, `features.csv`, and the executed notebooks.
+  `runs/latest` points at it in a fresh clone. **This is the directory to compare against** when
+  you re-run the model; `run_all.py` writes a new timestamped directory and repoints `latest`.
+- [`thesis_package/index.html`](thesis_package/index.html) — the same results as a browsable
+  package, with the figures, diagrams, evidence pack and docs alongside them.
+
+Both are self-contained HTML: the figures are embedded, so opening the file is enough.
+
 The notebook is the safety-net path — it produces the plots, a transaction CSV, and a
 per-account portfolio table grouped by cluster. The Solara app is the showpiece — it opens a
 browser, has sliders, updates live, and includes an account inspector (pick a cluster → a

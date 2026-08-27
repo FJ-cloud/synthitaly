@@ -61,7 +61,7 @@ REPORT_FILES = [
 
 DOC_FILES = [
     ("USAGE.md", "the one-page run guide — set up, export the data, run the analysis"),
-    ("ODD.md", "the ODD protocol (Grimm et al. 2010) — see diagrams/d06_odd_overview"),
+    ("ODD.md", "the ODD protocol (Grimm et al. 2020) — see diagrams/d06_odd_overview"),
     ("VALIDATION.md", "the long-form validation write-up"),
     ("METHOD_HISTORY.md", "the Q1–Q12 methodological narrative"),
     ("RUNBOOK.md", "how to reproduce every number"),

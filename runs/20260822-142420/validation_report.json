@@ -1,0 +1,613 @@
+{
+  "config": {
+    "n_consumers": 800,
+    "n_merchants_per_category": 3,
+    "n_days": 720,
+    "seed": 42
+  },
+  "frame": {
+    "n_consumers": 800,
+    "n_features": 44,
+    "n_fair": 34,
+    "n_leak": 10,
+    "leak_columns": [
+      "LEAK_cur_n_entries",
+      "LEAK_debt_service_n",
+      "LEAK_debt_service_sum",
+      "LEAK_overdraft_n",
+      "LEAK_credit_draw_n",
+      "LEAK_credit_draw_sum",
+      "LEAK_savings_balance",
+      "LEAK_pension_balance",
+      "LEAK_debt_balance",
+      "LEAK_min_balance_proxy"
+    ]
+  },
+  "labels": {
+    "n_debtors": 167,
+    "subtype_mix": {
+      "climber": 86,
+      "chronic": 44,
+      "subsister": 37
+    },
+    "n_savers": 442,
+    "financial_status_mix": {
+      "saver": 369,
+      "non_saver": 331,
+      "saver+debt": 73,
+      "non_saver+debt": 27
+    }
+  },
+  "saver_fair_columns": {
+    "n": 32,
+    "quarantined": [
+      "cur_total_out",
+      "cur_balance"
+    ]
+  },
+  "factorability": [
+    {
+      "treatment": "full fair set",
+      "note": "every fair feature, untouched",
+      "n_vars": 34,
+      "condition_number": 6.640254487407698e+16,
+      "kaiser_n": 10,
+      "kmo": null,
+      "verdict": "singular \u2014 refused",
+      "refusal": "correlation matrix is singular (rank 33 of 34, reciprocal condition 1.51e-17). KMO needs inv(R); pseudo-inverting here would return a number computed from numerical noise. Reduce the column set first \u2014 see factorable_columns().",
+      "bartlett": {
+        "chi2": 77941.6,
+        "dof": 561,
+        "p": 0.0
+      }
+    },
+    {
+      "treatment": "drop 1 share + duplicate aggregates",
+      "note": "drops share_retail only, plus the reconstructible aggregates",
+      "n_vars": 28,
+      "condition_number": 328.46139377305576,
+      "kaiser_n": 10,
+      "kmo": 0.7291,
+      "verdict": "middling",
+      "msa_min": 0.2091,
+      "lowest_msa_vars": [
+        "bill_utilities_n",
+        "bill_consumer_loan_n",
+        "bill_telecom_n"
+      ],
+      "bartlett": {
+        "chi2": 16661.1,
+        "dof": 378,
+        "p": 0.0
+      }
+    },
+    {
+      "treatment": "drop all shares + duplicates  [HEADLINE]",
+      "note": "synthitaly.diagnostics.factorable_columns() \u2014 structural drops only",
+      "n_vars": 19,
+      "condition_number": 291.32871752686924,
+      "kaiser_n": 5,
+      "kmo": 0.743,
+      "verdict": "middling",
+      "msa_min": 0.2082,
+      "lowest_msa_vars": [
+        "bill_utilities_n",
+        "bill_consumer_loan_n",
+        "bill_telecom_n"
+      ],
+      "bartlett": {
+        "chi2": 14555.1,
+        "dof": 171,
+        "p": 0.0
+      }
+    },
+    {
+      "treatment": "also drop 3 low-MSA stragglers  (sensitivity bound)",
+      "note": "drops bill_utilities_n, bill_consumer_loan_n, bill_telecom_n \u2014 circular by construction, not a result",
+      "n_vars": 16,
+      "condition_number": 288.9928969739496,
+      "kaiser_n": 3,
+      "kmo": 0.795,
+      "verdict": "middling",
+      "msa_min": 0.4013,
+      "lowest_msa_vars": [
+        "bill_mortgage_n",
+        "ticket_cv",
+        "bill_rent_n"
+      ],
+      "bartlett": {
+        "chi2": 13550.6,
+        "dof": 120,
+        "p": 0.0
+      }
+    }
+  ],
+  "eigen_spectrum": [
+    {
+      "component": 1,
+      "eigenvalue": 7.5557,
+      "pct_variance": 39.7667,
+      "cum_pct_variance": 39.7667,
+      "kaiser": true
+    },
+    {
+      "component": 2,
+      "eigenvalue": 2.189,
+      "pct_variance": 11.5212,
+      "cum_pct_variance": 51.2879,
+      "kaiser": true
+    },
+    {
+      "component": 3,
+      "eigenvalue": 1.6519,
+      "pct_variance": 8.6944,
+      "cum_pct_variance": 59.9823,
+      "kaiser": true
+    },
+    {
+      "component": 4,
+      "eigenvalue": 1.1983,
+      "pct_variance": 6.3071,
+      "cum_pct_variance": 66.2894,
+      "kaiser": true
+    },
+    {
+      "component": 5,
+      "eigenvalue": 1.0349,
+      "pct_variance": 5.4467,
+      "cum_pct_variance": 71.7361,
+      "kaiser": true
+    },
+    {
+      "component": 6,
+      "eigenvalue": 0.9888,
+      "pct_variance": 5.2043,
+      "cum_pct_variance": 76.9405,
+      "kaiser": false
+    },
+    {
+      "component": 7,
+      "eigenvalue": 0.95,
+      "pct_variance": 5.0002,
+      "cum_pct_variance": 81.9407,
+      "kaiser": false
+    },
+    {
+      "component": 8,
+      "eigenvalue": 0.8806,
+      "pct_variance": 4.6346,
+      "cum_pct_variance": 86.5752,
+      "kaiser": false
+    },
+    {
+      "component": 9,
+      "eigenvalue": 0.6663,
+      "pct_variance": 3.5071,
+      "cum_pct_variance": 90.0823,
+      "kaiser": false
+    },
+    {
+      "component": 10,
+      "eigenvalue": 0.4992,
+      "pct_variance": 2.6273,
+      "cum_pct_variance": 92.7097,
+      "kaiser": false
+    }
+  ],
+  "clustering": [
+    {
+      "features": "naive",
+      "n_features": 44,
+      "ari": 0.3636,
+      "nmi": 0.3846,
+      "silhouette": 0.208,
+      "confusion": {
+        "0": {
+          "chronic": 8,
+          "climber": 7,
+          "subsister": 0
+        },
+        "1": {
+          "chronic": 31,
+          "climber": 71,
+          "subsister": 0
+        },
+        "2": {
+          "chronic": 5,
+          "climber": 8,
+          "subsister": 37
+        }
+      }
+    },
+    {
+      "features": "fair",
+      "n_features": 34,
+      "ari": 0.2126,
+      "nmi": 0.1944,
+      "silhouette": 0.1336,
+      "confusion": {
+        "0": {
+          "chronic": 8,
+          "climber": 7,
+          "subsister": 0
+        },
+        "1": {
+          "chronic": 28,
+          "climber": 67,
+          "subsister": 7
+        },
+        "2": {
+          "chronic": 8,
+          "climber": 12,
+          "subsister": 30
+        }
+      }
+    }
+  ],
+  "prediction": [
+    {
+      "task": "is_debtor",
+      "estimator": "logreg",
+      "population": "all consumers",
+      "n": 800,
+      "positives": 167,
+      "naive_auc": 1.0,
+      "fair_auc": 0.6738
+    },
+    {
+      "task": "is_debtor",
+      "estimator": "rf",
+      "population": "all consumers",
+      "n": 800,
+      "positives": 167,
+      "naive_auc": 1.0,
+      "fair_auc": 0.7736
+    },
+    {
+      "task": "is_climber",
+      "estimator": "logreg",
+      "population": "debtors only",
+      "n": 167,
+      "positives": 86,
+      "naive_auc": 0.9882,
+      "fair_auc": 0.8173
+    },
+    {
+      "task": "is_climber",
+      "estimator": "rf",
+      "population": "debtors only",
+      "n": 167,
+      "positives": 86,
+      "naive_auc": 0.9979,
+      "fair_auc": 0.7857
+    }
+  ],
+  "saver_clustering": [
+    {
+      "features": "naive",
+      "n_features": 44,
+      "k": 2,
+      "target": "is_saver",
+      "ari": 0.0222,
+      "nmi": 0.013,
+      "silhouette": 0.2996,
+      "confusion": {
+        "0": {
+          "false": 258,
+          "true": 365
+        },
+        "1": {
+          "false": 100,
+          "true": 77
+        }
+      }
+    },
+    {
+      "features": "naive",
+      "n_features": 44,
+      "k": 4,
+      "target": "financial_status",
+      "ari": 0.1056,
+      "nmi": 0.1493,
+      "silhouette": 0.1563,
+      "confusion": {
+        "0": {
+          "non_saver": 93,
+          "non_saver+debt": 12,
+          "saver": 50,
+          "saver+debt": 5
+        },
+        "1": {
+          "non_saver": 197,
+          "non_saver+debt": 7,
+          "saver": 279,
+          "saver+debt": 28
+        },
+        "2": {
+          "non_saver": 41,
+          "non_saver+debt": 8,
+          "saver": 40,
+          "saver+debt": 3
+        },
+        "3": {
+          "non_saver": 0,
+          "non_saver+debt": 0,
+          "saver": 0,
+          "saver+debt": 37
+        }
+      }
+    },
+    {
+      "features": "saver-fair",
+      "n_features": 32,
+      "k": 2,
+      "target": "is_saver",
+      "ari": 0.018,
+      "nmi": 0.0107,
+      "silhouette": 0.362,
+      "confusion": {
+        "0": {
+          "false": 278,
+          "true": 381
+        },
+        "1": {
+          "false": 80,
+          "true": 61
+        }
+      }
+    },
+    {
+      "features": "saver-fair",
+      "n_features": 32,
+      "k": 4,
+      "target": "financial_status",
+      "ari": 0.0323,
+      "nmi": 0.0274,
+      "silhouette": 0.1493,
+      "confusion": {
+        "0": {
+          "non_saver": 103,
+          "non_saver+debt": 11,
+          "saver": 60,
+          "saver+debt": 18
+        },
+        "1": {
+          "non_saver": 170,
+          "non_saver+debt": 7,
+          "saver": 253,
+          "saver+debt": 49
+        },
+        "2": {
+          "non_saver": 41,
+          "non_saver+debt": 8,
+          "saver": 40,
+          "saver+debt": 3
+        },
+        "3": {
+          "non_saver": 17,
+          "non_saver+debt": 1,
+          "saver": 16,
+          "saver+debt": 3
+        }
+      }
+    }
+  ],
+  "saver_prediction": [
+    {
+      "task": "is_saver",
+      "estimator": "logreg",
+      "population": "all consumers",
+      "n": 800,
+      "positives": 442,
+      "naive_auc": 1.0,
+      "debtor_fair_auc": 0.9917,
+      "saver_fair_auc": 0.7467
+    },
+    {
+      "task": "is_saver",
+      "estimator": "rf",
+      "population": "all consumers",
+      "n": 800,
+      "positives": 442,
+      "naive_auc": 0.9999,
+      "debtor_fair_auc": 0.9917,
+      "saver_fair_auc": 0.7811
+    }
+  ],
+  "saver_leak_audit": {
+    "quarantined": {
+      "cur_total_out": 0.6124,
+      "cur_balance": -0.2355
+    },
+    "kept_for_contrast": {
+      "balance_std_proxy": {
+        "corr": 0.351,
+        "why": "transaction-derived; sweeps are never written to model.transactions"
+      },
+      "cur_total_in": {
+        "corr": 0.2941,
+        "why": "account-derived but unreachable: the sweep credits savings/pension, never the current account"
+      },
+      "mean_income_credit": {
+        "corr": 0.2923,
+        "why": "salary credits only \u2014 genuine signal, and income quintile is the label's actual cause"
+      }
+    },
+    "savings_balance_zero_among_non_savers": 1.0,
+    "saver_by_debtor_subtype": [
+      {
+        "subtype": "chronic",
+        "savers": 26,
+        "total": 44,
+        "saver_rate": 0.5909
+      },
+      {
+        "subtype": "climber",
+        "savers": 50,
+        "total": 86,
+        "saver_rate": 0.5814
+      },
+      {
+        "subtype": "none",
+        "savers": 329,
+        "total": 633,
+        "saver_rate": 0.5197
+      },
+      {
+        "subtype": "subsister",
+        "savers": 37,
+        "total": 37,
+        "saver_rate": 1.0
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "n_debtors",
+      "measured": 167,
+      "expected": 167,
+      "tolerance": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "kmo_headline",
+      "measured": 0.743,
+      "expected": 0.743,
+      "tolerance": 0.01,
+      "status": "PASS"
+    },
+    {
+      "name": "kaiser_n_headline",
+      "measured": 5,
+      "expected": 5,
+      "tolerance": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "bartlett_chi2_headline",
+      "measured": 14555.1,
+      "expected": 14555,
+      "tolerance": 150,
+      "status": "PASS"
+    },
+    {
+      "name": "ari_naive",
+      "measured": 0.3636,
+      "expected": 0.3636,
+      "tolerance": 0.05,
+      "status": "PASS"
+    },
+    {
+      "name": "ari_fair",
+      "measured": 0.2126,
+      "expected": 0.2126,
+      "tolerance": 0.05,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_debtor_logreg_naive",
+      "measured": 1.0,
+      "expected": 1.0,
+      "tolerance": 0.01,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_debtor_logreg_fair",
+      "measured": 0.6738,
+      "expected": 0.6783,
+      "tolerance": 0.02,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_debtor_rf_fair",
+      "measured": 0.7736,
+      "expected": 0.7646,
+      "tolerance": 0.02,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_climber_logreg_fair",
+      "measured": 0.8173,
+      "expected": 0.8043,
+      "tolerance": 0.02,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_climber_rf_fair",
+      "measured": 0.7857,
+      "expected": 0.7857,
+      "tolerance": 0.02,
+      "status": "PASS"
+    },
+    {
+      "name": "n_savers",
+      "measured": 442,
+      "expected": 442,
+      "tolerance": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "ari_saver_naive_k2",
+      "measured": 0.0222,
+      "expected": 0.0212,
+      "tolerance": 0.03,
+      "status": "PASS"
+    },
+    {
+      "name": "ari_saver_fair_k2",
+      "measured": 0.018,
+      "expected": 0.0182,
+      "tolerance": 0.03,
+      "status": "PASS"
+    },
+    {
+      "name": "ari_finstatus_naive_k4",
+      "measured": 0.1056,
+      "expected": 0.107,
+      "tolerance": 0.04,
+      "status": "PASS"
+    },
+    {
+      "name": "ari_finstatus_fair_k4",
+      "measured": 0.0323,
+      "expected": 0.0381,
+      "tolerance": 0.04,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_saver_logreg_naive",
+      "measured": 1.0,
+      "expected": 1.0,
+      "tolerance": 0.01,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_saver_logreg_debtorfair",
+      "measured": 0.9917,
+      "expected": 0.9956,
+      "tolerance": 0.015,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_saver_rf_debtorfair",
+      "measured": 0.9917,
+      "expected": 0.992,
+      "tolerance": 0.015,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_saver_logreg_saverfair",
+      "measured": 0.7467,
+      "expected": 0.7467,
+      "tolerance": 0.02,
+      "status": "PASS"
+    },
+    {
+      "name": "auc_is_saver_rf_saverfair",
+      "measured": 0.7811,
+      "expected": 0.7971,
+      "tolerance": 0.02,
+      "status": "PASS"
+    }
+  ]
+}

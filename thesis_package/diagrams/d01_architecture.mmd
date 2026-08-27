@@ -1,0 +1,64 @@
+classDiagram
+    class ItalyModel {
+        +date today
+        +list~dict~ transactions
+        +dict merchants
+        +dict income_sources
+        +list~Consumer~ consumers
+        +DataCollector datacollector
+        +step()
+        +run()
+        +group_balances()
+        +debt_by_subtype()
+    }
+    class Consumer {
+        +str macro_area
+        +float monthly_income
+        +str income_source
+        +str income_level
+        +bool has_debt
+        +str debtor_subtype
+        +float debt_balance
+        +step()
+        +_pay_due_bills()
+        +_service_debt()
+        +_maybe_buy_from_merchant()
+        +_can_afford()
+    }
+    class Merchant {
+        +str category
+        +str macro_area
+        +step()
+    }
+    class IncomeSource {
+        +str macro_area
+        +list served_consumers
+        +step()
+    }
+    class AccountSet {
+        +BankAccount current
+        +BankAccount savings
+        +BankAccount pension
+    }
+    class BankAccount {
+        +float balance
+        +list~BankEntry~ entries
+        +debit()
+        +credit()
+    }
+    class BankEntry {
+        +str date
+        +str direction
+        +str category
+        +float amount_eur
+    }
+    ItalyModel "1" o-- "*" Consumer
+    ItalyModel "1" o-- "*" Merchant
+    ItalyModel "1" o-- "*" IncomeSource
+    Consumer "1" *-- "1" AccountSet
+    AccountSet "1" *-- "3" BankAccount
+    Merchant "1" *-- "1" BankAccount
+    IncomeSource "1" *-- "1" BankAccount
+    BankAccount "1" *-- "*" BankEntry
+    IncomeSource ..> Consumer : credits on payday
+    Consumer ..> Merchant : _pay()

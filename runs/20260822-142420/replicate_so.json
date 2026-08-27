@@ -1,0 +1,3724 @@
+{
+  "paper": {
+    "n_accounts": 6308,
+    "n_bad": 1577,
+    "n_good": 4731,
+    "bad_rate": 0.25,
+    "transactor_share": 0.47,
+    "revolver_share": 0.53,
+    "gini_model1": 0.522,
+    "gini_model3": 0.519,
+    "gini_model4": 0.522,
+    "gini_threshold": 0.5
+  },
+  "config": {
+    "seed": 42,
+    "n_consumers": 800,
+    "n_merchants_per_category": 3,
+    "n_days": 720,
+    "n_folds": 10
+  },
+  "runs": {
+    "y_latefee|12m|t10|behavioural|setB": {
+      "model1": {
+        "characteristics": [
+          "cur_balance",
+          "balance_mean",
+          "late_fee_sum",
+          "balance_to_income",
+          "late_fee_n",
+          "total_spend",
+          "n_purchases",
+          "spend_per_active_month",
+          "total_income",
+          "post_payday_share",
+          "mean_income_credit",
+          "mean_ticket"
+        ],
+        "gini_mean": 0.9685529079832336,
+        "gini_sd": 0.03539133381342988,
+        "gini_folds": [
+          0.9652945924132363,
+          0.9741156169111305,
+          0.9937304075235109,
+          0.9741156169111302,
+          0.9948231233822262,
+          0.8769230769230769,
+          0.9890282131661441,
+          0.9349529780564263,
+          1.0,
+          0.9825454545454544
+        ],
+        "auc_oof": 0.9856920068321905,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -0.6479670885225653,
+            "sd": 0.19848675564074586,
+            "times_selected": 5
+          },
+          "late_fee_sum": {
+            "mean": -0.6679790337860922,
+            "sd": 0.07164700155016789,
+            "times_selected": 10
+          },
+          "balance_to_income": {
+            "mean": -0.6446434528156555,
+            "sd": 0.09840044898540362,
+            "times_selected": 6
+          },
+          "late_fee_n": {
+            "mean": -1.2679210285441214,
+            "sd": 0.0012276143417850936,
+            "times_selected": 3
+          },
+          "n_purchases": {
+            "mean": 0.43754984527907836,
+            "sd": 0.1292745757538308,
+            "times_selected": 5
+          },
+          "total_income": {
+            "mean": -0.4271598462371532,
+            "sd": 0.10444582128507089,
+            "times_selected": 8
+          },
+          "post_payday_share": {
+            "mean": 0.34761383330046874,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "mean_ticket": {
+            "mean": -0.8404553925690086,
+            "sd": 0.07050145500176833,
+            "times_selected": 10
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 4.361696484064694,
+          "total_spend": 4.577385275892453,
+          "mean_ticket": 2.255160108177499,
+          "ticket_cv": 0.8863064627169799,
+          "share_retail": 0.16391518821354728,
+          "share_food": 0.4951820804080562,
+          "share_hotels_rest": 0.36759588727748815,
+          "share_travel": 0.5963278191231067,
+          "share_clothing": 0.5955735881900832,
+          "share_home": 0.5044970717389609,
+          "share_phones_web": 0.25433999591070655,
+          "share_repairs": 0.5631972780117034,
+          "share_cash_advance": 0.46925342993819985,
+          "share_services": 0.4631345369479622,
+          "weekday_concentration": 1.0182389679699861,
+          "active_months": 0.0,
+          "spend_per_active_month": 4.338058377427615,
+          "post_payday_share": 3.424678722624188,
+          "n_bills": 0.23504167544864807,
+          "total_bills": 0.3751477339012149,
+          "bill_utilities_n": 0.015654865749001122,
+          "bill_telecom_n": -0.0009011476269945684,
+          "bill_rent_n": 0.22025416307503315,
+          "bill_mortgage_n": 0.054270773336341546,
+          "bill_consumer_loan_n": 0.08444905495372178,
+          "late_fee_n": 4.951829666478217,
+          "late_fee_sum": 5.276206072153508,
+          "total_income": 3.995069143760133,
+          "mean_income_credit": 3.3813428417301417,
+          "n_income": 0.0,
+          "income_shock": -0.009205669217093282,
+          "cur_balance": 5.905066107022927,
+          "balance_std": 2.12097997958697,
+          "balance_mean": 5.889315321213358,
+          "balance_to_income": 5.145848969082071,
+          "max_dpd": 0.30773818203805564,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 597,
+        "bad_rate": 0.74625
+      },
+      "model2": {
+        "characteristics": [
+          "total_income",
+          "mean_income_credit",
+          "cur_balance",
+          "late_fee_sum",
+          "balance_to_income",
+          "late_fee_n",
+          "share_travel",
+          "balance_std",
+          "n_purchases",
+          "spend_per_active_month",
+          "balance_mean",
+          "weekday_concentration"
+        ],
+        "gini_mean": 0.3666462507127607,
+        "gini_sd": 0.13877068786369134,
+        "gini_folds": [
+          0.6078431372549018,
+          0.431640625,
+          0.3808243727598566,
+          0.33870967741935476,
+          0.04329004329004338,
+          0.42950513538748836,
+          0.3974609375,
+          0.451251078515962,
+          0.322265625,
+          0.263671875
+        ],
+        "auc_oof": 0.6810975205986132,
+        "coefficients": {
+          "total_income": {
+            "mean": -1.0727903533707328,
+            "sd": 0.1143479280991218,
+            "times_selected": 10
+          },
+          "cur_balance": {
+            "mean": -0.8060308689191709,
+            "sd": 0.10563233488325334,
+            "times_selected": 9
+          },
+          "late_fee_sum": {
+            "mean": -1.238687053676498,
+            "sd": 0.13637066466140116,
+            "times_selected": 7
+          },
+          "balance_to_income": {
+            "mean": -1.3492092286561408,
+            "sd": 0.143711624310877,
+            "times_selected": 10
+          },
+          "late_fee_n": {
+            "mean": -1.4143981038453879,
+            "sd": 0.14780531291069043,
+            "times_selected": 3
+          },
+          "share_travel": {
+            "mean": -1.044565124159443,
+            "sd": 0.046597745516465165,
+            "times_selected": 10
+          },
+          "balance_std": {
+            "mean": -0.6432762351752803,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "n_purchases": {
+            "mean": -0.8367776479569002,
+            "sd": 0.07914870342699505,
+            "times_selected": 10
+          },
+          "balance_mean": {
+            "mean": -0.7992991251820042,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "weekday_concentration": {
+            "mean": -0.5834262203903552,
+            "sd": 0.05002526228289753,
+            "times_selected": 5
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.08409665413793593,
+          "total_spend": 0.016534566516792006,
+          "mean_ticket": 0.0030484535871691185,
+          "ticket_cv": 0.01854324812143065,
+          "share_retail": -0.005922234823765905,
+          "share_food": 0.005012973209154234,
+          "share_hotels_rest": -0.10260740265011387,
+          "share_travel": 0.10192680948617891,
+          "share_clothing": 0.053037653433747986,
+          "share_home": -0.017266121487393,
+          "share_phones_web": -0.047648537261677816,
+          "share_repairs": -0.03746152231967374,
+          "share_cash_advance": -0.0741898529614,
+          "share_services": 0.021490103921772835,
+          "weekday_concentration": 0.05425063051019492,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.0815541113235142,
+          "post_payday_share": -0.02402845879939531,
+          "n_bills": -0.0006020020324898766,
+          "total_bills": 0.01201746462876683,
+          "bill_utilities_n": -0.004881743336011762,
+          "bill_telecom_n": 0.01178547625308271,
+          "bill_rent_n": -0.01157471555154575,
+          "bill_mortgage_n": -0.01013287833654989,
+          "bill_consumer_loan_n": 0.04329484652746657,
+          "late_fee_n": 0.11272944061253087,
+          "late_fee_sum": 0.17231186618894348,
+          "total_income": 0.21061803819239372,
+          "mean_income_credit": 0.2007668647938614,
+          "n_income": 0.0,
+          "income_shock": -0.0015925863891376102,
+          "cur_balance": 0.1997323481378533,
+          "balance_std": 0.09539168744927365,
+          "balance_mean": 0.059107758958107506,
+          "balance_to_income": 0.13786567333584543,
+          "max_dpd": 0.00019725967445044057,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 167,
+        "bad_rate": 0.20875
+      },
+      "model3": {
+        "characteristics": [
+          "balance_mean",
+          "late_fee_n",
+          "late_fee_sum",
+          "cur_balance",
+          "mean_income_credit",
+          "total_income",
+          "spend_per_active_month",
+          "total_spend",
+          "balance_to_income",
+          "post_payday_share",
+          "mean_ticket",
+          "n_purchases"
+        ],
+        "gini_mean": 0.8596932234432234,
+        "gini_sd": 0.1292695738818215,
+        "gini_folds": [
+          1.0,
+          0.8125,
+          0.6346153846153846,
+          0.8095238095238095,
+          0.8095238095238098,
+          0.9666666666666666,
+          0.6666666666666665,
+          0.8974358974358976,
+          1.0,
+          1.0
+        ],
+        "auc_oof": 0.9222585924713586,
+        "coefficients": {
+          "balance_mean": {
+            "mean": -1.5841444802951419,
+            "sd": 0.8041726729216027,
+            "times_selected": 3
+          },
+          "late_fee_n": {
+            "mean": -1.750073970778815,
+            "sd": 0.1480900774060839,
+            "times_selected": 6
+          },
+          "cur_balance": {
+            "mean": -32.432069863380825,
+            "sd": 68.35533368504902,
+            "times_selected": 6
+          },
+          "mean_income_credit": {
+            "mean": -88.6918084136615,
+            "sd": 151.4968168116572,
+            "times_selected": 4
+          },
+          "spend_per_active_month": {
+            "mean": 496.78877831760343,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "balance_to_income": {
+            "mean": -361.47941587783515,
+            "sd": 360.07718318181435,
+            "times_selected": 2
+          },
+          "post_payday_share": {
+            "mean": -167.85664759374524,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "mean_ticket": {
+            "mean": -64.40316915319866,
+            "sd": 174.45801632851024,
+            "times_selected": 9
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 2.0433942078391607,
+          "total_spend": 2.9317415660604422,
+          "mean_ticket": 2.1217729031717205,
+          "ticket_cv": 0.7121443557812048,
+          "share_retail": 0.19172990138972676,
+          "share_food": 0.4550297388755238,
+          "share_hotels_rest": 0.3924208567005064,
+          "share_travel": -0.39301291172104147,
+          "share_clothing": 0.33839318267641216,
+          "share_home": 0.11094632446400653,
+          "share_phones_web": 0.15682709424912078,
+          "share_repairs": 0.5166011385661231,
+          "share_cash_advance": 0.051075846899679755,
+          "share_services": 0.46346387269026146,
+          "weekday_concentration": 0.5384446887815213,
+          "active_months": 0.0,
+          "spend_per_active_month": 3.0146726578030556,
+          "post_payday_share": 2.44070105202318,
+          "n_bills": 0.03190677694729019,
+          "total_bills": -0.07942896741581469,
+          "bill_utilities_n": -0.04073566247139153,
+          "bill_telecom_n": 0.03092038825225569,
+          "bill_rent_n": -0.15460512285242606,
+          "bill_mortgage_n": -0.041608952806774915,
+          "bill_consumer_loan_n": 0.10567232187877261,
+          "late_fee_n": 3.913710942049642,
+          "late_fee_sum": 3.8547924650125127,
+          "total_income": 3.090113447838439,
+          "mean_income_credit": 3.471431792224298,
+          "n_income": 0.0,
+          "income_shock": 0.06616499501451442,
+          "cur_balance": 3.6280936691701484,
+          "balance_std": 0.9472643473365236,
+          "balance_mean": 4.004103759249876,
+          "balance_to_income": 2.6753234807386046,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 167,
+        "n_bad": 141,
+        "bad_rate": 0.844311377245509
+      },
+      "model4": {
+        "gini": 0.9040027724831052,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "cur_balance",
+          "late_fee_n",
+          "mean_ticket"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9856920068321904,
+        "auc_b": 0.9520013862415527,
+        "diff": 0.033690620590637654,
+        "se": 0.006272589374675073,
+        "z": 5.37108657656757,
+        "p": 7.826362092707506e-08
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.2796208530805687,
+        "bad_rate_revolver": 0.15568862275449102,
+        "n_transactor": 633,
+        "n_revolver": 167
+      }
+    },
+    "y_latefee|12m|t10|behavioural|setC": {
+      "model1": {
+        "characteristics": [
+          "cur_balance",
+          "balance_mean",
+          "balance_to_income",
+          "spend_per_active_month",
+          "total_spend",
+          "n_purchases",
+          "mean_income_credit",
+          "post_payday_share",
+          "total_income",
+          "mean_ticket",
+          "balance_std",
+          "weekday_concentration"
+        ],
+        "gini_mean": 0.9633101088397741,
+        "gini_sd": 0.017184357147789216,
+        "gini_folds": [
+          0.9538690476190477,
+          0.9529780564263324,
+          0.9955357142857142,
+          0.9345238095238095,
+          0.974025974025974,
+          0.9836309523809523,
+          0.9483333333333337,
+          0.9632352941176472,
+          0.9551820728291316,
+          0.9717868338557993
+        ],
+        "auc_oof": 0.9805348581990411,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -0.5248584502733539,
+            "sd": 0.22586288520813327,
+            "times_selected": 10
+          },
+          "balance_mean": {
+            "mean": 0.6966337614886644,
+            "sd": 0.126390925385082,
+            "times_selected": 3
+          },
+          "balance_to_income": {
+            "mean": -0.5968045734689051,
+            "sd": 0.09907311702538363,
+            "times_selected": 10
+          },
+          "mean_income_credit": {
+            "mean": -0.4940163126489411,
+            "sd": 0.04554965260431075,
+            "times_selected": 10
+          },
+          "post_payday_share": {
+            "mean": -0.24492036640369746,
+            "sd": 0.0011611317561479734,
+            "times_selected": 2
+          },
+          "mean_ticket": {
+            "mean": -0.7054957483910442,
+            "sd": 0.03759400008348484,
+            "times_selected": 10
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 4.1614144575645975,
+          "total_spend": 4.616501148296296,
+          "mean_ticket": 2.2135194741004938,
+          "ticket_cv": 0.8795026139334918,
+          "share_retail": 0.18180492898245892,
+          "share_food": 0.4581610600382729,
+          "share_hotels_rest": 0.32529533807714295,
+          "share_travel": 0.5528900220074308,
+          "share_clothing": 0.6393310098184084,
+          "share_home": 0.3740593825321853,
+          "share_phones_web": 0.20416165291264618,
+          "share_repairs": 0.5672443558983964,
+          "share_cash_advance": 0.4960799044797406,
+          "share_services": 0.5271035273304441,
+          "weekday_concentration": 1.0894674626660024,
+          "active_months": 0.0,
+          "spend_per_active_month": 4.909465482064224,
+          "post_payday_share": 3.649086491128138,
+          "n_bills": 0.19212024728448235,
+          "total_bills": 0.3621226712818651,
+          "bill_utilities_n": 0.0231303634895013,
+          "bill_telecom_n": -2.520464837029826e-06,
+          "bill_rent_n": 0.21185300289760683,
+          "bill_mortgage_n": 0.057251267799404745,
+          "bill_consumer_loan_n": 0.10008875243361517,
+          "total_income": 3.6446303097761668,
+          "mean_income_credit": 3.926224044804288,
+          "n_income": 0.0,
+          "income_shock": -0.0021562845857937087,
+          "cur_balance": 5.7728049425586,
+          "balance_std": 1.8118036632219157,
+          "balance_mean": 5.73135563389549,
+          "balance_to_income": 4.936765587160394
+        },
+        "n": 800,
+        "n_bad": 597,
+        "bad_rate": 0.74625
+      },
+      "model2": {
+        "characteristics": [
+          "total_income",
+          "mean_income_credit",
+          "cur_balance",
+          "balance_to_income",
+          "n_purchases",
+          "spend_per_active_month",
+          "balance_mean",
+          "balance_std",
+          "share_services",
+          "total_spend",
+          "share_travel",
+          "ticket_cv"
+        ],
+        "gini_mean": 0.31432100375231264,
+        "gini_sd": 0.09888826034836554,
+        "gini_folds": [
+          0.41565778853914437,
+          0.3736559139784945,
+          0.16877152698048214,
+          0.3682051282051282,
+          0.21138912855910275,
+          0.15047021943573657,
+          0.42358974358974355,
+          0.2716666666666667,
+          0.37254901960784315,
+          0.3872549019607845
+        ],
+        "auc_oof": 0.6492938294028058,
+        "coefficients": {
+          "total_income": {
+            "mean": -1.3460100809524618,
+            "sd": 0.09680794604980386,
+            "times_selected": 10
+          },
+          "cur_balance": {
+            "mean": -0.886532772444216,
+            "sd": 0.1587821360135138,
+            "times_selected": 10
+          },
+          "balance_to_income": {
+            "mean": -1.1098816495322736,
+            "sd": 0.14055332318229255,
+            "times_selected": 10
+          },
+          "n_purchases": {
+            "mean": -0.6930677367543423,
+            "sd": 0.07357309415897569,
+            "times_selected": 7
+          },
+          "share_services": {
+            "mean": -0.9967038480871417,
+            "sd": 0.10016918124619285,
+            "times_selected": 10
+          },
+          "total_spend": {
+            "mean": -0.7717692228147152,
+            "sd": 0.06360603067550626,
+            "times_selected": 3
+          },
+          "share_travel": {
+            "mean": -0.96345156734718,
+            "sd": 0.12317099423965934,
+            "times_selected": 10
+          },
+          "ticket_cv": {
+            "mean": -0.8355333015997288,
+            "sd": 0.0981155194665292,
+            "times_selected": 9
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.12207529437644864,
+          "total_spend": 0.06993322936084814,
+          "mean_ticket": -0.015639825542683602,
+          "ticket_cv": 0.05978363072468633,
+          "share_retail": -0.027676062904166947,
+          "share_food": 0.04994566207179056,
+          "share_hotels_rest": -0.025415987392810674,
+          "share_travel": 0.06903011049956048,
+          "share_clothing": 0.057044059779379805,
+          "share_home": -0.02078117784560583,
+          "share_phones_web": -0.019241151244145223,
+          "share_repairs": 0.006015780831666547,
+          "share_cash_advance": -0.01740817496929325,
+          "share_services": 0.08686947657941334,
+          "weekday_concentration": 0.053948170764599436,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.12099282818122216,
+          "post_payday_share": 0.04808506542865389,
+          "n_bills": 0.0009543444811201747,
+          "total_bills": 0.03739646464852621,
+          "bill_utilities_n": -0.018026523270504823,
+          "bill_telecom_n": 0.0048249821193776365,
+          "bill_rent_n": -0.011355703441478337,
+          "bill_mortgage_n": 0.00013224818159079642,
+          "bill_consumer_loan_n": 0.03564586565676356,
+          "total_income": 0.2760939817142761,
+          "mean_income_credit": 0.24906151847602137,
+          "n_income": 0.0,
+          "income_shock": -0.0005091987513873512,
+          "cur_balance": 0.2379995067769286,
+          "balance_std": 0.11062742556200325,
+          "balance_mean": 0.11307218911474003,
+          "balance_to_income": 0.12848804117355417
+        },
+        "n": 800,
+        "n_bad": 167,
+        "bad_rate": 0.20875
+      },
+      "model3": {
+        "characteristics": [
+          "balance_mean",
+          "mean_income_credit",
+          "total_income",
+          "cur_balance",
+          "post_payday_share",
+          "total_spend",
+          "balance_to_income",
+          "spend_per_active_month",
+          "n_purchases",
+          "mean_ticket",
+          "share_hotels_rest",
+          "balance_std"
+        ],
+        "gini_mean": 0.8134920634920635,
+        "gini_sd": 0.23436227079735553,
+        "gini_folds": [
+          0.5,
+          0.8571428571428572,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.4642857142857144,
+          0.5,
+          1.0
+        ],
+        "auc_oof": 0.8853908188585609,
+        "coefficients": {
+          "balance_mean": {
+            "mean": -84.8271549160429,
+            "sd": 143.43243674048173,
+            "times_selected": 7
+          },
+          "mean_income_credit": {
+            "mean": -5.11144539681767,
+            "sd": 7.554240789730669,
+            "times_selected": 5
+          },
+          "balance_to_income": {
+            "mean": -31.521687072583262,
+            "sd": 12.393402305568298,
+            "times_selected": 3
+          },
+          "spend_per_active_month": {
+            "mean": -12.872430232796123,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "mean_ticket": {
+            "mean": -46.3836151279001,
+            "sd": 61.08685671867711,
+            "times_selected": 8
+          },
+          "share_hotels_rest": {
+            "mean": -114.97195408639337,
+            "sd": 196.66424971247662,
+            "times_selected": 5
+          },
+          "balance_std": {
+            "mean": -104.23444659527121,
+            "sd": 197.79935348942837,
+            "times_selected": 8
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 2.076428657028248,
+          "total_spend": 2.6359423123340644,
+          "mean_ticket": 1.821946832866646,
+          "ticket_cv": 0.154635653466678,
+          "share_retail": -0.008520862798130538,
+          "share_food": -0.19844966551583434,
+          "share_hotels_rest": 0.8157596677257035,
+          "share_travel": -0.39195691033991803,
+          "share_clothing": 0.4531425217599464,
+          "share_home": 0.12003711013771175,
+          "share_phones_web": -0.06552842974023217,
+          "share_repairs": 0.3561178500881102,
+          "share_cash_advance": -0.085168196444564,
+          "share_services": 0.16000194874727672,
+          "weekday_concentration": 0.520934570062447,
+          "active_months": 0.0,
+          "spend_per_active_month": 2.2295048049663966,
+          "post_payday_share": 2.8641654765923485,
+          "n_bills": 0.022875846631194418,
+          "total_bills": -0.04128753747939141,
+          "bill_utilities_n": 0.04564649959854308,
+          "bill_telecom_n": -0.04057481436162609,
+          "bill_rent_n": -0.018924287334464645,
+          "bill_mortgage_n": -0.02000746644898179,
+          "bill_consumer_loan_n": 0.12492320165629062,
+          "total_income": 3.2011037014579973,
+          "mean_income_credit": 3.4104762162920843,
+          "n_income": 0.0,
+          "income_shock": 0.0,
+          "cur_balance": 3.049609525651209,
+          "balance_std": 0.6921094835180504,
+          "balance_mean": 3.654204560098525,
+          "balance_to_income": 2.5554922724089657
+        },
+        "n": 167,
+        "n_bad": 141,
+        "bad_rate": 0.844311377245509
+      },
+      "model4": {
+        "gini": 0.6113407761302407,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "mean_ticket",
+          "balance_std",
+          "balance_to_income",
+          "balance_mean"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9805348581990413,
+        "auc_b": 0.8056703880651204,
+        "diff": 0.17486447013392092,
+        "se": 0.01650021432081034,
+        "z": 10.597709019656733,
+        "p": 3.0536914621732445e-26
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.2796208530805687,
+        "bad_rate_revolver": 0.15568862275449102,
+        "n_transactor": 633,
+        "n_revolver": 167
+      }
+    },
+    "y_latefee|12m|t10|assigned|setB": {
+      "model1": {
+        "characteristics": [
+          "cur_balance",
+          "late_fee_n",
+          "balance_mean",
+          "late_fee_sum",
+          "balance_to_income",
+          "total_spend",
+          "n_purchases",
+          "spend_per_active_month",
+          "mean_income_credit",
+          "post_payday_share",
+          "total_income",
+          "mean_ticket"
+        ],
+        "gini_mean": 0.9687021423236866,
+        "gini_sd": 0.029357342327504823,
+        "gini_folds": [
+          1.0,
+          0.9496567505720823,
+          1.0,
+          0.8947368421052633,
+          0.9608150470219434,
+          0.9930118798043326,
+          0.963235294117647,
+          0.9732528041415012,
+          0.9738181818181817,
+          0.978494623655914
+        ],
+        "auc_oof": 0.9844996740682064,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -0.6166762438311724,
+            "sd": 0.1416376749761417,
+            "times_selected": 7
+          },
+          "late_fee_n": {
+            "mean": -0.503784457712179,
+            "sd": 0.19699012261429985,
+            "times_selected": 3
+          },
+          "late_fee_sum": {
+            "mean": -0.658466903819855,
+            "sd": 0.12977622985723025,
+            "times_selected": 9
+          },
+          "balance_to_income": {
+            "mean": -0.657328541911812,
+            "sd": 0.08390087794392667,
+            "times_selected": 4
+          },
+          "n_purchases": {
+            "mean": 0.4164622432078699,
+            "sd": 0.10293639727391642,
+            "times_selected": 4
+          },
+          "mean_income_credit": {
+            "mean": -0.39164045294181576,
+            "sd": 0.07743076210992758,
+            "times_selected": 7
+          },
+          "mean_ticket": {
+            "mean": -0.8287663757950894,
+            "sd": 0.07033590601692911,
+            "times_selected": 10
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 4.460496426590408,
+          "total_spend": 4.493706069845711,
+          "mean_ticket": 2.2457194777267757,
+          "ticket_cv": 0.951781308994506,
+          "share_retail": 0.2601991165395681,
+          "share_food": 0.36653098450066424,
+          "share_hotels_rest": 0.3482230161391531,
+          "share_travel": 0.5004574249142101,
+          "share_clothing": 0.627429284979723,
+          "share_home": 0.41881982873545437,
+          "share_phones_web": 0.2312868416293726,
+          "share_repairs": 0.6061789644516826,
+          "share_cash_advance": 0.5587387203597062,
+          "share_services": 0.5249151861031166,
+          "weekday_concentration": 1.0546010373194457,
+          "active_months": 0.0,
+          "spend_per_active_month": 4.185962544484212,
+          "post_payday_share": 3.842234743850178,
+          "n_bills": 0.1966827958124444,
+          "total_bills": 0.36275897754270736,
+          "bill_utilities_n": 0.015939173411434124,
+          "bill_telecom_n": -0.002867757448289786,
+          "bill_rent_n": 0.2241315205127289,
+          "bill_mortgage_n": 0.05206221195872634,
+          "bill_consumer_loan_n": 0.07945291438099926,
+          "late_fee_n": 5.641793273098005,
+          "late_fee_sum": 5.423985222934029,
+          "total_income": 3.8401750812889417,
+          "mean_income_credit": 3.926686151909319,
+          "n_income": 0.0,
+          "income_shock": -0.00798014603508373,
+          "cur_balance": 5.719309727138906,
+          "balance_std": 1.9100628661663093,
+          "balance_mean": 5.542296040250248,
+          "balance_to_income": 5.3844102829828975,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.2990483795899909
+        },
+        "n": 800,
+        "n_bad": 597,
+        "bad_rate": 0.74625
+      },
+      "model2": {
+        "characteristics": [
+          "cur_balance",
+          "mean_income_credit",
+          "total_income",
+          "n_purchases",
+          "balance_mean",
+          "ticket_cv",
+          "late_fee_sum",
+          "spend_per_active_month",
+          "balance_std",
+          "balance_to_income",
+          "share_travel",
+          "late_fee_n"
+        ],
+        "gini_mean": 0.42256357074321205,
+        "gini_sd": 0.12226442972045241,
+        "gini_folds": [
+          0.602051282051282,
+          0.4925373134328359,
+          0.23354231974921635,
+          0.2939453125,
+          0.3075980392156863,
+          0.562550443906376,
+          0.4059725585149314,
+          0.31343283582089576,
+          0.5275443510737627,
+          0.48646125116713357
+        ],
+        "auc_oof": 0.6966730047014975,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -0.6991879139128577,
+            "sd": 0.11924661153794518,
+            "times_selected": 9
+          },
+          "mean_income_credit": {
+            "mean": -1.0674360822273736,
+            "sd": 0.12141940384113684,
+            "times_selected": 10
+          },
+          "n_purchases": {
+            "mean": -0.8825181835463496,
+            "sd": 0.2114777394860096,
+            "times_selected": 10
+          },
+          "balance_mean": {
+            "mean": -0.6099065948494821,
+            "sd": 0.10525274898104861,
+            "times_selected": 3
+          },
+          "ticket_cv": {
+            "mean": -0.8348179563311053,
+            "sd": 0.09227488605064409,
+            "times_selected": 10
+          },
+          "late_fee_sum": {
+            "mean": -1.0256683523440844,
+            "sd": 0.21016152481564487,
+            "times_selected": 6
+          },
+          "balance_to_income": {
+            "mean": -1.4567627237135505,
+            "sd": 0.3419116664021731,
+            "times_selected": 10
+          },
+          "share_travel": {
+            "mean": -0.9015138977334471,
+            "sd": 0.060742157281871594,
+            "times_selected": 10
+          },
+          "late_fee_n": {
+            "mean": -1.426917349913782,
+            "sd": 0.26749018402482744,
+            "times_selected": 6
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.13639604197694813,
+          "total_spend": 0.031456989662753294,
+          "mean_ticket": -0.08162470119806885,
+          "ticket_cv": 0.11454065191438853,
+          "share_retail": 0.0007377451485843928,
+          "share_food": 0.0855865813643191,
+          "share_hotels_rest": -0.05056484564938015,
+          "share_travel": 0.10841957168962799,
+          "share_clothing": 0.045733448550316885,
+          "share_home": -0.07624824572842376,
+          "share_phones_web": -0.01187759275947932,
+          "share_repairs": -0.02110503952353915,
+          "share_cash_advance": 0.052524570217276474,
+          "share_services": 0.047485806466072616,
+          "weekday_concentration": 0.019352133979943422,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.11150591414508773,
+          "post_payday_share": -0.004702401980891752,
+          "n_bills": -0.0005805045196012725,
+          "total_bills": 0.042303967819769264,
+          "bill_utilities_n": -0.0005155339387259821,
+          "bill_telecom_n": 0.012219863337333096,
+          "bill_rent_n": 0.006033259151264175,
+          "bill_mortgage_n": -0.004065330495867862,
+          "bill_consumer_loan_n": 0.03623062799020492,
+          "late_fee_n": 0.09627050034695636,
+          "late_fee_sum": 0.11213213938726938,
+          "total_income": 0.1373289730385337,
+          "mean_income_credit": 0.1660668270975962,
+          "n_income": 0.0,
+          "income_shock": 0.008374440682191342,
+          "cur_balance": 0.18137224784744854,
+          "balance_std": 0.10968757230279481,
+          "balance_mean": 0.11698878964799933,
+          "balance_to_income": 0.10870433265699948,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0021422359648342413,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 167,
+        "bad_rate": 0.20875
+      },
+      "model3": {
+        "characteristics": [
+          "late_fee_n",
+          "late_fee_sum",
+          "cur_balance",
+          "balance_mean",
+          "total_income",
+          "mean_income_credit",
+          "total_spend",
+          "balance_to_income",
+          "spend_per_active_month",
+          "mean_ticket",
+          "n_purchases",
+          "post_payday_share"
+        ],
+        "gini_mean": 0.8740842490842491,
+        "gini_sd": 0.15144164146993797,
+        "gini_folds": [
+          0.9523809523809526,
+          1.0,
+          0.8095238095238098,
+          1.0,
+          1.0,
+          0.5,
+          0.75,
+          0.8571428571428572,
+          1.0,
+          0.8717948717948718
+        ],
+        "auc_oof": 0.9064375340971086,
+        "coefficients": {
+          "late_fee_n": {
+            "mean": -20.473850100644853,
+            "sd": 49.92265975082428,
+            "times_selected": 8
+          },
+          "cur_balance": {
+            "mean": -14.853921377262276,
+            "sd": 33.12164157652329,
+            "times_selected": 7
+          },
+          "balance_mean": {
+            "mean": -1.6966900500232593,
+            "sd": 1.02146559879934,
+            "times_selected": 3
+          },
+          "total_income": {
+            "mean": -1.0212241167402603,
+            "sd": 0.29294803413560067,
+            "times_selected": 3
+          },
+          "total_spend": {
+            "mean": -1.6460178721865781,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "balance_to_income": {
+            "mean": -1.1614326294963173,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "mean_ticket": {
+            "mean": -66.3868101623724,
+            "sd": 173.068926413593,
+            "times_selected": 8
+          },
+          "post_payday_share": {
+            "mean": -56.568787610867915,
+            "sd": 0.0,
+            "times_selected": 1
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 2.0743428227059084,
+          "total_spend": 2.7075070194058655,
+          "mean_ticket": 2.368379192146684,
+          "ticket_cv": 0.878388716571497,
+          "share_retail": 0.026939918970956767,
+          "share_food": 0.2803341849323686,
+          "share_hotels_rest": 0.5863068846404449,
+          "share_travel": 0.20043174478720216,
+          "share_clothing": -0.017363381938472637,
+          "share_home": 0.11761891484402882,
+          "share_phones_web": -0.11049008308579714,
+          "share_repairs": 0.22987413317513938,
+          "share_cash_advance": -0.13626778538044662,
+          "share_services": 0.22203439886064547,
+          "weekday_concentration": 0.4104026595011224,
+          "active_months": 0.0,
+          "spend_per_active_month": 2.524919321607849,
+          "post_payday_share": 1.9329994437442022,
+          "n_bills": 0.0548606070164145,
+          "total_bills": 0.13595911734072305,
+          "bill_utilities_n": 0.04344102070298922,
+          "bill_telecom_n": 0.027874642196702114,
+          "bill_rent_n": -0.002656091865660364,
+          "bill_mortgage_n": -0.022364169545473628,
+          "bill_consumer_loan_n": 0.08723914684106907,
+          "late_fee_n": 4.349414678479565,
+          "late_fee_sum": 4.178769566861773,
+          "total_income": 3.4302390464089036,
+          "mean_income_credit": 2.938358005999934,
+          "n_income": 0.0,
+          "income_shock": 0.029599972886430598,
+          "cur_balance": 3.9726689375556496,
+          "balance_std": 0.7026391121955569,
+          "balance_mean": 3.5861544233108846,
+          "balance_to_income": 2.5873264122999284,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 167,
+        "n_bad": 141,
+        "bad_rate": 0.844311377245509
+      },
+      "model4": {
+        "gini": 0.890437408718469,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "cur_balance",
+          "late_fee_n",
+          "mean_ticket"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9844996740682065,
+        "auc_b": 0.9452187043592345,
+        "diff": 0.03928096970897199,
+        "se": 0.0073430723712911775,
+        "z": 5.34939160650884,
+        "p": 8.825039752226034e-08
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.2796208530805687,
+        "bad_rate_revolver": 0.15568862275449102,
+        "n_transactor": 633,
+        "n_revolver": 167
+      }
+    },
+    "y_latefee|12m|t10|assigned|setC": {
+      "model1": {
+        "characteristics": [
+          "balance_mean",
+          "cur_balance",
+          "total_spend",
+          "balance_to_income",
+          "n_purchases",
+          "spend_per_active_month",
+          "mean_income_credit",
+          "post_payday_share",
+          "total_income",
+          "mean_ticket",
+          "balance_std",
+          "weekday_concentration"
+        ],
+        "gini_mean": 0.9537190800670592,
+        "gini_sd": 0.025164451831554382,
+        "gini_folds": [
+          0.9612590799031477,
+          0.9001148105625718,
+          0.949959644874899,
+          0.9639498432601878,
+          0.949090909090909,
+          0.9943977591036415,
+          0.9695340501792113,
+          0.9226190476190477,
+          0.9734451432564639,
+          0.9528205128205129
+        ],
+        "auc_oof": 0.9781460669521664,
+        "coefficients": {
+          "balance_mean": {
+            "mean": 0.6549476900919713,
+            "sd": 0.07156027893531287,
+            "times_selected": 6
+          },
+          "cur_balance": {
+            "mean": -0.6643284090360635,
+            "sd": 0.20518712726435165,
+            "times_selected": 9
+          },
+          "balance_to_income": {
+            "mean": -0.6609679659615906,
+            "sd": 0.10266765433638578,
+            "times_selected": 10
+          },
+          "mean_income_credit": {
+            "mean": -0.547043488363162,
+            "sd": 0.055885012917928745,
+            "times_selected": 10
+          },
+          "post_payday_share": {
+            "mean": -0.26717236930966376,
+            "sd": 0.03223621268828342,
+            "times_selected": 3
+          },
+          "mean_ticket": {
+            "mean": -0.6868345444232116,
+            "sd": 0.07093443185862393,
+            "times_selected": 10
+          },
+          "weekday_concentration": {
+            "mean": -0.5780994204679347,
+            "sd": 0.06419584339229778,
+            "times_selected": 3
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 4.372065389701504,
+          "total_spend": 4.728841957009578,
+          "mean_ticket": 2.4599018937574844,
+          "ticket_cv": 0.8203232716290416,
+          "share_retail": 0.2365341387197462,
+          "share_food": 0.4523451452442378,
+          "share_hotels_rest": 0.33151538327024543,
+          "share_travel": 0.45509209324011546,
+          "share_clothing": 0.6310829476541109,
+          "share_home": 0.5152042119641365,
+          "share_phones_web": 0.20719811162585228,
+          "share_repairs": 0.5293488536391173,
+          "share_cash_advance": 0.43277681267155893,
+          "share_services": 0.47743741484807645,
+          "weekday_concentration": 1.030397304132697,
+          "active_months": 0.0,
+          "spend_per_active_month": 4.231400689515766,
+          "post_payday_share": 3.6944113754176087,
+          "n_bills": 0.16435725426216954,
+          "total_bills": 0.423876771085711,
+          "bill_utilities_n": 0.021656087712775073,
+          "bill_telecom_n": -0.016372779890205483,
+          "bill_rent_n": 0.22634338468437912,
+          "bill_mortgage_n": 0.055826443377058194,
+          "bill_consumer_loan_n": 0.09156695516212798,
+          "total_income": 3.6222052041329578,
+          "mean_income_credit": 3.8338231537365104,
+          "n_income": 0.0,
+          "income_shock": -0.0017726204990207678,
+          "cur_balance": 5.606396634072345,
+          "balance_std": 2.06954921868882,
+          "balance_mean": 5.858271812539342,
+          "balance_to_income": 4.6263209403233
+        },
+        "n": 800,
+        "n_bad": 597,
+        "bad_rate": 0.74625
+      },
+      "model2": {
+        "characteristics": [
+          "cur_balance",
+          "mean_income_credit",
+          "total_income",
+          "balance_std",
+          "n_purchases",
+          "balance_to_income",
+          "spend_per_active_month",
+          "balance_mean",
+          "share_travel",
+          "share_food",
+          "weekday_concentration",
+          "total_spend"
+        ],
+        "gini_mean": 0.3254168563601871,
+        "gini_sd": 0.10557097512585599,
+        "gini_folds": [
+          0.48991121872477805,
+          0.45987920621225187,
+          0.3356341673856773,
+          0.330078125,
+          0.275897435897436,
+          0.4025974025974026,
+          0.3287566742944319,
+          0.1515151515151516,
+          0.15958668197474157,
+          0.3203125
+        ],
+        "auc_oof": 0.6691167428176822,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -0.8175746691216073,
+            "sd": 0.09317212272086232,
+            "times_selected": 8
+          },
+          "mean_income_credit": {
+            "mean": -1.3337459971199823,
+            "sd": 0.10941464276634749,
+            "times_selected": 10
+          },
+          "balance_std": {
+            "mean": -0.614378460396954,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "n_purchases": {
+            "mean": -0.6798302776373675,
+            "sd": 0.07766846894015238,
+            "times_selected": 8
+          },
+          "balance_to_income": {
+            "mean": -1.0576537038715306,
+            "sd": 0.17667079122315363,
+            "times_selected": 10
+          },
+          "balance_mean": {
+            "mean": -0.7782365986802473,
+            "sd": 0.13490853065663228,
+            "times_selected": 2
+          },
+          "share_travel": {
+            "mean": -0.9289067146678969,
+            "sd": 0.09432989220972109,
+            "times_selected": 10
+          },
+          "share_food": {
+            "mean": -0.9375952785549335,
+            "sd": 0.06927517279837954,
+            "times_selected": 10
+          },
+          "weekday_concentration": {
+            "mean": -0.7284600843303272,
+            "sd": 0.0824030198960085,
+            "times_selected": 10
+          },
+          "total_spend": {
+            "mean": -0.7770960449730875,
+            "sd": 0.0392112716230833,
+            "times_selected": 2
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.1107384009424528,
+          "total_spend": 0.05089103367613588,
+          "mean_ticket": 0.014931636175245797,
+          "ticket_cv": -0.06942559365987974,
+          "share_retail": -0.036996278781432135,
+          "share_food": 0.07423524692811484,
+          "share_hotels_rest": -0.1083978840800423,
+          "share_travel": 0.07777279305801824,
+          "share_clothing": 0.02206279584262178,
+          "share_home": -0.037566247942054376,
+          "share_phones_web": -0.028530298359590485,
+          "share_repairs": -0.005593436876434349,
+          "share_cash_advance": -0.029388540334356658,
+          "share_services": 0.017097660063271368,
+          "weekday_concentration": 0.0674883037990924,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.106681168237023,
+          "post_payday_share": -0.03455832702888105,
+          "n_bills": 0.006303930888489116,
+          "total_bills": -0.024988604250865014,
+          "bill_utilities_n": -0.004770596116586941,
+          "bill_telecom_n": 0.009277424573103115,
+          "bill_rent_n": 0.006377086898231781,
+          "bill_mortgage_n": -0.008577625889414311,
+          "bill_consumer_loan_n": 0.03811035276416785,
+          "total_income": 0.16705809795807144,
+          "mean_income_credit": 0.19066511666610697,
+          "n_income": 0.0,
+          "income_shock": 0.008542862638619694,
+          "cur_balance": 0.22419196826013993,
+          "balance_std": 0.13898306049191583,
+          "balance_mean": 0.09911760425182793,
+          "balance_to_income": 0.10947112956137173
+        },
+        "n": 800,
+        "n_bad": 167,
+        "bad_rate": 0.20875
+      },
+      "model3": {
+        "characteristics": [
+          "balance_mean",
+          "total_income",
+          "mean_income_credit",
+          "cur_balance",
+          "balance_to_income",
+          "n_purchases",
+          "post_payday_share",
+          "spend_per_active_month",
+          "total_spend",
+          "mean_ticket",
+          "balance_std",
+          "ticket_cv"
+        ],
+        "gini_mean": 0.8937728937728938,
+        "gini_sd": 0.1437583110123839,
+        "gini_folds": [
+          0.6190476190476191,
+          0.6666666666666667,
+          1.0,
+          1.0,
+          1.0,
+          0.7619047619047621,
+          0.9615384615384617,
+          1.0,
+          0.9285714285714286,
+          1.0
+        ],
+        "auc_oof": 0.900709219858156,
+        "coefficients": {
+          "balance_mean": {
+            "mean": -62.31497334519648,
+            "sd": 58.799892977095496,
+            "times_selected": 9
+          },
+          "total_income": {
+            "mean": -1.3202441855567466,
+            "sd": 0.11294702964489844,
+            "times_selected": 2
+          },
+          "cur_balance": {
+            "mean": -1.4119573924243913,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "balance_to_income": {
+            "mean": -68.46104766929457,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "n_purchases": {
+            "mean": 1.0535693559020238,
+            "sd": 16.81372605869349,
+            "times_selected": 3
+          },
+          "post_payday_share": {
+            "mean": -1.5953628884432483,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "total_spend": {
+            "mean": 35.14230277906801,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "mean_ticket": {
+            "mean": -41.01268724945562,
+            "sd": 29.241641186321647,
+            "times_selected": 7
+          },
+          "balance_std": {
+            "mean": -71.69175881027061,
+            "sd": 70.4657972739249,
+            "times_selected": 9
+          },
+          "ticket_cv": {
+            "mean": -54.983141916322026,
+            "sd": 74.52117846072431,
+            "times_selected": 4
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 2.743302995114194,
+          "total_spend": 1.809036266218624,
+          "mean_ticket": 1.7829105304956916,
+          "ticket_cv": 0.5483248117684317,
+          "share_retail": 0.1445020431483909,
+          "share_food": 0.1786507951171421,
+          "share_hotels_rest": -0.01990089937734122,
+          "share_travel": -0.5456922960809085,
+          "share_clothing": 0.3194526280295131,
+          "share_home": 0.2369907760497311,
+          "share_phones_web": -0.30712575704515654,
+          "share_repairs": 0.25692724884763857,
+          "share_cash_advance": -0.07860013587252296,
+          "share_services": -0.07429005210687893,
+          "weekday_concentration": 0.38677803096316654,
+          "active_months": 0.0,
+          "spend_per_active_month": 2.4168099071411797,
+          "post_payday_share": 2.6689021637735717,
+          "n_bills": 0.10839455692958598,
+          "total_bills": -0.13483294051383388,
+          "bill_utilities_n": 0.0542098129939128,
+          "bill_telecom_n": 0.024564018255271686,
+          "bill_rent_n": -0.0182132559165908,
+          "bill_mortgage_n": -0.08489461880902724,
+          "bill_consumer_loan_n": 0.054928060809472073,
+          "total_income": 3.3768105870171947,
+          "mean_income_credit": 3.146397860699169,
+          "n_income": 0.0,
+          "income_shock": 0.024846081488850556,
+          "cur_balance": 3.1236021582298603,
+          "balance_std": 0.9150645483559778,
+          "balance_mean": 3.9334699686052703,
+          "balance_to_income": 2.7966686677815042
+        },
+        "n": 167,
+        "n_bad": 141,
+        "bad_rate": 0.844311377245509
+      },
+      "model4": {
+        "gini": 0.6145093282504475,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "mean_ticket",
+          "balance_std",
+          "balance_to_income",
+          "balance_mean"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9781460669521664,
+        "auc_b": 0.8072546641252238,
+        "diff": 0.1708914028269426,
+        "se": 0.016576390743230363,
+        "z": 10.30932520076682,
+        "p": 6.394874745132793e-25
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.2796208530805687,
+        "bad_rate_revolver": 0.15568862275449102,
+        "n_transactor": 633,
+        "n_revolver": 167
+      }
+    },
+    "y_90dpd|12m|t10|behavioural|setB": {
+      "model1": {
+        "characteristics": [
+          "late_fee_n",
+          "late_fee_sum",
+          "balance_mean",
+          "cur_balance",
+          "n_purchases",
+          "total_spend",
+          "spend_per_active_month",
+          "balance_to_income",
+          "mean_ticket",
+          "post_payday_share",
+          "weekday_concentration",
+          "ticket_cv"
+        ],
+        "gini_mean": 0.9219281496134227,
+        "gini_sd": 0.05804092243900769,
+        "gini_folds": [
+          0.9835526315789473,
+          0.9066666666666667,
+          0.9733333333333334,
+          0.8266666666666667,
+          0.9746835443037973,
+          0.9358974358974359,
+          0.8333333333333333,
+          0.9412915851272015
+        ],
+        "auc_oof": 0.9559563536204247,
+        "coefficients": {
+          "balance_mean": {
+            "mean": -1.004322926182426,
+            "sd": 0.13301221433444302,
+            "times_selected": 3
+          },
+          "n_purchases": {
+            "mean": -0.8290388268190054,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "total_spend": {
+            "mean": -0.9137586657760204,
+            "sd": 0.1371990581185488,
+            "times_selected": 5
+          },
+          "weekday_concentration": {
+            "mean": -0.5086632147783822,
+            "sd": 0.09751040227932171,
+            "times_selected": 7
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 3.5332546680018924,
+          "total_spend": 3.4460897246915305,
+          "mean_ticket": 2.975052983141058,
+          "ticket_cv": 2.1535407847239325,
+          "share_retail": 0.8949699665945863,
+          "share_food": 1.381539290279394,
+          "share_hotels_rest": 1.1878126497129133,
+          "share_travel": 1.1911269122497705,
+          "share_clothing": 1.1714517857742055,
+          "share_home": 1.0291307428775809,
+          "share_phones_web": 0.8223309600095805,
+          "share_repairs": 0.8646739181187388,
+          "share_cash_advance": 1.5670852172941978,
+          "share_services": 1.3710941357718385,
+          "weekday_concentration": 2.7500442700081793,
+          "active_months": 0.0,
+          "spend_per_active_month": 3.3464413860745394,
+          "post_payday_share": 2.8819965293031675,
+          "n_bills": -0.06031113419508636,
+          "total_bills": 0.6719011594099609,
+          "bill_utilities_n": -0.030949569789714523,
+          "bill_telecom_n": 0.00024833301008575346,
+          "bill_rent_n": 0.7769897962146368,
+          "bill_mortgage_n": 0.08640447451464141,
+          "bill_consumer_loan_n": -0.00023578298507432628,
+          "late_fee_n": 3.921421991232576,
+          "late_fee_sum": 3.885060873812314,
+          "total_income": 2.034110920423494,
+          "mean_income_credit": 1.7890458646290612,
+          "n_income": 0.0,
+          "income_shock": -0.001777512045172242,
+          "cur_balance": 3.668206260089445,
+          "balance_std": 0.9451809132499734,
+          "balance_mean": 3.8052136024090295,
+          "balance_to_income": 3.3073371470162822,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 769,
+        "bad_rate": 0.96125
+      },
+      "model2": {
+        "characteristics": [
+          "cur_balance",
+          "total_income",
+          "mean_income_credit",
+          "balance_to_income",
+          "n_purchases",
+          "late_fee_sum",
+          "balance_std",
+          "spend_per_active_month",
+          "share_clothing",
+          "balance_mean",
+          "share_food",
+          "total_spend"
+        ],
+        "gini_mean": 0.3460637879881207,
+        "gini_sd": 0.17104164764122518,
+        "gini_folds": [
+          0.4408602150537635,
+          0.49784296807592754,
+          0.37254901960784315,
+          0.4358974358974359,
+          0.07333908541846412,
+          0.43179487179487186,
+          0.5060532687651331,
+          0.34558823529411775,
+          0.3883333333333334,
+          -0.031620553359683834
+        ],
+        "auc_oof": 0.6763960231196374,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -0.8295384340028851,
+            "sd": 0.10680028054439118,
+            "times_selected": 9
+          },
+          "total_income": {
+            "mean": -1.1031192944026325,
+            "sd": 0.10631056393909612,
+            "times_selected": 10
+          },
+          "balance_to_income": {
+            "mean": -1.194633822803421,
+            "sd": 0.1660672224730711,
+            "times_selected": 10
+          },
+          "n_purchases": {
+            "mean": -0.8390057402653182,
+            "sd": 0.11698099774643862,
+            "times_selected": 8
+          },
+          "late_fee_sum": {
+            "mean": -1.2354929129759908,
+            "sd": 0.12240329943820595,
+            "times_selected": 10
+          },
+          "balance_std": {
+            "mean": -0.6413321464156256,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "share_clothing": {
+            "mean": -0.9828616582737626,
+            "sd": 0.08735241491238205,
+            "times_selected": 10
+          },
+          "balance_mean": {
+            "mean": -0.7040742030241394,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "share_food": {
+            "mean": -1.0240043071532925,
+            "sd": 0.10721966885997701,
+            "times_selected": 10
+          },
+          "total_spend": {
+            "mean": -0.7236474702922941,
+            "sd": 0.10224813124489175,
+            "times_selected": 4
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.1564112210512691,
+          "total_spend": 0.06100640602202832,
+          "mean_ticket": 0.04644792036491566,
+          "ticket_cv": 0.02664701973493402,
+          "share_retail": 0.01880275476069577,
+          "share_food": 0.06220416578778566,
+          "share_hotels_rest": 0.028752095053819565,
+          "share_travel": -0.02699379156996319,
+          "share_clothing": 0.0642469513624346,
+          "share_home": -0.0016226708849849426,
+          "share_phones_web": -0.02629359277553091,
+          "share_repairs": 0.01231826530891927,
+          "share_cash_advance": 0.057725756134554856,
+          "share_services": -0.0009442619550206824,
+          "weekday_concentration": 0.057522181212427276,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.10653038663191587,
+          "post_payday_share": 0.012297273517990323,
+          "n_bills": -0.03430472582958252,
+          "total_bills": 0.013926860184250342,
+          "bill_utilities_n": -0.010436185559100496,
+          "bill_telecom_n": 0.010187617326204818,
+          "bill_rent_n": 0.0003623602807225079,
+          "bill_mortgage_n": -0.005616279005176495,
+          "bill_consumer_loan_n": 0.035689493684673786,
+          "late_fee_n": 0.04859597409440307,
+          "late_fee_sum": 0.14747624762272965,
+          "total_income": 0.21692739979027692,
+          "mean_income_credit": 0.20206687103373536,
+          "n_income": 0.0,
+          "income_shock": -8.118488782976781e-05,
+          "cur_balance": 0.2623763159355129,
+          "balance_std": 0.11631747022990002,
+          "balance_mean": 0.06270373958273012,
+          "balance_to_income": 0.16191871064399976,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 167,
+        "bad_rate": 0.20875
+      },
+      "model3": {
+        "characteristics": [
+          "cur_balance",
+          "total_income",
+          "late_fee_n",
+          "post_payday_share",
+          "ticket_cv",
+          "balance_mean",
+          "balance_to_income",
+          "mean_ticket",
+          "n_purchases",
+          "share_cash_advance",
+          "late_fee_sum",
+          "share_phones_web"
+        ],
+        "gini_mean": 0.37777777777777777,
+        "gini_sd": 0.4433319409613334,
+        "gini_folds": [
+          0.1333333333333333,
+          1.0,
+          0.0
+        ],
+        "auc_oof": 0.7336956521739131,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -35.397907096599816,
+            "sd": 31.418069521240078,
+            "times_selected": 2
+          },
+          "balance_to_income": {
+            "mean": -5.36284788199825,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "n_purchases": {
+            "mean": -8.2968771120319,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "share_cash_advance": {
+            "mean": -4.646785718289285,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "share_phones_web": {
+            "mean": -58.75828732834221,
+            "sd": 71.81258033646172,
+            "times_selected": 3
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.81041575077815,
+          "total_spend": 0.531156063054208,
+          "mean_ticket": 0.8586945883173922,
+          "ticket_cv": 1.6137782596849122,
+          "share_retail": 0.17222602839423043,
+          "share_food": 0.5087887104105742,
+          "share_hotels_rest": 0.0960860569730715,
+          "share_travel": -0.23975525124898092,
+          "share_clothing": -0.5882881766799316,
+          "share_home": 0.13349626504971218,
+          "share_phones_web": 0.677584093307452,
+          "share_repairs": 0.6274401658094957,
+          "share_cash_advance": 0.7725792504982552,
+          "share_services": 0.0,
+          "weekday_concentration": 0.22934564379661354,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.3603471506316017,
+          "post_payday_share": 1.6812451163084194,
+          "n_bills": -0.4168850197587322,
+          "total_bills": -0.2635191637564177,
+          "bill_utilities_n": -0.15431674161108805,
+          "bill_telecom_n": 0.03953095734217632,
+          "bill_rent_n": -0.5125067474868088,
+          "bill_mortgage_n": 0.06545822981223914,
+          "bill_consumer_loan_n": -0.012428522074080363,
+          "late_fee_n": 1.6900406397949403,
+          "late_fee_sum": 0.7272758616624182,
+          "total_income": 1.746044615202493,
+          "mean_income_credit": -0.5920770440764705,
+          "n_income": 0.0,
+          "income_shock": 0.0,
+          "cur_balance": 2.368743492258375,
+          "balance_std": -0.008038996889799147,
+          "balance_mean": 1.5973653240406356,
+          "balance_to_income": 0.9394820369910296,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 167,
+        "n_bad": 163,
+        "bad_rate": 0.9760479041916168
+      },
+      "model4": {
+        "gini": 0.8835521624229203,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "total_spend",
+          "cur_balance",
+          "late_fee_n"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9559563536204242,
+        "auc_b": 0.9448593675512469,
+        "diff": 0.011096986069177306,
+        "se": 0.01963600255421543,
+        "z": 0.565134682506701,
+        "p": 0.5719821598717727
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.04265402843601896,
+        "bad_rate_revolver": 0.023952095808383235,
+        "n_transactor": 633,
+        "n_revolver": 167
+      }
+    },
+    "y_90dpd|12m|t10|behavioural|setC": {
+      "model1": {
+        "characteristics": [
+          "balance_mean",
+          "balance_to_income",
+          "n_purchases",
+          "total_spend",
+          "spend_per_active_month",
+          "cur_balance",
+          "weekday_concentration",
+          "post_payday_share",
+          "mean_ticket",
+          "mean_income_credit",
+          "ticket_cv",
+          "share_cash_advance"
+        ],
+        "gini_mean": 0.9126097852583849,
+        "gini_sd": 0.06319912626624336,
+        "gini_folds": [
+          0.9620253164556962,
+          0.8782894736842106,
+          0.9746835443037976,
+          0.831702544031311,
+          0.974025974025974,
+          0.9134199134199135,
+          0.9324324324324325,
+          0.9367088607594938,
+          0.950657894736842,
+          0.7721518987341773
+        ],
+        "auc_oof": 0.9462225764503545,
+        "coefficients": {
+          "balance_mean": {
+            "mean": -0.9598443198164531,
+            "sd": 0.11992823587387276,
+            "times_selected": 3
+          },
+          "n_purchases": {
+            "mean": -0.7929393464323226,
+            "sd": 0.08996400340965191,
+            "times_selected": 4
+          },
+          "total_spend": {
+            "mean": -0.9906291889081495,
+            "sd": 0.14203158903353935,
+            "times_selected": 2
+          },
+          "weekday_concentration": {
+            "mean": -0.502855227293188,
+            "sd": 0.06106569814468346,
+            "times_selected": 8
+          },
+          "post_payday_share": {
+            "mean": -0.5945507034391003,
+            "sd": 0.013166169536394738,
+            "times_selected": 3
+          },
+          "mean_ticket": {
+            "mean": -0.5634876436265108,
+            "sd": 0.08250995684814127,
+            "times_selected": 2
+          },
+          "mean_income_credit": {
+            "mean": -0.7581366925451096,
+            "sd": 0.13028300892687278,
+            "times_selected": 5
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 3.5354383685186273,
+          "total_spend": 3.4250708337791202,
+          "mean_ticket": 2.5706214962021274,
+          "ticket_cv": 2.019950492917324,
+          "share_retail": 1.0269654738368297,
+          "share_food": 1.4067805777178606,
+          "share_hotels_rest": 1.1311540694175575,
+          "share_travel": 1.3704767484368077,
+          "share_clothing": 0.9838180362298667,
+          "share_home": 1.18065718744778,
+          "share_phones_web": 0.7511472508832439,
+          "share_repairs": 0.7702359861779828,
+          "share_cash_advance": 1.7780376327385095,
+          "share_services": 1.3895703375003037,
+          "weekday_concentration": 2.884057755948455,
+          "active_months": 0.0,
+          "spend_per_active_month": 3.354822607914933,
+          "post_payday_share": 2.8779549082623586,
+          "n_bills": -0.10727017106672965,
+          "total_bills": 0.49109871949045636,
+          "bill_utilities_n": -0.011266140027358458,
+          "bill_telecom_n": -0.0643463652352681,
+          "bill_rent_n": 0.7301804867893954,
+          "bill_mortgage_n": 0.03367158827614988,
+          "bill_consumer_loan_n": -0.018287439335344262,
+          "total_income": 1.7362833258038215,
+          "mean_income_credit": 2.379585341378614,
+          "n_income": 0.0,
+          "income_shock": -0.010762706993708055,
+          "cur_balance": 3.354290156491273,
+          "balance_std": 1.1902527754301695,
+          "balance_mean": 3.897444549863785,
+          "balance_to_income": 3.5383015107470146
+        },
+        "n": 800,
+        "n_bad": 769,
+        "bad_rate": 0.96125
+      },
+      "model2": {
+        "characteristics": [
+          "cur_balance",
+          "mean_income_credit",
+          "balance_mean",
+          "total_income",
+          "balance_std",
+          "share_travel",
+          "spend_per_active_month",
+          "balance_to_income",
+          "n_purchases",
+          "share_food",
+          "weekday_concentration",
+          "post_payday_share"
+        ],
+        "gini_mean": 0.31549570079189093,
+        "gini_sd": 0.14981332970515346,
+        "gini_folds": [
+          0.2943589743589743,
+          0.2378181818181817,
+          0.4065598779557589,
+          0.21999999999999997,
+          0.3046875,
+          0.35589743589743583,
+          0.28205128205128194,
+          0.6932707355242567,
+          0.275897435897436,
+          0.0844155844155845
+        ],
+        "auc_oof": 0.6452781640510448,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -0.831883470281477,
+            "sd": 0.0907989355165075,
+            "times_selected": 8
+          },
+          "mean_income_credit": {
+            "mean": -1.3116767700388254,
+            "sd": 0.1548761506037285,
+            "times_selected": 10
+          },
+          "balance_mean": {
+            "mean": -0.7702617390502283,
+            "sd": 0.009328044053777407,
+            "times_selected": 2
+          },
+          "balance_std": {
+            "mean": -0.7024169785949494,
+            "sd": 0.08670774559141053,
+            "times_selected": 3
+          },
+          "share_travel": {
+            "mean": -0.9817886938759706,
+            "sd": 0.0651894308762981,
+            "times_selected": 10
+          },
+          "spend_per_active_month": {
+            "mean": -0.6596619195893191,
+            "sd": 0.14287498414689684,
+            "times_selected": 10
+          },
+          "balance_to_income": {
+            "mean": -1.0190008592270052,
+            "sd": 0.15267894508638294,
+            "times_selected": 9
+          },
+          "share_food": {
+            "mean": -0.9424455210684675,
+            "sd": 0.0650297051692014,
+            "times_selected": 10
+          },
+          "weekday_concentration": {
+            "mean": -0.7293281220359514,
+            "sd": 0.07496046413473374,
+            "times_selected": 9
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.08714731527234876,
+          "total_spend": 0.026184142063976873,
+          "mean_ticket": -0.03554974652344135,
+          "ticket_cv": 0.03340983128283142,
+          "share_retail": 0.026717021604741972,
+          "share_food": 0.07979501673817894,
+          "share_hotels_rest": -0.02157763291245663,
+          "share_travel": 0.10578851088805642,
+          "share_clothing": 0.038566579545077175,
+          "share_home": -0.05270314113119992,
+          "share_phones_web": 0.012803837876211605,
+          "share_repairs": 0.04080328226864716,
+          "share_cash_advance": -0.03181040171082387,
+          "share_services": 0.047249021144834175,
+          "weekday_concentration": 0.07903536914649031,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.10027910379841175,
+          "post_payday_share": 0.06143063124229722,
+          "n_bills": -0.003489791780649564,
+          "total_bills": -0.022911483062765838,
+          "bill_utilities_n": -0.006792879927658071,
+          "bill_telecom_n": -0.0074512689986979495,
+          "bill_rent_n": -0.003592387883188318,
+          "bill_mortgage_n": -0.0030245945557138367,
+          "bill_consumer_loan_n": 0.03888840681530542,
+          "total_income": 0.15434877732572305,
+          "mean_income_credit": 0.1643391346559608,
+          "n_income": 0.0,
+          "income_shock": 0.003039389793741994,
+          "cur_balance": 0.2150012958747899,
+          "balance_std": 0.12473823174243838,
+          "balance_mean": 0.15770772471673666,
+          "balance_to_income": 0.0960953421914644
+        },
+        "n": 800,
+        "n_bad": 167,
+        "bad_rate": 0.20875
+      },
+      "model3": {
+        "characteristics": [
+          "balance_mean",
+          "mean_income_credit",
+          "ticket_cv",
+          "cur_balance",
+          "total_spend",
+          "share_phones_web",
+          "balance_to_income",
+          "n_purchases",
+          "share_services",
+          "share_cash_advance",
+          "share_repairs",
+          "spend_per_active_month"
+        ],
+        "gini_mean": 0.7166666666666667,
+        "gini_sd": 0.4907477288111819,
+        "gini_folds": [
+          1.0,
+          1.0,
+          -0.1333333333333333,
+          1.0
+        ],
+        "auc_oof": 0.8064516129032259,
+        "coefficients": {
+          "mean_income_credit": {
+            "mean": -7.053349347794217,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "ticket_cv": {
+            "mean": -9.680766148811047,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "cur_balance": {
+            "mean": -8.37839154694088,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "share_phones_web": {
+            "mean": -7.446930404589297,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "balance_to_income": {
+            "mean": -55.71068219631354,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "n_purchases": {
+            "mean": -6.238551052881785,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "share_cash_advance": {
+            "mean": -17.625275489156703,
+            "sd": 12.131304621226489,
+            "times_selected": 2
+          },
+          "share_repairs": {
+            "mean": -70.27286510853457,
+            "sd": 0.0,
+            "times_selected": 1
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.9459959512711994,
+          "total_spend": 1.2514150338297612,
+          "mean_ticket": -0.14331620926208788,
+          "ticket_cv": 1.5337279939635693,
+          "share_retail": 0.34622856723859596,
+          "share_food": 0.31276248831558645,
+          "share_hotels_rest": -0.07169942800540323,
+          "share_travel": -0.49002707617617586,
+          "share_clothing": -0.519485183754935,
+          "share_home": 0.3733983824274425,
+          "share_phones_web": 1.1860216211007437,
+          "share_repairs": 0.46193174642181084,
+          "share_cash_advance": 0.6057271937527247,
+          "share_services": 0.6436027936419965,
+          "weekday_concentration": 0.42222169776638907,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.45944283583797524,
+          "post_payday_share": 0.2808931321450008,
+          "n_bills": -0.010990107370441177,
+          "total_bills": -0.1369166841485035,
+          "bill_utilities_n": -0.32259850516526567,
+          "bill_telecom_n": -0.4110038182755103,
+          "bill_rent_n": -0.13420670090727282,
+          "bill_mortgage_n": 0.02280627132547425,
+          "bill_consumer_loan_n": -0.09397755978212996,
+          "total_income": 0.061048042924682855,
+          "mean_income_credit": 1.7297637737451124,
+          "n_income": 0.0,
+          "income_shock": -0.006618028847044037,
+          "cur_balance": 1.352879740069613,
+          "balance_std": -0.2950514359279376,
+          "balance_mean": 2.6571815867012876,
+          "balance_to_income": 1.1425622687314454
+        },
+        "n": 167,
+        "n_bad": 163,
+        "bad_rate": 0.9760479041916168
+      },
+      "model4": {
+        "gini": 0.7376987289735308,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "ticket_cv",
+          "cur_balance",
+          "balance_to_income"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9462225764503552,
+        "auc_b": 0.8688493644867648,
+        "diff": 0.07737321196359048,
+        "se": 0.0359677345510544,
+        "z": 2.15118391328659,
+        "p": 0.031461686249494844
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.04265402843601896,
+        "bad_rate_revolver": 0.023952095808383235,
+        "n_transactor": 633,
+        "n_revolver": 167
+      }
+    },
+    "y_90dpd|12m|t10|assigned|setB": {
+      "model1": {
+        "characteristics": [
+          "late_fee_sum",
+          "balance_to_income",
+          "total_spend",
+          "balance_mean",
+          "spend_per_active_month",
+          "n_purchases",
+          "cur_balance",
+          "late_fee_n",
+          "post_payday_share",
+          "weekday_concentration",
+          "mean_ticket",
+          "total_income"
+        ],
+        "gini_mean": 0.8962837855899565,
+        "gini_sd": 0.149092413935728,
+        "gini_folds": [
+          0.9487179487179487,
+          0.9746835443037973,
+          0.945945945945946,
+          0.9615384615384617,
+          0.45569620253164556,
+          0.9496527777777777,
+          0.9466666666666668,
+          0.9807692307692308,
+          0.9004329004329006,
+          0.8987341772151898
+        ],
+        "auc_oof": 0.934015688577541,
+        "coefficients": {
+          "total_spend": {
+            "mean": -0.7317257553816461,
+            "sd": 0.07880124067623327,
+            "times_selected": 5
+          },
+          "balance_mean": {
+            "mean": -0.8866767404494769,
+            "sd": 0.167128850773705,
+            "times_selected": 4
+          },
+          "spend_per_active_month": {
+            "mean": -0.7343648885121873,
+            "sd": 0.08187812386767095,
+            "times_selected": 3
+          },
+          "late_fee_n": {
+            "mean": -1.0214335285553608,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "post_payday_share": {
+            "mean": -0.5239845054752653,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "weekday_concentration": {
+            "mean": -0.49649548225909224,
+            "sd": 0.08333521220337263,
+            "times_selected": 8
+          },
+          "total_income": {
+            "mean": -0.6940226699256109,
+            "sd": 0.05170483951998041,
+            "times_selected": 6
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 3.4400272299098598,
+          "total_spend": 3.758021669035317,
+          "mean_ticket": 2.580334849720076,
+          "ticket_cv": 1.5965551865820728,
+          "share_retail": 0.863672876202505,
+          "share_food": 1.2015832303513194,
+          "share_hotels_rest": 0.973314777993666,
+          "share_travel": 1.4749615746030926,
+          "share_clothing": 1.0466274074344284,
+          "share_home": 1.1062344116391145,
+          "share_phones_web": 0.7166120391685409,
+          "share_repairs": 0.8431886430456732,
+          "share_cash_advance": 1.5610669968025062,
+          "share_services": 1.3818768794790137,
+          "weekday_concentration": 2.8015129389454967,
+          "active_months": 0.0,
+          "spend_per_active_month": 3.4955448670791474,
+          "post_payday_share": 3.0008978227723517,
+          "n_bills": -0.0327801543924053,
+          "total_bills": 0.6563314051637916,
+          "bill_utilities_n": -0.01079798844225211,
+          "bill_telecom_n": -0.003785911013190193,
+          "bill_rent_n": 0.74315558700576,
+          "bill_mortgage_n": -0.006456900264383766,
+          "bill_consumer_loan_n": -0.003499956002109051,
+          "late_fee_n": 3.288667114576297,
+          "late_fee_sum": 3.8210595221925523,
+          "total_income": 2.1888812537087228,
+          "mean_income_credit": 1.7884183494012573,
+          "n_income": 0.0,
+          "income_shock": 0.016526608760243672,
+          "cur_balance": 3.4141070867434653,
+          "balance_std": 0.7215208666700679,
+          "balance_mean": 3.6055862476746894,
+          "balance_to_income": 3.769191974135399,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 769,
+        "bad_rate": 0.96125
+      },
+      "model2": {
+        "characteristics": [
+          "mean_income_credit",
+          "balance_mean",
+          "late_fee_sum",
+          "late_fee_n",
+          "balance_std",
+          "cur_balance",
+          "total_income",
+          "share_clothing",
+          "spend_per_active_month",
+          "n_purchases",
+          "balance_to_income",
+          "share_travel"
+        ],
+        "gini_mean": 0.37800354695303595,
+        "gini_sd": 0.14627774590355488,
+        "gini_folds": [
+          0.4205004035512512,
+          0.4166666666666665,
+          0.4950980392156863,
+          0.5887445887445886,
+          0.4140625,
+          0.24913892078071176,
+          0.26802507836990586,
+          0.168831168831169,
+          0.5779645191409897,
+          0.18100358422939067
+        ],
+        "auc_oof": 0.6910349916281182,
+        "coefficients": {
+          "mean_income_credit": {
+            "mean": -1.0822165828964756,
+            "sd": 0.12336249785747726,
+            "times_selected": 10
+          },
+          "late_fee_sum": {
+            "mean": -1.2052417849828656,
+            "sd": 0.08779459659823798,
+            "times_selected": 8
+          },
+          "late_fee_n": {
+            "mean": -1.3839570221325974,
+            "sd": 0.12641424091073317,
+            "times_selected": 2
+          },
+          "cur_balance": {
+            "mean": -0.8176418578030791,
+            "sd": 0.10461944994186298,
+            "times_selected": 10
+          },
+          "share_clothing": {
+            "mean": -0.9352059504170833,
+            "sd": 0.08898573177520736,
+            "times_selected": 10
+          },
+          "spend_per_active_month": {
+            "mean": -0.8481268736150381,
+            "sd": 0.11484443893125898,
+            "times_selected": 10
+          },
+          "balance_to_income": {
+            "mean": -1.3672291144774884,
+            "sd": 0.1437568877200253,
+            "times_selected": 10
+          },
+          "share_travel": {
+            "mean": -1.0440145924934074,
+            "sd": 0.11451623750699766,
+            "times_selected": 10
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.0954861157403741,
+          "total_spend": 0.0544156995234265,
+          "mean_ticket": -0.01105211409144996,
+          "ticket_cv": 0.052824376237475934,
+          "share_retail": 0.008731365162485214,
+          "share_food": 0.024998095635819027,
+          "share_hotels_rest": -0.044618153937747,
+          "share_travel": 0.0839041271431209,
+          "share_clothing": 0.11361974454737794,
+          "share_home": -0.1673159171237742,
+          "share_phones_web": 0.0032172884184167895,
+          "share_repairs": -0.004374774836882854,
+          "share_cash_advance": -0.049036002579018134,
+          "share_services": 0.02183248643516812,
+          "weekday_concentration": 0.06048900553284793,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.10865698347034584,
+          "post_payday_share": -0.01679692607843812,
+          "n_bills": -0.005330550649013662,
+          "total_bills": -0.002502476789869583,
+          "bill_utilities_n": -0.009636885872096834,
+          "bill_telecom_n": -0.0014875109191475194,
+          "bill_rent_n": -0.0018793842231362994,
+          "bill_mortgage_n": -0.0007739506002906,
+          "bill_consumer_loan_n": 0.03606979036563414,
+          "late_fee_n": 0.13121083775383444,
+          "late_fee_sum": 0.1532861554891493,
+          "total_income": 0.12750005768654737,
+          "mean_income_credit": 0.1784184171412332,
+          "n_income": 0.0,
+          "income_shock": -0.013308355477428924,
+          "cur_balance": 0.13008356731120724,
+          "balance_std": 0.13024956413156188,
+          "balance_mean": 0.17674717508652327,
+          "balance_to_income": 0.08602651459587896,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 167,
+        "bad_rate": 0.20875
+      },
+      "model3": {
+        "characteristics": [
+          "cur_balance",
+          "share_phones_web",
+          "mean_ticket",
+          "ticket_cv",
+          "late_fee_n",
+          "weekday_concentration",
+          "post_payday_share",
+          "total_income",
+          "late_fee_sum",
+          "mean_income_credit",
+          "total_spend",
+          "share_home"
+        ],
+        "gini_mean": 0.540625,
+        "gini_sd": 0.5399039829116737,
+        "gini_folds": [
+          0.9375,
+          -0.375,
+          0.9333333333333333,
+          0.6666666666666667
+        ],
+        "auc_oof": 0.8568548387096775,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -8.79099497608729,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "share_phones_web": {
+            "mean": -10.256335142696363,
+            "sd": 3.1607536962354192,
+            "times_selected": 2
+          },
+          "ticket_cv": {
+            "mean": -7.386093393461902,
+            "sd": 2.256779697354481,
+            "times_selected": 2
+          },
+          "total_income": {
+            "mean": -7.985628129560869,
+            "sd": 1.0302384781237826,
+            "times_selected": 2
+          },
+          "share_home": {
+            "mean": -9.108590035215485,
+            "sd": 0.0,
+            "times_selected": 1
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.24048194535196696,
+          "total_spend": 0.9102092346566771,
+          "mean_ticket": 1.6338954219574373,
+          "ticket_cv": 1.446902592486482,
+          "share_retail": 0.23019667912182887,
+          "share_food": -0.5135625106598516,
+          "share_hotels_rest": 0.6590528300508014,
+          "share_travel": -0.5589377039076571,
+          "share_clothing": -0.09087730918872372,
+          "share_home": 0.7774148943031419,
+          "share_phones_web": 2.132115897779398,
+          "share_repairs": 0.3388232468242974,
+          "share_cash_advance": 0.10019268497201067,
+          "share_services": 0.2870135913838032,
+          "weekday_concentration": 1.3247392560030007,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.6022177397747511,
+          "post_payday_share": 1.2881053515561567,
+          "n_bills": -0.5194421461442977,
+          "total_bills": -0.04822836734770347,
+          "bill_utilities_n": -0.17519834167986548,
+          "bill_telecom_n": -0.3313609310979445,
+          "bill_rent_n": -0.42038258588598987,
+          "bill_mortgage_n": 0.03817558679735573,
+          "bill_consumer_loan_n": -0.012897928280517557,
+          "late_fee_n": 1.342793468814994,
+          "late_fee_sum": 1.0451531967090721,
+          "total_income": 1.2558612492702677,
+          "mean_income_credit": 1.011456996183981,
+          "n_income": 0.0,
+          "income_shock": -0.015418766468035739,
+          "cur_balance": 2.235246853842603,
+          "balance_std": -0.2942576134432656,
+          "balance_mean": 0.6364980309385321,
+          "balance_to_income": -0.0049057268028767954,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 167,
+        "n_bad": 163,
+        "bad_rate": 0.9760479041916168
+      },
+      "model4": {
+        "gini": 0.8559922815554342,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "total_spend",
+          "cur_balance",
+          "total_income",
+          "mean_ticket"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9340156885775411,
+        "auc_b": 0.9279961407777181,
+        "diff": 0.006019547799823055,
+        "se": 0.040242863798541806,
+        "z": 0.1495805027683237,
+        "p": 0.8810955916375128
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.04265402843601896,
+        "bad_rate_revolver": 0.023952095808383235,
+        "n_transactor": 633,
+        "n_revolver": 167
+      }
+    },
+    "y_90dpd|12m|t10|assigned|setC": {
+      "model1": {
+        "characteristics": [
+          "balance_mean",
+          "total_spend",
+          "n_purchases",
+          "spend_per_active_month",
+          "balance_to_income",
+          "cur_balance",
+          "weekday_concentration",
+          "post_payday_share",
+          "mean_ticket",
+          "total_income",
+          "mean_income_credit",
+          "share_cash_advance"
+        ],
+        "gini_mean": 0.9086862241161745,
+        "gini_sd": 0.0762348761117931,
+        "gini_folds": [
+          0.9671052631578947,
+          0.7721518987341771,
+          0.924342105263158,
+          0.9746835443037976,
+          1.0,
+          0.9726027397260275,
+          0.7884615384615383,
+          0.948051948051948,
+          0.8693333333333333,
+          0.8701298701298703
+        ],
+        "auc_oof": 0.9580729057426906,
+        "coefficients": {
+          "balance_mean": {
+            "mean": -1.0328162435649064,
+            "sd": 0.15921361288064723,
+            "times_selected": 4
+          },
+          "total_spend": {
+            "mean": -0.8560336933969754,
+            "sd": 0.04836817005199689,
+            "times_selected": 3
+          },
+          "n_purchases": {
+            "mean": -0.8589093644244538,
+            "sd": 0.22402654806743524,
+            "times_selected": 3
+          },
+          "weekday_concentration": {
+            "mean": -0.5068553615129848,
+            "sd": 0.06480753745440376,
+            "times_selected": 8
+          },
+          "post_payday_share": {
+            "mean": -0.5686107816320255,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "mean_ticket": {
+            "mean": -0.4179873599336124,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "total_income": {
+            "mean": -0.7261899222962077,
+            "sd": 0.17029033389535606,
+            "times_selected": 6
+          },
+          "share_cash_advance": {
+            "mean": -0.4798465619435688,
+            "sd": 0.0,
+            "times_selected": 1
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 3.6789961014171686,
+          "total_spend": 3.8012420038231003,
+          "mean_ticket": 2.8235204126364932,
+          "ticket_cv": 1.7037410332522192,
+          "share_retail": 1.0319162362237655,
+          "share_food": 0.9335511026476363,
+          "share_hotels_rest": 1.091316834174381,
+          "share_travel": 1.3949760256980683,
+          "share_clothing": 1.0390346218926623,
+          "share_home": 1.1485584529539914,
+          "share_phones_web": 0.8734955927137572,
+          "share_repairs": 0.7267298209670398,
+          "share_cash_advance": 1.7167142157528386,
+          "share_services": 1.2831684339378517,
+          "weekday_concentration": 2.976907916037602,
+          "active_months": 0.0,
+          "spend_per_active_month": 3.530758841414097,
+          "post_payday_share": 2.8534481603661037,
+          "n_bills": -0.02723727993247494,
+          "total_bills": 0.6710381598763906,
+          "bill_utilities_n": -0.003224080554510572,
+          "bill_telecom_n": -0.010207268342686525,
+          "bill_rent_n": 0.7527311251982409,
+          "bill_mortgage_n": 0.05462336048971491,
+          "bill_consumer_loan_n": -0.05163339477120753,
+          "total_income": 2.227159403952495,
+          "mean_income_credit": 1.8156800746653667,
+          "n_income": 0.0,
+          "income_shock": 0.0016039125734760816,
+          "cur_balance": 3.4473339731421717,
+          "balance_std": 0.9237407816450844,
+          "balance_mean": 3.8592744885451404,
+          "balance_to_income": 3.5247174384490556
+        },
+        "n": 800,
+        "n_bad": 769,
+        "bad_rate": 0.96125
+      },
+      "model2": {
+        "characteristics": [
+          "cur_balance",
+          "mean_income_credit",
+          "share_food",
+          "n_purchases",
+          "balance_to_income",
+          "balance_mean",
+          "total_income",
+          "balance_std",
+          "spend_per_active_month",
+          "share_clothing",
+          "total_spend",
+          "ticket_cv"
+        ],
+        "gini_mean": 0.2613525655024077,
+        "gini_sd": 0.17663218571672218,
+        "gini_folds": [
+          0.4769975786924938,
+          0.18205349439171714,
+          0.2903225806451615,
+          -0.10957722174288176,
+          0.27489177489177474,
+          0.06256410256410261,
+          0.372859025032938,
+          0.40717948717948715,
+          0.4667817083692838,
+          0.189453125
+        ],
+        "auc_oof": 0.6269451618090833,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -0.8200037522519847,
+            "sd": 0.14275993097338957,
+            "times_selected": 9
+          },
+          "mean_income_credit": {
+            "mean": -1.3294291725097125,
+            "sd": 0.13548792787400663,
+            "times_selected": 10
+          },
+          "share_food": {
+            "mean": -0.9427596343670901,
+            "sd": 0.0723238905474406,
+            "times_selected": 10
+          },
+          "n_purchases": {
+            "mean": -0.7787565624323574,
+            "sd": 0.16331784125561166,
+            "times_selected": 7
+          },
+          "balance_to_income": {
+            "mean": -0.9154604555732175,
+            "sd": 0.1169528389861417,
+            "times_selected": 10
+          },
+          "balance_mean": {
+            "mean": -0.6393575213089338,
+            "sd": 0.2222472086956279,
+            "times_selected": 3
+          },
+          "share_clothing": {
+            "mean": -1.0829986296869816,
+            "sd": 0.08455785602537916,
+            "times_selected": 10
+          },
+          "total_spend": {
+            "mean": -0.8322385457286078,
+            "sd": 0.10829816197076114,
+            "times_selected": 3
+          },
+          "ticket_cv": {
+            "mean": -0.9164462834283545,
+            "sd": 0.08450481405585465,
+            "times_selected": 10
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.13401016622406225,
+          "total_spend": 0.08308632627776835,
+          "mean_ticket": 0.010774175105874379,
+          "ticket_cv": 0.07436813537490883,
+          "share_retail": 0.03957046169875629,
+          "share_food": 0.14373900545218393,
+          "share_hotels_rest": -0.008219576064878577,
+          "share_travel": 0.0691058222387306,
+          "share_clothing": 0.08607969607288211,
+          "share_home": 0.0432833317638864,
+          "share_phones_web": -0.009083512176823363,
+          "share_repairs": 0.03487631715077533,
+          "share_cash_advance": -0.09346980265935116,
+          "share_services": 0.01959991598953196,
+          "weekday_concentration": 0.05895360163358623,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.0904189608459904,
+          "post_payday_share": -0.0011882979640413828,
+          "n_bills": -0.0019173674549770418,
+          "total_bills": 0.007261737724449584,
+          "bill_utilities_n": -0.0054135124075107635,
+          "bill_telecom_n": -0.0023315704548856645,
+          "bill_rent_n": -0.0012270134970170001,
+          "bill_mortgage_n": -0.006111121319533765,
+          "bill_consumer_loan_n": 0.043125908747715797,
+          "total_income": 0.12276891987131305,
+          "mean_income_credit": 0.1951077824856733,
+          "n_income": 0.0,
+          "income_shock": 0.006045748328302321,
+          "cur_balance": 0.24434341569444912,
+          "balance_std": 0.11952270441229801,
+          "balance_mean": 0.12337113802519023,
+          "balance_to_income": 0.1301927318311386
+        },
+        "n": 800,
+        "n_bad": 167,
+        "bad_rate": 0.20875
+      },
+      "model3": {
+        "characteristics": [
+          "balance_mean",
+          "cur_balance",
+          "total_income",
+          "share_cash_advance",
+          "post_payday_share",
+          "share_food",
+          "share_phones_web",
+          "share_home",
+          "mean_income_credit",
+          "balance_to_income",
+          "weekday_concentration",
+          "share_services"
+        ],
+        "gini_mean": -0.375,
+        "gini_sd": 0.0,
+        "gini_folds": [
+          -0.375
+        ],
+        "auc_oof": 0.3125,
+        "coefficients": {
+          "share_cash_advance": {
+            "mean": -4.456025919860054,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "post_payday_share": {
+            "mean": -6.807915551502651,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "share_phones_web": {
+            "mean": -8.030999582988201,
+            "sd": 0.0,
+            "times_selected": 1
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.8473317871055165,
+          "total_spend": 0.9773451515375048,
+          "mean_ticket": 0.19123097915231171,
+          "ticket_cv": -0.10084293368369046,
+          "share_retail": -0.21243921970504773,
+          "share_food": 1.446211721816435,
+          "share_hotels_rest": -0.19242934933922007,
+          "share_travel": -0.8166315151384769,
+          "share_clothing": -0.2643992380897701,
+          "share_home": 1.3208525778144167,
+          "share_phones_web": 1.3574553963515177,
+          "share_repairs": 0.4599581517383879,
+          "share_cash_advance": 1.5670854487815549,
+          "share_services": 1.0034240993917685,
+          "weekday_concentration": 1.01159252682502,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.9703698230883335,
+          "post_payday_share": 1.456180865869651,
+          "n_bills": -0.6495463272738544,
+          "total_bills": -0.7255108350541484,
+          "bill_utilities_n": 0.0054626413097192145,
+          "bill_telecom_n": -0.45945422708155176,
+          "bill_rent_n": -0.006758285977881996,
+          "bill_mortgage_n": -0.03318824666025001,
+          "bill_consumer_loan_n": -0.07534297233758949,
+          "total_income": 1.577049213492519,
+          "mean_income_credit": 1.2675545153601318,
+          "n_income": 0.0,
+          "income_shock": 0.0,
+          "cur_balance": 1.6733775578119743,
+          "balance_std": -0.3202499088926252,
+          "balance_mean": 1.7512793659930006,
+          "balance_to_income": 1.2651516187664897
+        },
+        "n": 167,
+        "n_bad": 163,
+        "bad_rate": 0.9760479041916168
+      },
+      "model4": {
+        "gini": 0.739292755568606,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "ticket_cv",
+          "cur_balance",
+          "balance_to_income"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9580729057426904,
+        "auc_b": 0.8696463777843028,
+        "diff": 0.08842652795838768,
+        "se": 0.03543898045107917,
+        "z": 2.495176972725099,
+        "p": 0.01258943238255908
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.04265402843601896,
+        "bad_rate_revolver": 0.023952095808383235,
+        "n_transactor": 633,
+        "n_revolver": 167
+      }
+    },
+    "y_latefee|3m|t19|behavioural|setB": {
+      "model1": {
+        "characteristics": [
+          "late_fee_n",
+          "late_fee_sum",
+          "cur_balance",
+          "balance_mean",
+          "n_purchases",
+          "balance_to_income",
+          "spend_per_active_month",
+          "post_payday_share",
+          "total_spend",
+          "mean_income_credit",
+          "total_income",
+          "mean_ticket"
+        ],
+        "gini_mean": 0.9823051966274734,
+        "gini_sd": 0.014286964056981957,
+        "gini_folds": [
+          0.9600313479623823,
+          0.9881201956673653,
+          1.0,
+          0.9651282051282053,
+          0.9855072463768115,
+          0.9921875,
+          0.9609375,
+          0.984126984126984,
+          1.0,
+          0.9870129870129871
+        ],
+        "auc_oof": 0.9893421795595709,
+        "coefficients": {
+          "late_fee_n": {
+            "mean": -0.533437757617113,
+            "sd": 0.20548170297552232,
+            "times_selected": 7
+          },
+          "late_fee_sum": {
+            "mean": -0.5961546619851206,
+            "sd": 0.11215084375076621,
+            "times_selected": 7
+          },
+          "cur_balance": {
+            "mean": -0.5398975921458341,
+            "sd": 0.19850491004519183,
+            "times_selected": 10
+          },
+          "balance_mean": {
+            "mean": 0.6680904917181086,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "post_payday_share": {
+            "mean": -0.3260867163636599,
+            "sd": 0.00988459957991289,
+            "times_selected": 2
+          },
+          "mean_income_credit": {
+            "mean": -0.3097299000052774,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "mean_ticket": {
+            "mean": -0.5035416445879577,
+            "sd": 0.057799738031988485,
+            "times_selected": 8
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 5.174740940624317,
+          "total_spend": 4.603213426151032,
+          "mean_ticket": 2.6255336193067187,
+          "ticket_cv": 1.3729387662044732,
+          "share_retail": 0.3925160735349389,
+          "share_food": 0.41830322876580406,
+          "share_hotels_rest": 0.31868816193277794,
+          "share_travel": 0.6119946128542225,
+          "share_clothing": 0.30935366440593925,
+          "share_home": 0.6381866691580611,
+          "share_phones_web": 0.34767560118617596,
+          "share_repairs": 0.5091528976070661,
+          "share_cash_advance": 0.8023046877845684,
+          "share_services": 0.5092323017847389,
+          "weekday_concentration": 1.4247397393950845,
+          "active_months": 0.0,
+          "spend_per_active_month": 4.961510296611984,
+          "post_payday_share": 4.832066598275491,
+          "n_bills": 0.2741380968216788,
+          "total_bills": 0.480164908407373,
+          "bill_utilities_n": -0.00012843487491728367,
+          "bill_telecom_n": -0.0007869975924655272,
+          "bill_rent_n": 0.31061317241605113,
+          "bill_mortgage_n": 0.07606182793441546,
+          "bill_consumer_loan_n": 0.09389799793659653,
+          "late_fee_n": 6.478264448345746,
+          "late_fee_sum": 6.262365671111084,
+          "total_income": 3.416584682459968,
+          "mean_income_credit": 3.5507184603414745,
+          "n_income": 0.0,
+          "income_shock": -0.030149478371887493,
+          "cur_balance": 5.72684059992522,
+          "balance_std": 1.6998868944977705,
+          "balance_mean": 5.332240366053433,
+          "balance_to_income": 4.963010646771901,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 616,
+        "bad_rate": 0.77
+      },
+      "model2": {
+        "characteristics": [
+          "cur_balance",
+          "balance_to_income",
+          "balance_mean",
+          "spend_per_active_month",
+          "balance_std",
+          "n_purchases",
+          "total_spend",
+          "ticket_cv",
+          "post_payday_share",
+          "share_repairs",
+          "mean_ticket",
+          "total_income"
+        ],
+        "gini_mean": 0.5072950819429336,
+        "gini_sd": 0.11140496733443742,
+        "gini_folds": [
+          0.4542857142857144,
+          0.4730392156862744,
+          0.4703557312252964,
+          0.4011741682974561,
+          0.553921568627451,
+          0.5485714285714285,
+          0.5871428571428572,
+          0.712779973649539,
+          0.5855263157894737,
+          0.2861538461538462
+        ],
+        "auc_oof": 0.7453438395415473,
+        "coefficients": {
+          "cur_balance": {
+            "mean": -0.6451494935958876,
+            "sd": 0.058896469827697,
+            "times_selected": 10
+          },
+          "spend_per_active_month": {
+            "mean": -0.6448765947679203,
+            "sd": 0.08035655722218787,
+            "times_selected": 10
+          },
+          "balance_std": {
+            "mean": -0.5006281680797859,
+            "sd": 0.06553032308201193,
+            "times_selected": 10
+          },
+          "total_spend": {
+            "mean": -0.4400760353273234,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "ticket_cv": {
+            "mean": -0.919403333345131,
+            "sd": 0.04465568349427847,
+            "times_selected": 10
+          },
+          "share_repairs": {
+            "mean": -0.8342803441331832,
+            "sd": 0.08097360486956734,
+            "times_selected": 8
+          },
+          "total_income": {
+            "mean": -0.7228024596169449,
+            "sd": 0.12789001306483996,
+            "times_selected": 5
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.48189966272625007,
+          "total_spend": 0.30157709422548823,
+          "mean_ticket": 0.09654024060351485,
+          "ticket_cv": 0.23777197167730552,
+          "share_retail": 0.01973922058628149,
+          "share_food": -0.059357512779227066,
+          "share_hotels_rest": -0.13521013389441305,
+          "share_travel": 0.03906762297589023,
+          "share_clothing": -0.06563784911704418,
+          "share_home": -0.15460334559144373,
+          "share_phones_web": -0.029955969031433334,
+          "share_repairs": 0.20547555937943834,
+          "share_cash_advance": -0.12342516017276725,
+          "share_services": 0.044462801532742666,
+          "weekday_concentration": -0.002235112236716904,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.5911176555370883,
+          "post_payday_share": 0.22742992332821277,
+          "n_bills": -0.0331787324379706,
+          "total_bills": 0.016189809419233207,
+          "bill_utilities_n": -0.003190516295758613,
+          "bill_telecom_n": 0.00912823956774448,
+          "bill_rent_n": 0.0036697271538652827,
+          "bill_mortgage_n": -0.006629651538356006,
+          "bill_consumer_loan_n": -0.0073142486817556725,
+          "late_fee_n": 0.0026659468311157897,
+          "late_fee_sum": 0.031952565056468006,
+          "total_income": 0.05255296855645762,
+          "mean_income_credit": 0.016823634229614512,
+          "n_income": 0.0,
+          "income_shock": -0.009183531921040012,
+          "cur_balance": 0.84923056234144,
+          "balance_std": 0.5480507450863266,
+          "balance_mean": 0.6128652810395738,
+          "balance_to_income": 0.7915452816514499,
+          "max_dpd": -0.0005236926038918407,
+          "dpd_bucket": -0.0016086399774129059,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 102,
+        "bad_rate": 0.1275
+      },
+      "model3": {
+        "characteristics": [
+          "late_fee_sum",
+          "late_fee_n",
+          "balance_mean",
+          "total_spend",
+          "cur_balance",
+          "post_payday_share",
+          "spend_per_active_month",
+          "n_purchases",
+          "total_income",
+          "mean_income_credit",
+          "weekday_concentration",
+          "balance_to_income"
+        ],
+        "gini_mean": 0.9571428571428571,
+        "gini_sd": 0.08637312927246213,
+        "gini_folds": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.7619047619047619,
+          0.8095238095238098,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "auc_oof": 0.9332386363636364,
+        "coefficients": {
+          "late_fee_sum": {
+            "mean": -2.2224289310944245,
+            "sd": 0.0994715639965623,
+            "times_selected": 4
+          },
+          "late_fee_n": {
+            "mean": -28.22049495634454,
+            "sd": 54.07654120591992,
+            "times_selected": 6
+          },
+          "post_payday_share": {
+            "mean": -36.0932932834276,
+            "sd": 57.588417030289605,
+            "times_selected": 5
+          },
+          "spend_per_active_month": {
+            "mean": -1.5172405937473463,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "balance_to_income": {
+            "mean": 65.60980556340078,
+            "sd": 58.061792916250994,
+            "times_selected": 2
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 2.644079050007216,
+          "total_spend": 3.2784331663008968,
+          "mean_ticket": 1.4190213895820813,
+          "ticket_cv": -0.06457201280338422,
+          "share_retail": 0.20543663745899218,
+          "share_food": 0.4594005809158396,
+          "share_hotels_rest": 0.12827723584465506,
+          "share_travel": 1.1809763802466362,
+          "share_clothing": -0.3845490418749095,
+          "share_home": 0.38695974481180373,
+          "share_phones_web": -0.013305922593439198,
+          "share_repairs": 0.05824591414299462,
+          "share_cash_advance": 0.12022699521382874,
+          "share_services": 0.314444254171559,
+          "weekday_concentration": 1.614500430079145,
+          "active_months": 0.0,
+          "spend_per_active_month": 2.7998410692866047,
+          "post_payday_share": 2.8709451403292623,
+          "n_bills": -0.2505060796859816,
+          "total_bills": 0.18459816766356227,
+          "bill_utilities_n": 0.17161751317287674,
+          "bill_telecom_n": -0.08524607406958537,
+          "bill_rent_n": -0.04823638244309155,
+          "bill_mortgage_n": -0.016832326551011613,
+          "bill_consumer_loan_n": 0.10482066946851773,
+          "late_fee_n": 4.921362966269765,
+          "late_fee_sum": 5.414179137528663,
+          "total_income": 2.1802387325065427,
+          "mean_income_credit": 1.8598522249350862,
+          "n_income": 0.0,
+          "income_shock": 0.014650372588695358,
+          "cur_balance": 3.228320937971854,
+          "balance_std": 1.3261160928072355,
+          "balance_mean": 3.360561644256225,
+          "balance_to_income": 1.5722447410270115,
+          "max_dpd": 0.08799247713938962,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.08799247713938962,
+          "overdue_eur": 0.0,
+          "overdue_to_income": -0.038633251585542545
+        },
+        "n": 102,
+        "n_bad": 80,
+        "bad_rate": 0.7843137254901961
+      },
+      "model4": {
+        "gini": 0.9541925465838508,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "late_fee_n",
+          "post_payday_share"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9893421795595707,
+        "auc_b": 0.9770962732919254,
+        "diff": 0.012245906267645323,
+        "se": 0.004894266848708541,
+        "z": 2.5020920693927167,
+        "p": 0.012346181321634515
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.23209169054441262,
+        "bad_rate_revolver": 0.21568627450980393,
+        "n_transactor": 698,
+        "n_revolver": 102
+      }
+    },
+    "y_latefee|3m|t19|assigned|setB": {
+      "model1": {
+        "characteristics": [
+          "late_fee_n",
+          "late_fee_sum",
+          "cur_balance",
+          "balance_mean",
+          "n_purchases",
+          "balance_to_income",
+          "spend_per_active_month",
+          "post_payday_share",
+          "total_spend",
+          "mean_income_credit",
+          "total_income",
+          "mean_ticket"
+        ],
+        "gini_mean": 0.9823051966274734,
+        "gini_sd": 0.014286964056981957,
+        "gini_folds": [
+          0.9600313479623823,
+          0.9881201956673653,
+          1.0,
+          0.9651282051282053,
+          0.9855072463768115,
+          0.9921875,
+          0.9609375,
+          0.984126984126984,
+          1.0,
+          0.9870129870129871
+        ],
+        "auc_oof": 0.9893421795595709,
+        "coefficients": {
+          "late_fee_n": {
+            "mean": -0.533437757617113,
+            "sd": 0.20548170297552232,
+            "times_selected": 7
+          },
+          "late_fee_sum": {
+            "mean": -0.5961546619851206,
+            "sd": 0.11215084375076621,
+            "times_selected": 7
+          },
+          "cur_balance": {
+            "mean": -0.5398975921458341,
+            "sd": 0.19850491004519183,
+            "times_selected": 10
+          },
+          "balance_mean": {
+            "mean": 0.6680904917181086,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "post_payday_share": {
+            "mean": -0.3260867163636599,
+            "sd": 0.00988459957991289,
+            "times_selected": 2
+          },
+          "mean_income_credit": {
+            "mean": -0.3097299000052774,
+            "sd": 0.0,
+            "times_selected": 1
+          },
+          "mean_ticket": {
+            "mean": -0.5035416445879577,
+            "sd": 0.057799738031988485,
+            "times_selected": 8
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 5.174740940624317,
+          "total_spend": 4.603213426151032,
+          "mean_ticket": 2.6255336193067187,
+          "ticket_cv": 1.3729387662044732,
+          "share_retail": 0.3925160735349389,
+          "share_food": 0.41830322876580406,
+          "share_hotels_rest": 0.31868816193277794,
+          "share_travel": 0.6119946128542225,
+          "share_clothing": 0.30935366440593925,
+          "share_home": 0.6381866691580611,
+          "share_phones_web": 0.34767560118617596,
+          "share_repairs": 0.5091528976070661,
+          "share_cash_advance": 0.8023046877845684,
+          "share_services": 0.5092323017847389,
+          "weekday_concentration": 1.4247397393950845,
+          "active_months": 0.0,
+          "spend_per_active_month": 4.961510296611984,
+          "post_payday_share": 4.832066598275491,
+          "n_bills": 0.2741380968216788,
+          "total_bills": 0.480164908407373,
+          "bill_utilities_n": -0.00012843487491728367,
+          "bill_telecom_n": -0.0007869975924655272,
+          "bill_rent_n": 0.31061317241605113,
+          "bill_mortgage_n": 0.07606182793441546,
+          "bill_consumer_loan_n": 0.09389799793659653,
+          "late_fee_n": 6.478264448345746,
+          "late_fee_sum": 6.262365671111084,
+          "total_income": 3.416584682459968,
+          "mean_income_credit": 3.5507184603414745,
+          "n_income": 0.0,
+          "income_shock": -0.030149478371887493,
+          "cur_balance": 5.72684059992522,
+          "balance_std": 1.6998868944977705,
+          "balance_mean": 5.332240366053433,
+          "balance_to_income": 4.963010646771901,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 616,
+        "bad_rate": 0.77
+      },
+      "model2": {
+        "characteristics": [
+          "total_income",
+          "spend_per_active_month",
+          "n_purchases",
+          "mean_income_credit",
+          "balance_to_income",
+          "cur_balance",
+          "share_retail",
+          "total_spend",
+          "late_fee_sum",
+          "balance_std",
+          "late_fee_n",
+          "share_repairs"
+        ],
+        "gini_mean": 0.39153297018963956,
+        "gini_sd": 0.14103981946460853,
+        "gini_folds": [
+          0.4748717948717949,
+          0.33091202582727997,
+          0.2493528904227782,
+          0.5836627140974968,
+          0.4961173425366696,
+          0.4659498207885304,
+          0.42652329749103934,
+          0.53515625,
+          0.1646903820816863,
+          0.18809318377911977
+        ],
+        "auc_oof": 0.6905147051867828,
+        "coefficients": {
+          "total_income": {
+            "mean": -1.1183322045830524,
+            "sd": 0.11357922596064478,
+            "times_selected": 10
+          },
+          "spend_per_active_month": {
+            "mean": -0.8877655731225434,
+            "sd": 0.06156601073470422,
+            "times_selected": 10
+          },
+          "balance_to_income": {
+            "mean": -1.0879914298732127,
+            "sd": 0.2709011600230147,
+            "times_selected": 10
+          },
+          "cur_balance": {
+            "mean": -0.8400609533214622,
+            "sd": 0.1733112301999246,
+            "times_selected": 10
+          },
+          "share_retail": {
+            "mean": -1.0304892611096337,
+            "sd": 0.0723530254062444,
+            "times_selected": 10
+          },
+          "total_spend": {
+            "mean": -0.6430489767204298,
+            "sd": 0.07354117013963216,
+            "times_selected": 3
+          },
+          "late_fee_sum": {
+            "mean": -0.943324651936224,
+            "sd": 0.04564941715457184,
+            "times_selected": 5
+          },
+          "balance_std": {
+            "mean": -0.871286828771925,
+            "sd": 0.13512592715570224,
+            "times_selected": 10
+          },
+          "late_fee_n": {
+            "mean": -1.3018392785062705,
+            "sd": 0.2258666757072714,
+            "times_selected": 6
+          },
+          "share_repairs": {
+            "mean": -0.9731800480132066,
+            "sd": 0.11269362347875715,
+            "times_selected": 10
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 0.17837523210895917,
+          "total_spend": 0.09145143770402364,
+          "mean_ticket": 0.019681785540128248,
+          "ticket_cv": 0.01589877478404909,
+          "share_retail": 0.10021526356151256,
+          "share_food": -0.04067458052405172,
+          "share_hotels_rest": 0.01281274293331605,
+          "share_travel": 0.02886456691178205,
+          "share_clothing": -0.0359086938256472,
+          "share_home": -0.035543521100620146,
+          "share_phones_web": -0.011920613557852323,
+          "share_repairs": 0.05465984218578305,
+          "share_cash_advance": -0.05857498627733736,
+          "share_services": -0.02248800575360784,
+          "weekday_concentration": 0.029403817473186745,
+          "active_months": 0.0,
+          "spend_per_active_month": 0.210536788788708,
+          "post_payday_share": 0.048706253850042236,
+          "n_bills": -0.03915254673395769,
+          "total_bills": 0.02742872309812063,
+          "bill_utilities_n": -0.022746637259492317,
+          "bill_telecom_n": 0.002053204606283981,
+          "bill_rent_n": -0.008991227012069803,
+          "bill_mortgage_n": -0.0033970058605325773,
+          "bill_consumer_loan_n": 0.0273730807892663,
+          "late_fee_n": 0.07640409462342918,
+          "late_fee_sum": 0.08888642926208437,
+          "total_income": 0.21163583870388927,
+          "mean_income_credit": 0.1748448947008256,
+          "n_income": 0.0,
+          "income_shock": -0.002746611728317903,
+          "cur_balance": 0.1155623462075063,
+          "balance_std": 0.08198002300802523,
+          "balance_mean": 0.050790186899994,
+          "balance_to_income": 0.12277056183456134,
+          "max_dpd": 0.004303841952187892,
+          "dpd_bucket": 0.002379148560333392,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 800,
+        "n_bad": 167,
+        "bad_rate": 0.20875
+      },
+      "model3": {
+        "characteristics": [
+          "late_fee_sum",
+          "late_fee_n",
+          "balance_mean",
+          "spend_per_active_month",
+          "n_purchases",
+          "cur_balance",
+          "total_income",
+          "mean_income_credit",
+          "post_payday_share",
+          "total_spend",
+          "balance_to_income",
+          "balance_std"
+        ],
+        "gini_mean": 0.9572649572649572,
+        "gini_sd": 0.12087295404898248,
+        "gini_folds": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6153846153846154,
+          1.0,
+          1.0
+        ],
+        "auc_oof": 0.9512153372132831,
+        "coefficients": {
+          "late_fee_n": {
+            "mean": -1.2455663748982428,
+            "sd": 0.5461246994629987,
+            "times_selected": 9
+          },
+          "spend_per_active_month": {
+            "mean": -1.0554384645061996,
+            "sd": 0.09106847616996103,
+            "times_selected": 6
+          },
+          "post_payday_share": {
+            "mean": -1.1943639135410193,
+            "sd": 0.011177968688476425,
+            "times_selected": 2
+          }
+        },
+        "iv_mean": {
+          "n_purchases": 3.146713855513642,
+          "total_spend": 2.6705779986215417,
+          "mean_ticket": 0.8709060542863174,
+          "ticket_cv": 0.6754206656996324,
+          "share_retail": 0.19538962692223893,
+          "share_food": 0.7927642443886025,
+          "share_hotels_rest": 0.19638617207492565,
+          "share_travel": 0.6878325875140242,
+          "share_clothing": -0.48352058867170117,
+          "share_home": 0.2825024536767248,
+          "share_phones_web": -0.1555698485464873,
+          "share_repairs": 0.36704750276856807,
+          "share_cash_advance": 0.3023948391541359,
+          "share_services": 0.2451561507934481,
+          "weekday_concentration": 0.8946733127084678,
+          "active_months": 0.0,
+          "spend_per_active_month": 3.365356586445244,
+          "post_payday_share": 2.780972898967381,
+          "n_bills": -0.01368967051840603,
+          "total_bills": 0.060599137669044435,
+          "bill_utilities_n": 0.10058468155367797,
+          "bill_telecom_n": 0.009193059046666278,
+          "bill_rent_n": -0.07568939384713688,
+          "bill_mortgage_n": -0.018949911662354886,
+          "bill_consumer_loan_n": 0.15452306643601077,
+          "late_fee_n": 6.153438604021023,
+          "late_fee_sum": 6.4847080066846505,
+          "total_income": 2.879883177059805,
+          "mean_income_credit": 2.845564210288924,
+          "n_income": 0.0,
+          "income_shock": 0.014527632252197747,
+          "cur_balance": 2.9073554406313775,
+          "balance_std": 1.2980975840609674,
+          "balance_mean": 3.830413730007688,
+          "balance_to_income": 2.4103646037196125,
+          "max_dpd": 0.0,
+          "dpd_bucket": 0.0,
+          "n_overdue": 0.0,
+          "overdue_eur": 0.0,
+          "overdue_to_income": 0.0
+        },
+        "n": 167,
+        "n_bad": 144,
+        "bad_rate": 0.8622754491017964
+      },
+      "model4": {
+        "gini": 0.9080674760022585,
+        "formula": "P(G|x) = P(T|x) + P(R|x) P(G|x,R)",
+        "selected": [
+          "late_fee_n",
+          "n_purchases"
+        ]
+      },
+      "delong_1_vs_4": {
+        "auc_a": 0.9893421795595707,
+        "auc_b": 0.9540337380011294,
+        "diff": 0.03530844155844126,
+        "se": 0.008338004585555316,
+        "z": 4.234639258847289,
+        "p": 2.289188891652584e-05
+      },
+      "premise": {
+        "claim": "Since transactors pay off all their balance each period, they cannot default and so all Transactors must be Goods.",
+        "bad_rate_transactor": 0.25434439178515006,
+        "bad_rate_revolver": 0.1377245508982036,
+        "n_transactor": 633,
+        "n_revolver": 167
+      }
+    }
+  },
+  "tr_definition_divergence": [
+    {
+      "month_idx": 5,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 6,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 7,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 8,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 9,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 10,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 11,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 12,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 13,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 14,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 15,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 16,
+      "n_revolver": 167,
+      "n_debtor": 167,
+      "agreement": 1.0
+    },
+    {
+      "month_idx": 17,
+      "n_revolver": 113,
+      "n_debtor": 167,
+      "agreement": 0.9325
+    },
+    {
+      "month_idx": 18,
+      "n_revolver": 103,
+      "n_debtor": 167,
+      "agreement": 0.92
+    },
+    {
+      "month_idx": 19,
+      "n_revolver": 102,
+      "n_debtor": 167,
+      "agreement": 0.91875
+    },
+    {
+      "month_idx": 20,
+      "n_revolver": 101,
+      "n_debtor": 167,
+      "agreement": 0.9175
+    },
+    {
+      "month_idx": 21,
+      "n_revolver": 101,
+      "n_debtor": 167,
+      "agreement": 0.9175
+    },
+    {
+      "month_idx": 22,
+      "n_revolver": 100,
+      "n_debtor": 167,
+      "agreement": 0.91625
+    }
+  ],
+  "tr_first_divergence_month": 17,
+  "divergence_run": {
+    "month_idx": 19,
+    "horizon_months": 3
+  },
+  "main_origination_month": 10
+}

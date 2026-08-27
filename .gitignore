@@ -16,8 +16,13 @@ notebooks/demo.html
 notebooks/demo_transactions.csv
 notebooks/demo_accounts.csv
 
-# Simulation outputs
-runs/
+# Simulation outputs. Every run is local and regenerable, with one exception:
+# runs/20260822-142420/ is the pinned run the thesis reports, named by Appendix
+# C.5, so it is tracked. runs/latest points at it in a fresh clone; re-running
+# run_all.py repoints that symlink locally, which shows up as a modified file.
+runs/*
+!runs/20260822-142420/
+!runs/latest
 
 # Dataset exports — scripts/export_dataset.py writes here by default. Derived
 # from a seeded model, so regenerable by re-running the command in MANIFEST.md.
@@ -32,8 +37,10 @@ exports/
 #   presentation/scripts/build_deck.py           -> status_deck.html
 #   presentation/scripts/make_reference_card.py  -> MODEL_REFERENCE_CARD.pdf
 #   presentation/scripts/make_system_sequence.py -> SLIDES/ (dupes of slide_assets)
-#   scripts/build_thesis_package.py              -> thesis_package/
-thesis_package/
+#
+# thesis_package/ is the exception. scripts/build_thesis_package.py regenerates
+# it, but Appendix C.4 of the thesis tells the reader to open
+# thesis_package/index.html without rerunning the model, so it is tracked.
 presentation/figures/
 presentation/diagrams/
 presentation/slide_assets/

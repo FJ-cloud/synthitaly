@@ -262,7 +262,7 @@ def d06_odd_overview():
     H_IN = 13.5
     fig, ax = new_ax(17.5, H_IN)
     title(ax, "ODD protocol — synthitaly at a glance",
-          "Grimm et al. (2010).  A · entities & state (ODD 1.2)   B · process overview & scheduling (1.3)   "
+          "Grimm et al. (2020).  A · entities & state (ODD 1.2)   B · process overview & scheduling (1.3)   "
           "C · submodels & money flows (3.3)   ⚠ = modelling choice, not a calibrated value")
 
     # Axes-units per typographic point, so a box can be sized from its line count.
@@ -327,7 +327,7 @@ def d06_odd_overview():
           "3 macro-areas, ISTAT weights .46/.20/.34;\n"
           "no distance or coordinates, but area sets\n"
           "the income level (South ×0.554)\n"
-          "≈150 consumers · 10 categories × 3 areas\n"
+          "200-consumer default · 10 categories × 3 areas\n"
           "× k merchants · money in euros",
           MUTED, face="#f7f6f2")
 
